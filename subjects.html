@@ -7,23 +7,22 @@
     <link rel="stylesheet" href="subjects.css">
 </head>
 
-
+<body data-role="teacher">  
 
 <header class="header">
     <nav class="navbar">
         
         <div class="name">
-        <div class="logo">
-            <img src="3.png" width="70px" height="70px">
-        </div>
+            <div class="logo">
+                <img src="3.png" width="70px" height="70px">
+            </div>
 
             <div class="namePos">
-            ISKOLAR
-            <br>
-            <h3 style="font-size: 10px;
-            letter-spacing: 1px;
-            line-height: 0cm;
-            ">Interactive System for Knowledge-Oriented Learning, Assistance, and Review</h3>
+                ISKOLAR
+                <br>
+                <h3 style="font-size: 10px; letter-spacing: 1px; line-height: 0cm;">
+                    Interactive System for Knowledge-Oriented Learning, Assistance, and Review
+                </h3>
             </div>
         </div>
 
@@ -32,47 +31,45 @@
             <a href="subjects.html">Subjects</a>
             <a href="application.html">Sign-in</a>
         </nav>
-        <div class="searchBar">
-        <input type="search" placeholder="Search…" aria-label="Search" id="searchbar"/>
+
+        <div>
+            <input type="search" placeholder="Search…" aria-label="Search" id="searchbar"/>
         </div>
     </nav>
-    </header>
+</header>
 
+<!-- MAIN CONTENT -->
+<div class="container">
 
-
+    <h2>Subject PDF Manager</h2>
+    <!-- Viewer -->
+    <div class="viewer">
+        <h3 style= "justify-self: center;">PDF Viewer</h3>
+        <iframe id= "pdfViewer" src="" frameborder="0"></iframe>
     </div>
-              <!--Upload section-->
-    <div class="upload-section" >Upload Your Document</div>
-    <form class="upload-form">
-        <label for="documentFile" class="upload-section">Choose Document:</label>
-        <input type="file" name="documentFile" id="documentFile" accept=".pdf,.doc,.docx,.txt" multiple required>
-        <br><br>
-        <input type="submit" value="Upload Document" class="upload-btn">
-    </form>
-    <div class="document-list">
-        <h2>Uploaded Documents</h2>
-        <ul id="documents">
-            <!-- Uploaded documents will be listed here -->
-        </ul>     
-    </div>      
-<script>
-    const fileInput = document.getElementById("documentFile");
-    const documentsList = document.getElementById("documents");
-    const uploadForm = document.querySelector(".upload-form");
 
-    fileInput.addEventListener("change", function () {
-        documentsList.innerHTML = ""; // clear old items
+    <!-- Subject Selector -->
+    <label for="subjectSelect">Select Subject:</label>
+    <select id="subjectSelect">
+        <option value="science">Science</option>
+        <option value="mathematics">Mathematics</option>
+        <option value="english">English</option>
+        <option value="reading">Reading Comprehension</option>
+        <option value="abstract">Abstract Thinking</option>
+    </select>
 
-        for (let file of fileInput.files) {
-            const li = document.createElement("li");
-            li.textContent = file.name;
-            documentsList.appendChild(li);
-        }
-    });
+    <!-- PDF List -->
+    <div class= "file-list-box">
+        <h3>Available Files</h3>
+        <input type= "file" id="uploadInput" accept="application/pdf">
+        <button id= "uploadBtn">Upload PDF</button>
+        
+        <ul id= "fileList"></ul>
+    </div>
 
-    uploadForm.addEventListener("submit", function (e) {
-        e.preventDefault(); // prevent page reload
-    });
-</script>
+</div>
 
+<script src= "subjects.js"></script>
 
+</body>
+</html>
