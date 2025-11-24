@@ -7,31 +7,69 @@
     <link rel="stylesheet" href="subjects.css">
 </head>
 
+<body data-role="guest">
+
 <header class="header">
     <nav class="navbar">
         
         <div class="name">
-        <div class="logo">
-            <img src="3.png" width="70px" height="70px">
-        </div>
+            <div class="logo">
+                <img src="3.png" width="70px" height="70px">
+            </div>
 
             <div class="namePos">
-            ISKOLAR
-            <br>
-            <h3 style="font-size: 10px;
-            letter-spacing: 1px;
-            line-height: 0cm;
-            ">Interactive System for Knowledge-Oriented Learning, Assistance, and Review</h3>
+                ISKOLAR
+                <br>
+                <h3 style="font-size: 10px; letter-spacing: 1px; line-height: 0cm;">
+                    Interactive System for Knowledge-Oriented Learning, Assistance, and Review
+                </h3>
             </div>
         </div>
 
         <nav class="nav">
             <a href="index.html">Home</a>
-            <a href="subjects.html">Subjects</a>
+            <a href="sbjctGuest.html">Subjects</a>
             <a href="application.html">Sign-in</a>
         </nav>
-        <div class="searchBar">
-        <input type="search" placeholder="Search…" aria-label="Search" id="searchbar"/>
+
+        <div>
+            <input type="search" placeholder="Search…" aria-label="Search" id="searchbar"/>
         </div>
     </nav>
-    </header>
+</header>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+    <h2>Subject PDF Manager</h2>
+    <!-- Viewer -->
+    <div class="viewer">
+        <h3 style= "justify-self: center;">PDF Viewer</h3>
+        <iframe id= "pdfViewer" src="" frameborder="0"></iframe>
+    </div>
+
+    <!-- Subject Selector -->
+    <label for="subjectSelect">Select Subject:</label>
+    <select id="subjectSelect">
+        <option value="science">Science</option>
+        <option value="mathematics">Mathematics</option>
+        <option value="english">English</option>
+        <option value="reading">Reading Comprehension</option>
+        <option value="abstract">Abstract Thinking</option>
+    </select>
+
+    <!-- PDF List -->
+    <div class= "file-list-box">
+        <h3>Available Files</h3>
+        <input type= "file" id="uploadInput" accept="application/pdf">
+        <button id= "uploadBtn">Upload PDF</button>
+
+        <ul id= "fileList"></ul>
+    </div>
+
+</div>
+
+<script src= "subjects.js"></script>
+
+</body>
+</html>
