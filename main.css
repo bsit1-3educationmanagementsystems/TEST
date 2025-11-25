@@ -94,7 +94,7 @@
     width: 85% auto;
     padding: 50px;
     background-color: #ecefeb;
-    overflow: auto;
+    height: 100px;
 }
 
 .div2 {

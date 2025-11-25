@@ -11,7 +11,7 @@ document.getElementById("studentBtn").addEventListener("click", () => {
     document.getElementById("formTitle").innerHTML = "Student Sign In";
 });
 
-// Correct login credentials (editable)
+// login credentials
 const teachers = [
     {
         name: "T1",
@@ -23,7 +23,7 @@ const teachers = [
 
 const students = [
     {
-        name: "S2",
+        name: "S1",
         school: "SHS",
         email: "student@test.com",
         id: "S001"
@@ -68,7 +68,7 @@ document.getElementById("signinForm").addEventListener("submit", function (e) {
         );
 
         if (valid) {
-            window.location.href = "student.html"; // redirect
+            window.location.href = "sbjctStud.html"; // redirect
         }
     }
 

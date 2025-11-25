@@ -31,20 +31,82 @@ const files = {
     ],
 
     mathematics: [
-        { name: "Sample Math PDF", url: "pdfs/math1.pdf" }
+        { name: "Basic Calculus", url: "2Basic-Calculus.pdf" },
+
+        { name: "Math 9", url: "2Math-9.pdf" },
+
+        { name: "Math Diagnostic", url: "2Math-Diagnostic.pdf" },
+
+        { name: "Math Formula Guide", url: "2Math-Formula-Guide.pdf" },
+
+        { name: "Math Module 2", url: "2Math-Module-2.pdf" },
+
+        { name: "Math Readings 2", url: "2Math-Readings-2.pdf" },
+        { name: "Math Readings 3", url: "2Math-Readings-3.pdf" },
+        { name: "Math Readings 4", url: "2Math-Readings-4.pdf" },
+
+        { name: "Math Review", url: "2Math-Review.pdf" },
+
+        { name: "Practice Test 1", url: "2Practice-Test-1.pdf" },
+    ],
+
+     abstract: [
+        { name: "Abstract Reasoning (Testing Series) Mike Bryon", url: "3(Testing Series)-Mike-Bryon.pdf" },
+
+        { name: "Abstract Reasoning Test 1", url: "3Abstract-Reasoning-test(1).pdf" },
+        { name: "Abstract Reasoning Test 2", url: "3Abstract-Reasoning-test(2).pdf" },
+        { name: "Abstract Reasoning Test 3", url: "3Abstract-Reasoning-test(3).pdf" },
+        { name: "Abstract Reasoning Test 4", url: "3Abstract-Reasoning-test(4).pdf" },
+        { name: "Abstract Reasoning Test 5", url: "3Abstract-Reasoning-test(5).pdf" },
+        { name: "Abstract Reasoning Test 6", url: "3Abstract-Reasoning-test(6).pdf" },
+
+        { name: "ASET Abstract Reasoning Sample Test", url: "3ASET-Abstract-Reasoning-sample-test.pdf" },
+
+        { name: "NCE Abstract Reasoning Reviewer", url: "3NCE-ABSTRACT-Reviewer.pdf" },
+
+        { name: "ACET 2015 Simulated Exam Abstract Reasoning", url: "3ACET2015_SIMULATED-EXAM-SET-B_SECTION-4_ABSTRACT-REASONING.pdf" },
     ],
 
     english: [
+    
+        { name: "Compiled UPCAT Questions Language Reading", url: "4Compiled-UPCAT-Questions-Language-Reading.pdf" },
 
+        { name: "English Module-4", url: "4English-Module-4.pdf" },
+
+        { name: "English Reading", url: "4English-reading_comp.pdf" },
+
+        { name: "English Readings 1", url: "4English-Readings-1.pdf" },
+        { name: "English Readings 2", url: "4English-Readings-2.pdf" },
+        { name: "English Readings 3", url: "4English-Readings-3.pdf" },
+        { name: "English Readings 4", url: "4English-Readings-4.pdf" },
+
+        { name: "Subject-Verb Agreement", url: "4SUBJECT-VERB_AGREEMENT.pdf" },
+
+        { name: "UPCAT Language", url: "4UPCAT_LANGUAGE.pdf" },
     ],
 
     reading: [
+        { name: "Reading Comprehension Module", url: "5Academic-Clinic-Eng-Module-4.pdf" },
 
-    ],
-    
-    abstract: [
+        { name: "ACET 2015 Reading Comprehension", url: "5ACET2015_SIMULATED-EXAM-SET-B_SECTION-5_RE55ADING-COMPREHENSION.pdf" },
+        
+        { name: "DCAT 2014 Reading Comprehension", url: "5DCAT2014_SIMULATED-SET-B_SECTION-3_READING-COMPREHENSION_final.pdf" },
 
+        { name: "English Module 4", url: "5English-Module-4.pdf" },
+
+        { name: "MCAS g10ela 2012", url: "5MCAS-g10ela-2012.pdf" },
+
+        { name: "Reading Comprehension v1", url: "5Reading-Comprehension-v1.pdf" },
+
+        { name: "Reading Comprehension 1", url: "5READING-COMPREHENSION1.pdf" },
+
+        { name: "Reading Review", url: "5reading-review.pdf" },
+
+        { name: "UPCAT 2014 Reading Comprehension", url: "5UPCAT-2014_SIMULATED-EXAM_SET-A_SECTION-4_READING-COMPREHENSION-v.5.26.2014.pdf" },
+
+        { name: "UPCAT 2015 Reading Comprehension", url: "5UPCAT-2015_SIMULATED-EXAM_SET-B_SECTION-4_READING-COMPREHENSION-Final-Copy_v08.08.2015.pdf" },
     ]
+    
 };
 
 // DOM Elements

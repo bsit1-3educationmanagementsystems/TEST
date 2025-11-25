@@ -38,6 +38,17 @@
     min-width: 160px;
   }
 
+/* Background */
+.bg1 {
+    background-image: url('!ISKOLAR3.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 150vh;
+    margin: 0;
+    padding-top: 0;
+}
+
 /* MAIN CONTENT */
 .container {
     margin: 40px auto;
