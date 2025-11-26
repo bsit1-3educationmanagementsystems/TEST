@@ -208,37 +208,38 @@ footer {
 /* phones and small screens */
 @media (max-width: 600px) {
 
-  /* NAVBAR */
+  /* NAVIGATION BAR */
   .header .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 12px 15px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 15px;
   }
 
   .name {
-    grid-template-columns: 55px 1fr;
-    align-items: center;
+      grid-template-columns: 60px 1fr;
+      gap: 5px;
+      align-items: center;
   }
 
   .logo {
-    width: 55px;
+      width: 55px;
   }
 
   .namePos {
-    font-size: 14px;
-    letter-spacing: 4px;
-    padding: 0;
+      font-size: 14px;
+      letter-spacing: 6px;
+      padding: 0;
   }
 
   .nav a {
-    font-size: 13px;
-    margin: 0 5px;
+      font-size: 13px;
+      margin: 0 4px;
   }
 
   .searchBar[type="search"] {
-    width: 100%;
-    margin-top: 6px;
+      min-width: 100%;
+      margin-top: 5px;
   }
 
   /* TITLES */
@@ -254,7 +255,7 @@ footer {
 
   /* BACKGROUND SECTIONS */
   .bg1, .bg2, .bg3 {
-    min-height: 80vh;
+    min-height: 120vh;
     background-position: center;
   }
 
