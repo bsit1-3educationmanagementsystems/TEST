@@ -14,9 +14,12 @@ searchbar.addEventListener("keydown", function(event){
             easteregg.style = "font-size:400px;"
             }
 
-           if (
+            if (
             searchbar.value === "home" ||
+            searchbar.value === "Home" ||
+            searchbar.value === "Main" ||
             searchbar.value === "main" ||
+            searchbar.value === "Index" ||
             searchbar.value === "index"
             ) {
             window.location.href = "index.html";
@@ -42,6 +45,13 @@ searchbar.addEventListener("keydown", function(event){
         }
 
   }})
+
+
+
+
+
+
+
 
 
 
@@ -102,7 +112,7 @@ document.getElementById("signinForm").addEventListener("submit", function (e) {
         );
 
         if (valid) {
-            window.location.href = "subjects.html"; // redirect
+            window.location.href = "subjectsmain.html"; // redirect
         }
     }
 
@@ -115,12 +125,11 @@ document.getElementById("signinForm").addEventListener("submit", function (e) {
         );
 
         if (valid) {
-            window.location.href = "sbjctStud.html"; // redirect
+            window.location.href = "sbjctStudmain.html"; // redirect
         }
     }
 
     if (!valid) {
         alert("Incorrect information. Please try again.");
     }
-
 });

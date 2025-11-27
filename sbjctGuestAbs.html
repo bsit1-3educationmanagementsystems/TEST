@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="subjects.css">
 </head>
 
-<body data-role="student" class="bg1">  
+<body data-role="guest" class="bg1">
 
 <header class="header">
     <nav class="navbar">
@@ -28,7 +28,7 @@
 
         <nav class="nav">
             <a href="index.html">Home</a>
-            <a href="sbjctStud.html">Subjects</a>
+            <a href="sbjctGuestAbs.html">Subjects</a>
             <a href="application.html">Sign-in</a>
         </nav>
 
@@ -51,11 +51,11 @@
     <!-- Subject Selector -->
     <label for="subjectSelect">Select Subject:</label>
     <select id="subjectSelect">
+        <option value="abstract">Abstract Reasoning</option>
         <option value="science">Science</option>
         <option value="mathematics">Mathematics</option>
         <option value="english">English</option>
         <option value="reading">Reading Comprehension</option>
-        <option value="abstract">Abstract Reasoning</option>
     </select>
 
     <!-- PDF List -->
@@ -63,7 +63,7 @@
         <h3>Available Files</h3>
         <input type= "file" id="uploadInput" accept="application/pdf">
         <button id= "uploadBtn">Upload PDF</button>
-        
+
         <ul id= "fileList"></ul>
     </div>
 

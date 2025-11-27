@@ -14,9 +14,12 @@ searchbar.addEventListener("keydown", function(event){
             easteregg.style = "font-size:400px;"
             }
 
-           if (
+            if (
             searchbar.value === "home" ||
+            searchbar.value === "Home" ||
+            searchbar.value === "Main" ||
             searchbar.value === "main" ||
+            searchbar.value === "Index" ||
             searchbar.value === "index"
             ) {
             window.location.href = "index.html";
@@ -42,6 +45,7 @@ searchbar.addEventListener("keydown", function(event){
         }
 
   }})
+
 
 
 
@@ -231,7 +235,8 @@ uploadBtn.addEventListener("click", () => {
         url: fileURL
     });
 
-    uploadInput.value = "";
+    uploadInput.value = "science";
+    uploadInput.value = "mathematics";  
     updateFileList();
 });
 
@@ -240,5 +245,3 @@ subjectSelect.addEventListener("change", updateFileList);
 
 // Initial Load
 updateFileList();
-
-

@@ -14,9 +14,12 @@ searchbar.addEventListener("keydown", function(event){
             easteregg.style = "font-size:400px;"
             }
 
-           if (
-            searchbar.value === "home" ||
+            if (
+            ssearchbar.value === "home" ||
+            searchbar.value === "Home" ||
+            searchbar.value === "Main" ||
             searchbar.value === "main" ||
+            searchbar.value === "Index" ||
             searchbar.value === "index"
             ) {
             window.location.href = "index.html";
