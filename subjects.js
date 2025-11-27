@@ -59,55 +59,56 @@ const role = document.body.dataset.role;
  
 const files = {
     science: [
-        { name: "Science Module 1", url: "1Science-Module-1.pdf" },
-        { name: "Science Module 2", url: "1Science-Module-2.pdf" },
-        { name: "Science Module 3", url: "1Science-Module-3.pdf" },
-        { name: "Science Module 4", url: "1Science-Module-4.pdf" },
+        { name: "Science Lessons 1 - Academic Clinic", url: "1Science-Readings-1.pdf" },
+        { name: "Science Lessons 2 - Academic Clinic", url: "1Science-Readings-2.pdf" },
+        { name: "Science Lessons 3 - Academic Clinic", url: "1Science-Readings-3.pdf" },
+        { name: "Science Lessons 4 - Academic Clinic", url: "1Science-Readings-4.pdf" },
 
-        { name: "Science Readings 1", url: "1Science-Readings-1.pdf" },
-        { name: "Science Readings 2", url: "1Science-Readings-2.pdf" },
-        { name: "Science Readings 3", url: "1Science-Readings-3.pdf" },
-        { name: "Science Readings 4", url: "1Science-Readings-4.pdf" },
+        { name: "Science Practice Test 1 - Academic Clinic", url: "1Science-Module-1.pdf" },
+        { name: "Science Practice Test 2 - Academic Clinic", url: "1Science-Module-2.pdf" },
+        { name: "Science Practice Test 3 - Academic Clinic", url: "1Science-Module-3.pdf" },
+        { name: "Science Practice Test 4 - Academic Clinic", url: "1Science-Module-4.pdf" },
 
-        { name: "Science Review 1", url: "1Science-Review-part-1.pdf" },
-        { name: "Science Review 2", url: "1Science-Review-part-2.pdf" },
-        { name: "Science Review 3", url: "1Science-Review-part-3.pdf" },
-        { name: "Science Review 4", url: "1Science-Review-part-4.pdf" },
+        { name: "Science Practice Test 5 - UPCAT", url: "1Science-Review-part-1.pdf" },
+        { name: "Science Practice Test 6 - UPCAT", url: "1Science-Review-part-2.pdf" },
+        { name: "Science Practice Test 7 - UPCAT", url: "1Science-Review-part-3.pdf" },
+        { name: "Science Practice Test 8 - UPCAT", url: "1Science-Review-part-4.pdf" },
 
-        { name: "Science UPCAT", url: "1Science-UPCAT.pdf" },
+        { name: "Science UPCAT Mock Exam", url: "1Science-UPCAT.pdf" },
     ],
 
     mathematics: [
-        { name: "Basic Calculus", url: "2Basic-Calculus.pdf" },
+        { name: "Basic Calculus - Commission on Higher Education", url: "2Basic-Calculus.pdf" },
 
-        { name: "Math 9", url: "2Math-9.pdf" },
+        { name: "Math 9 - FreeVocabulary.com", url: "2Math-9.pdf" },
 
-        { name: "Math Diagnostic", url: "2Math-Diagnostic.pdf" },
+        { name: "Math Readings 2 - Academic Clinic", url: "2Math-Readings-2.pdf" },
+        { name: "Math Readings 3 - Academic Clinic", url: "2Math-Readings-3.pdf" },
+        { name: "Math Readings 4 - Academic Clinic", url: "2Math-Readings-4.pdf" },
 
-        { name: "Math Formula Guide", url: "2Math-Formula-Guide.pdf" },
+        { name: "Math Formula Guide - Magoosh", url: "2Math-Formula-Guide.pdf" },
 
-        { name: "Math Module 2", url: "2Math-Module-2.pdf" },
+        { name: "Math Diagnostic - Reason Prep' SAT Diagnostic", url: "2Math-Diagnostic.pdf" },
 
-        { name: "Math Readings 2", url: "2Math-Readings-2.pdf" },
-        { name: "Math Readings 3", url: "2Math-Readings-3.pdf" },
-        { name: "Math Readings 4", url: "2Math-Readings-4.pdf" },
+        { name: "Math Practice Test 1 - UPCAT", url: "2Practice-Test-1.pdf" },
+        
+        { name: "Math Practice Test 2 - Academic Clinic", url: "2Math-Module-2.pdf" },
 
-        { name: "Math Review", url: "2Math-Review.pdf" },
+        { name: "Math Practice Test 3", url: "2Math-Review.pdf" },
 
-        { name: "Practice Test 1", url: "2Practice-Test-1.pdf" },
     ],
 
      abstract: [
         { name: "Abstract Reasoning (Testing Series) Mike Bryon", url: "3(Testing Series)-Mike-Bryon.pdf" },
 
-        { name: "Abstract Reasoning Test 1", url: "3Abstract-Reasoning-test(1).pdf" },
-        { name: "Abstract Reasoning Test 2", url: "3Abstract-Reasoning-test(2).pdf" },
-        { name: "Abstract Reasoning Test 3", url: "3Abstract-Reasoning-test(3).pdf" },
-        { name: "Abstract Reasoning Test 4", url: "3Abstract-Reasoning-test(4).pdf" },
-        { name: "Abstract Reasoning Test 5", url: "3Abstract-Reasoning-test(5).pdf" },
-        { name: "Abstract Reasoning Test 6", url: "3Abstract-Reasoning-test(6).pdf" },
+        { name: "Abstract Reasoning Test 1 - Psychometric Success", url: "3Abstract-Reasoning-test(1).pdf" },
+        { name: "Abstract Reasoning Test 2 - Practice4Me", url: "3Abstract-Reasoning-test(2).pdf" },
+        { name: "Abstract Reasoning Test 3 - Practice Aptitude Test", url: "3Abstract-Reasoning-test(3).pdf" },
+        { name: "Abstract Reasoning Test 4 - Psychometric Test Online", url: "3Abstract-Reasoning-test(4).pdf" },
+        { name: "Abstract Reasoning Test 5 - Psychometric Success", url: "3Abstract-Reasoning-test(5).pdf" },
+        { name: "Abstract Reasoning Test 6 - Psychometric Success", url: "3Abstract-Reasoning-test(6).pdf" },
 
-        { name: "ASET Abstract Reasoning Sample Test", url: "3ASET-Abstract-Reasoning-sample-test.pdf" },
+        { name: "ASET Abstract Reasoning Sample Test - Department of Education Australia", url: "3ASET-Abstract-Reasoning-sample-test.pdf" },
 
         { name: "NCE Abstract Reasoning Reviewer", url: "3NCE-ABSTRACT-Reviewer.pdf" },
 
@@ -115,39 +116,36 @@ const files = {
     ],
 
     english: [
-    
+        { name: "English Lessons 1 - Academic Clinic", url: "4English-Readings-1.pdf" },
+        { name: "English Lessons 2 - Academic Clinic", url: "4English-Readings-2.pdf" },
+        { name: "English Lessons 3 - Academic Clinic", url: "4English-Readings-3.pdf" },
+        { name: "English Lessons 4 - Academic Clinic", url: "4English-Readings-4.pdf" },
+        { name: "English Lessons 5 - EPS Book", url: "4English-reading_comp.pdf" },
+        { name: "Subject-Verb Agreement - Diana Hacker", url: "4SUBJECT-VERB_AGREEMENT.pdf" },  
+
+        { name: "English Practice Test 4 - Academic Clinic", url: "4English-Module-4.pdf" },
+
         { name: "Compiled UPCAT Questions Language Reading", url: "4Compiled-UPCAT-Questions-Language-Reading.pdf" },
-
-        { name: "English Module-4", url: "4English-Module-4.pdf" },
-
-        { name: "English Reading", url: "4English-reading_comp.pdf" },
-
-        { name: "English Readings 1", url: "4English-Readings-1.pdf" },
-        { name: "English Readings 2", url: "4English-Readings-2.pdf" },
-        { name: "English Readings 3", url: "4English-Readings-3.pdf" },
-        { name: "English Readings 4", url: "4English-Readings-4.pdf" },
-
-        { name: "Subject-Verb Agreement", url: "4SUBJECT-VERB_AGREEMENT.pdf" },
 
         { name: "UPCAT Language", url: "4UPCAT_LANGUAGE.pdf" },
     ],
 
     reading: [
-        { name: "Reading Comprehension Module", url: "5Academic-Clinic-Eng-Module-4.pdf" },
+        { name: "Reading Comprehension Lesson 1", url: "5reading-review.pdf" },
 
-        { name: "ACET 2015 Reading Comprehension", url: "5ACET2015_SIMULATED-EXAM-SET-B_SECTION-5_RE55ADING-COMPREHENSION.pdf" },
+        { name: "Reading Comprehension Practice Test 1 - Academic Clinic", url: "5Academic-Clinic-Eng-Module-4.pdf" },
+
+        { name: "ACET 2015 Reading Comprehension Practice Test 2", url: "5ACET2015_SIMULATED-EXAM-SET-B_SECTION-5_RE55ADING-COMPREHENSION.pdf" },
         
-        { name: "DCAT 2014 Reading Comprehension", url: "5DCAT2014_SIMULATED-SET-B_SECTION-3_READING-COMPREHENSION_final.pdf" },
+        { name: "DCAT 2014 Reading Comprehension Practice Test 3", url: "5DCAT2014_SIMULATED-SET-B_SECTION-3_READING-COMPREHENSION_final.pdf" },
 
-        { name: "English Module 4", url: "5English-Module-4.pdf" },
+        { name: "Reading Comprehension Practice Test 4 - Academic Clinic", url: "5English-Module-4.pdf" },
 
-        { name: "MCAS g10ela 2012", url: "5MCAS-g10ela-2012.pdf" },
+        { name: "Practice Test 5 - MCAS g10ela 2012", url: "5MCAS-g10ela-2012.pdf" },
 
-        { name: "Reading Comprehension v1", url: "5Reading-Comprehension-v1.pdf" },
+        { name: "Practice Test 6 - Department of Human Resources County of Los Angeles", url: "5Reading-Comprehension-v1.pdf" },
 
-        { name: "Reading Comprehension 1", url: "5READING-COMPREHENSION1.pdf" },
-
-        { name: "Reading Review", url: "5reading-review.pdf" },
+        { name: "Practice Test 7", url: "5READING-COMPREHENSION1.pdf" },
 
         { name: "UPCAT 2014 Reading Comprehension", url: "5UPCAT-2014_SIMULATED-EXAM_SET-A_SECTION-4_READING-COMPREHENSION-v.5.26.2014.pdf" },
 
@@ -242,4 +240,5 @@ subjectSelect.addEventListener("change", updateFileList);
 
 // Initial Load
 updateFileList();
+
 
