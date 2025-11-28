@@ -97,7 +97,8 @@ body {
 }
 
 .hero-content .tagline {
-    font-size: 48px;
+    font-size: 32px;
+    font-style: italic;
 }
 
 .hero-infoCard {
@@ -242,4 +243,5 @@ footer {
         padding: 15px;
     }
 }
+
 
