@@ -1,53 +1,72 @@
-/* NAVIGATION BAR */
-.header .navbar {
-  background: #5a0f10;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  padding: 12px 25px;
-  justify-content: space-between;
-  gap: 20px;
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.name {
-  display: grid;
-  grid-template-columns: 60px auto;
-  gap: 5px;
-  align-items: center;
+body {
+    font-family: "Times New Roman", serif;
+}
+
+/* Background */
+.bg-login {
+    background-image: url('ISKOLAR (1).png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* Header */
+.header .navbar {
+    background: #7c2b2b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
 }
 
 .logo img {
-  width: 60px;
-  height: 60px;
+    width: 70px;
+}
+
+.name {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .namePos {
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  line-height: 15px;
+    font-size: 22px;
+    letter-spacing: 3px;
+    font-weight: bold;
 }
 
-.tagline {
-  font-size: 9px;
-  line-height: 10px;
-  letter-spacing: 1px;
-  margin-top: 3px;
+.namePos h3 {
+    font-size: 10px;
+    font-weight: 400;
 }
 
 .nav a {
-  color: #fff;
-  margin: 0 12px;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 1px;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 18px;
+    color: #fff;
+    transition: 0.3s;
 }
 
-.searchBox input {
-  padding: 6px 12px;
-  border-radius: 20px;
-  border: none;
-  outline: none;
+.nav a:hover {
+    color: #ffe2cc;
+}
+
+/* Search bar */
+.search-wrapper input {
+    padding: 6px 12px;
+    border-radius: 18px;
+    border: none;
+    width: 160px;
 }
 
 
@@ -136,13 +155,70 @@
   font-size: 14px;
 }
 
-/* FOOTER */
-footer {
-  background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
-  color: white;
-  padding: 15px;
-  text-align: center;
-  margin-top: 50px;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
-}   
+}
 
+footer {
+    background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin-top: 50px;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
+} 
+ /* Responsive for mobile */
+@media (max-width: 768px) {
+    .signin-section {
+        flex-direction: column;
+        align-items: center;
+        margin: 30px auto;
+    }
+
+    .signin-left, .signin-box {
+        width: 90%;
+    }
+
+    .signin-left h1 {
+        font-size: 40px;
+    }
+
+    .tab {
+        font-size: 16px;
+    }
+
+    .search-wrapper input {
+        width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .signin-left h1 {
+        font-size: 32px;
+    }
+
+    .signin-left p {
+        font-size: 14px;
+    }
+
+    .tab {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .signin-btn {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .namePos {
+        font-size: 16px;
+    }
+
+    .namePos h3 {
+        font-size: 8px;
+    }
+
+    .nav a {
+        font-size: 12px;
+        margin: 0 5px;
+    }
+}
