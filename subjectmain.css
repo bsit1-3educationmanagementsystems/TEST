@@ -175,61 +175,102 @@ footer {
     box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
 }
 
-/* Responsive for mobile */
+/* MOBILE RESPONSIVE */
+
+/* Medium screens: tablets */
 @media (max-width: 768px) {
-    .signin-section {
-        flex-direction: column;
-        align-items: center;
+    .subject-header {
+        width: 95%;
         margin: 30px auto;
+        text-align: center;
     }
 
-    .signin-left, .signin-box {
-        width: 90%;
+    .title {
+        font-size: 50px;
     }
 
-    .signin-left h1 {
-        font-size: 40px;
+    .subtitle {
+        font-size: 14px;
+        max-width: 90%;
+        margin: 15px auto;
     }
 
-    .tab {
-        font-size: 16px;
+    .infoSection {
+        width: 95%;
+        gap: 15px;
+        justify-content: center; /* center cards */
     }
 
-    .search-wrapper input {
-        width: 100px;
+    .infoCard {
+        width: 45%; /* two cards per row */
+        margin-bottom: 20px;
+    }
+
+    .subject-img {
+        width: 130px;
+        height: 130px;
+    }
+
+    .desc {
+        font-size: 11px;
+    }
+
+    .subject-btn {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    footer {
+        font-size: 14px;
+        padding: 15px;
     }
 }
 
+/* Small screens: phones */
 @media (max-width: 480px) {
-    .signin-left h1 {
+    .subject-header {
+        width: 95%;
+        text-align: center;
+    }
+
+    .title {
         font-size: 32px;
     }
 
-    .signin-left p {
-        font-size: 14px;
+    .subtitle {
+        font-size: 12px;
+        max-width: 100%;
+        margin: 10px auto 20px auto;
     }
 
-    .tab {
-        font-size: 14px;
-        padding: 6px;
+    .infoSection {
+        flex-direction: column; /* stack cards vertically */
+        align-items: center;
+        width: 95%;
+        gap: 15px;
     }
 
-    .signin-btn {
-        font-size: 16px;
+    .infoCard {
+        width: 90%; /* full width on small phones */
+        margin-bottom: 20px;
+    }
+
+    .subject-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .desc {
+        font-size: 12px;
+    }
+
+    .subject-btn {
+        font-size: 14px;
         padding: 10px;
     }
 
-    .namePos {
-        font-size: 16px;
-    }
-
-    .namePos h3 {
-        font-size: 8px;
-    }
-
-    .nav a {
+    footer {
         font-size: 12px;
-        margin: 0 5px;
+        padding: 15px;
     }
 }
-
