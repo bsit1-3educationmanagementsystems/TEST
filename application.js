@@ -1,3 +1,4 @@
+
 const searchbar = document.getElementById('searchbar');
 const easteregg = document.getElementById('EASTEREGG');
 const pics = document.getElementById('PICS');
@@ -94,33 +95,34 @@ document.getElementById("signinForm").addEventListener("submit", function (e) {
 
     let valid = false;
 
-    if (accountType === "teacher") {
-        valid = teachers.some(t =>
-            t.name === name &&
-            t.school === school &&
-            t.email === email &&
-            t.id === idnum
-        );
+if (accountType === "teacher") {
+    valid = teachers.some(t =>
+        t.name === name &&
+        t.school === school &&
+        t.email === email &&
+        t.id === idnum
+    );
 
-        if (valid) {
-            window.location.href = "subjectsmain.html"; // redirect
-        }
+    if (valid) {
+        window.location.href = "subjectsmain.html"; // redirect teacher
     }
+}
 
-    if (accountType === "student") {
-        valid = students.some(s =>
-            s.name === name &&
-            s.school === school &&
-            s.email === email &&
-            s.id === idnum
-        );
+if (accountType === "student") {
+    valid = students.some(s =>
+        s.name === name &&
+        s.school === school &&
+        s.email === email &&
+        s.id === idnum
+    );
 
-        if (valid) {
-            window.location.href = "sbjctStudmain.html"; // redirect
-        }
+    if (valid) {
+        window.location.href = "sbjctStudmain.html"; // redirect student
     }
+}
 
     if (!valid) {
         alert("Incorrect information. Please try again.");
     }
+
 });
