@@ -69,7 +69,6 @@ body {
     width: 160px;
 }
 
-
 /* BACKGROUND */
 .bg1 {
     background-image: url('!2bg1.jpg');
@@ -82,7 +81,6 @@ body {
 }
 
 /* SUBJECTS HEADER */
-
 
 .subject-header {
   margin: 50px auto;
@@ -222,3 +220,4 @@ footer {
         margin: 0 5px;
     }
 }
+
