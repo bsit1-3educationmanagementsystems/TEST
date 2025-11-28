@@ -5,6 +5,12 @@ const pics = document.getElementById('PICS');
 searchbar.addEventListener("keydown", function(event){
         
         if (event.key === "Enter"){
+                
+            if (searchbar.value === "jc"){
+            easteregg.innerHTML = "BISAYAAAAAAAAAAAA"
+            easteregg.style = "font-size:400px;"
+            }
+                
             if (searchbar.value === "ezekiel") {
             pics.style.backgroundImage = "url('ezekiel.jpg')";
             pics.style.backgroundSize = "cover";      
@@ -51,3 +57,4 @@ searchbar.addEventListener("keydown", function(event){
 
 
     //windows.location.href = "ss.html"
+
