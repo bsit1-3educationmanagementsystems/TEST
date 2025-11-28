@@ -80,14 +80,15 @@ body {
   width: 85%;
   color: white;
   text-shadow: 1px 1px 4px black;
-  flex: 1 0 auto;          /* Let content grow to push footer down */
+  flex: 1 0 auto;
 }
 
 .title {
-  font-size: 70px;
-  font-weight: 900;
-  letter-spacing: 5px;
-  margin: 0;
+    text-align: center;
+    font-size: 45px;
+    margin-bottom: 10px;
+    letter-spacing: 1px; 
+    font-weight: 700;
 }
 
 .subtitle {
@@ -160,7 +161,7 @@ body {
 
 /* FOOTER */
 footer {
-    flex-shrink: 0; /* Ensure footer is visible at bottom */
+    flex-shrink: 0;
     background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
     color: white;
     padding: 15px;
@@ -237,14 +238,14 @@ footer {
     }
 
     .infoSection {
-        flex-direction: column; /* stack cards vertically */
+        flex-direction: column;
         align-items: center;
         width: 95%;
         gap: 15px;
     }
 
     .infoCard {
-        width: 90%; /* full width on small phones */
+        width: 90%;
         margin-bottom: 20px;
     }
 
@@ -267,6 +268,7 @@ footer {
         padding: 15px;
     }
 }
+
 
 
 
