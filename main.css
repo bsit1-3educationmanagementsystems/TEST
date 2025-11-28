@@ -118,7 +118,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 25px;
+    gap: 15px;
     padding: 150px 20px 40px 20px; /* keep space below hero info card */
 }
 
@@ -202,3 +202,4 @@ footer {
     .quickLinks a { font-size: 17px; padding: 18px 0; }
     .nav, .search-wrapper { width: 100%; display: flex; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
 }
+
