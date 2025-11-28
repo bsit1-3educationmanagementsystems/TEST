@@ -9,15 +9,6 @@ body {
     font-family: "Times New Roman", serif;
 }
 
-/* Background */
-.bg-login {
-    background-image: url('ISKOLAR (1).png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-}
-
 /* Header */
 .header .navbar {
     background: #7c2b2b;
@@ -236,3 +227,4 @@ footer {
         padding: 15px;
     }
 }
+
