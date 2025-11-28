@@ -119,7 +119,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     gap: 25px;
-    padding: 100px 20px 40px 20px; /* reduced top padding from 150px to 100px */
+    padding: 75px 20px 40px 20px; /* reduced top padding from 150px to 75px */
 }
 
 .infoCard {
@@ -184,23 +184,62 @@ footer {
     box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
 }
 
-/* Responsive for tablets */
-@media (max-width: 768px) {
-    .hero-content h1 { font-size: 90px; }
-    .hero-content .tagline { font-size: 36px; }
-    .hero-infoCard { font-size: 18px; padding: 35px 15px; }
-    .nav a { font-size: 15px; margin: 5px 8px; }
-}
-
+/* Small screens: phones */
 @media (max-width: 480px) {
-    .hero-content h1 { font-size: 70px; }
-    .hero-content .tagline { font-size: 28px; }
-    .hero-infoCard { font-size: 16px; padding: 30px 10px; }
-    .infoSection { 
-        flex-direction: column; 
-        margin-top: 60px; /* reduce top spacing for mobile */
-        gap: 20px; 
-        padding: 0 10px; 
+    /* Hero Section */
+    .hero {
+        height: 50vh;
+    }
+
+    .hero-content h1 {
+        font-size: 60px;
+    }
+
+    .hero-content .tagline {
+        font-size: 24px;
+    }
+
+    .hero-infoCard {
+        font-size: 16px;
+        padding: 20px 10px;
+        bottom: -30px;
+    }
+
+    /* Info Section */
+    .infoSection {
+        flex-direction: column;
+        align-items: center;
+        width: 95%;
+        gap: 15px;
+        margin-top: 20px;
+        padding: 0 10px;
+    }
+
+    .infoCard {
+        width: 90%;
+        margin-bottom: 15px;
+        padding: 20px;
+    }
+
+    .infoCard h2 {
+        font-size: 20px;
+    }
+
+    .infoCard p, .infoCard ul {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    /* Quick Access Buttons */
+    .quickLinks a {
+        font-size: 16px;
+        padding: 18px 0;
+    }
+
+    /* Footer */
+    footer {
+        font-size: 12px;
+        padding: 15px;
     }
 }
 
