@@ -86,11 +86,12 @@ body {
 .intro-text {
     max-width: 700px;
     margin: 20px auto 0;
-    font-size: 20px;
+    font-size: 24px;
+    color: #051f09;
     background: rgba(255,255,255,0.85);
-    color: #333;
     padding: 15px 20px;
     border-radius: 15px;
+    text-align: left;
 }
 
 /* INFO CARDS */
@@ -168,3 +169,4 @@ footer {
     .infoCard { padding: 15px; }
     .highlight { padding: 20px; }
 }
+
