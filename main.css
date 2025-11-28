@@ -143,6 +143,10 @@ body {
     color: #333;
 }
 
+.infoCard:nth-child(2) ul li {
+    line-height: 1.8; /* slightly larger than default 1.5 */
+}
+
 .infoCard ul li {
     margin-bottom: 8px;
 }
@@ -220,4 +224,5 @@ footer {
         padding: 18px 0;
     }
 }
+
 
