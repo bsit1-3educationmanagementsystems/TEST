@@ -1,58 +1,78 @@
-/* Navigation Bar Header */
-.header .navbar {
-  background: #7c2b2b; /* maroon */
-  color: #fff;
-  display: flex;
-  align-items: center;
-  gap: 10px; 
-  padding: 14px 20px;
-  justify-content: space-between;
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-  .name {
-    display: grid;
-    grid-template-columns: 70px 1fr;
-    gap: auto;
-    width: auto;
-  }
+body {
+    font-family: "Times New Roman", serif;
+}
 
-  .logo {
-    flex-shrink: 3;
-    margin-right: 0;
+/* Background */
+.bg-login {
+    background-image: url('ISKOLAR (1).png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* Header */
+.header .navbar {
+    background: #7c2b2b;
+    color: #fff;
     display: flex;
-    align-items: left;
-    padding: 0;
-    grid-column: 1/2;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+}
+
+.logo img {
     width: 70px;
 }
 
-  .namePos {
-    font-weight: 700;
-    letter-spacing: 10px;
-    font-size: 18px;
-    margin-left: 0;
-    grid-column: 2/2;
-    padding: 14px 20px;
+.name {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
-  .nav a {
-    color: #fff;
-    margin: 0 8px;
-    font-size: 14px;
-    opacity: 0.95;
-  }
+.namePos {
+    font-size: 22px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
 
-  .searchBar[type="search"]{
-    padding: 6px 10px;
+.namePos h3 {
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.nav a {
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 18px;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.nav a:hover {
+    color: #ffe2cc;
+}
+
+/* Search bar */
+.search-wrapper input {
+    padding: 6px 12px;
     border-radius: 18px;
     border: none;
-    min-width: 160px;
-  }
+    width: 160px;
+}
 
 /* Background */
 
 .bg1 {
-    background-image: url('!2bg1.jpg');
+    background-image: url('iskolarhome.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -195,22 +215,28 @@
       0 0 15px rgba(255,200,180,0.8);
 }
 
-
 /* FOOTER */
 footer {
-  background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
-  color: white;
-  padding: 15px;
-  text-align: center;
-  margin-top: 50px;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
-}   
+    background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin-top: 50px;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
+} 
 
+ /* Responsive for mobile */
+@media (max-width: 480px) {
+    .namePos {
+        font-size: 16px;
+    }
 
-#pics {
-    width: 400px;
-    height: 300px;
-    background-color: #ddd; 
-    border: 2px solid black;
-    margin-top: 20px;
+    .namePos h3 {
+        font-size: 8px;
+    }
+
+    .nav a {
+        font-size: 12px;
+        margin: 0 5px;
+    }
 }
