@@ -4,9 +4,15 @@ const pics = document.getElementById('PICS');
 
 searchbar.addEventListener("keydown", function(event){
         
-        if (event.key === "Enter"){      
+        if (event.key === "Enter"){
             if (searchbar.value === "ezekiel") {
             pics.style.backgroundImage = "url('ezekiel.jpg')";
+            pics.style.backgroundSize = "cover";      
+            pics.style.backgroundPosition = "center"; 
+            }
+
+            if (searchbar.value === "clarence") {
+            pics.style.backgroundImage = "url('clarence.jpg')";
             pics.style.backgroundSize = "cover";      
             pics.style.backgroundPosition = "center"; 
             }
@@ -17,14 +23,8 @@ searchbar.addEventListener("keydown", function(event){
             easteregg.style = "font-size:400px;"
             }
 
-            if (searchbar.value === "clarence") {
-            pics.style.backgroundImage = "url('clarence.jpg')";
-            pics.style.backgroundSize = "cover";      
-            pics.style.backgroundPosition = "center"; 
-            }
-
             if (
-            ssearchbar.value === "home" ||
+            searchbar.value === "home" ||
             searchbar.value === "Home" ||
             searchbar.value === "Main" ||
             searchbar.value === "main" ||
@@ -53,9 +53,6 @@ searchbar.addEventListener("keydown", function(event){
             window.location.href = "sbjctGuest.html";
         }
 
-  }})
-
+  })
 
     //windows.location.href = "ss.html"
-
-

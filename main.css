@@ -205,3 +205,12 @@ footer {
   margin-top: 50px;
   box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
 }   
+
+
+#pics {
+    width: 400px;
+    height: 300px;
+    background-color: #ddd; 
+    border: 2px solid black;
+    margin-top: 20px;
+}
