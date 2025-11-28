@@ -1,53 +1,64 @@
-/* Navigation Bar Header */
-.header .navbar {
-  background: #7c2b2b; /* maroon */
-  color: #fff;
-  display: flex;
-  align-items: center;
-  gap: 10px; 
-  padding: 14px 20px;
-  justify-content: space-between;
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-  .name {
-    display: grid;
-    grid-template-columns: 70px 1fr;
-    gap: auto;
-    width: auto;
-  }
+body {
+    font-family: "Times New Roman", serif;
+}
 
-  .logo {
-    flex-shrink: 3;
-    margin-right: 0;
+/* Header */
+.header .navbar {
+    background: #7c2b2b;
+    color: #fff;
     display: flex;
-    align-items: left;
-    padding: 0;
-    grid-column: 1/2;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+}
+
+.logo img {
     width: 70px;
 }
 
-  .namePos {
-    font-weight: 700;
-    letter-spacing: 10px;
-    font-size: 18px;
-    margin-left: 0;
-    grid-column: 2/2;
-    padding: 14px 20px;
+.name {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
-  .nav a {
-    color: #fff;
-    margin: 0 8px;
-    font-size: 14px;
-    opacity: 0.95;
-  }
+.namePos {
+    font-size: 22px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
 
-  .searchBar[type="search"]{
-    padding: 6px 10px;
+.namePos h3 {
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.nav a {
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 18px;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.nav a:hover {
+    color: #ffe2cc;
+}
+
+/* Search bar */
+.search-wrapper input {
+    padding: 6px 12px;
     border-radius: 18px;
     border: none;
-    min-width: 160px;
-  }
+    width: 160px;
+}
 
 /* Background */
 
@@ -198,14 +209,13 @@
 
 /* FOOTER */
 footer {
-  background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
-  color: white;
-  padding: 15px;
-  text-align: center;
-  margin-top: 50px;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
+    flex-shrink: 0; /* Ensure footer is visible at bottom */
+    background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
 }   
-
 
 #pics {
     width: 400px;
@@ -214,3 +224,4 @@ footer {
     border: 2px solid black;
     margin-top: 20px;
 }
+
