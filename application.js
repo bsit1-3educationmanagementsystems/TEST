@@ -123,5 +123,4 @@ document.getElementById("signinForm").addEventListener("submit", function (e) {
     if (!valid) {
         alert("Incorrect information. Please try again.");
     }
-
 });

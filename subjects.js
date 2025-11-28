@@ -235,5 +235,3 @@ subjectSelect.addEventListener("change", updateFileList);
 
 // Initial Load
 updateFileList();
-
-
