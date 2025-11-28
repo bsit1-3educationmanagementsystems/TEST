@@ -7,50 +7,44 @@
 
 body {
     font-family: "Times New Roman", serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #7c2b2b; /* same as navbar */
-    color: white; /* default text color */
 }
 
-/* Navigation Bar Header */
+/* Header */
 .header .navbar {
     background: #7c2b2b;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 20px;
-}
-
-.name {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    padding: 12px 20px;
 }
 
 .logo img {
     width: 70px;
 }
 
+.name {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 .namePos {
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-size: 18px;
+    font-size: 22px;
+    letter-spacing: 3px;
+    font-weight: bold;
 }
 
 .namePos h3 {
     font-size: 10px;
     font-weight: 400;
-    line-height: 1.2;
 }
 
 .nav a {
-    color: #fff;
-    margin: 0 8px;
-    font-size: 14px;
     text-decoration: none;
+    font-size: 16px;
+    margin: 0 18px;
+    color: #fff;
     transition: 0.3s;
 }
 
@@ -58,6 +52,7 @@ body {
     color: #ffe2cc;
 }
 
+/* Search bar */
 .search-wrapper input {
     padding: 6px 12px;
     border-radius: 18px;
@@ -156,19 +151,19 @@ body {
     text-decoration: none;
     background: linear-gradient(90deg, #7c2b2b, #a83838);
     color: #fff;
-    padding: 22px 0;       /* slightly taller */
+    padding: 22px 0;
     border-radius: 10px;
     text-align: center;
-    font-size: 19px;       /* slightly bigger */
+    font-size: 19px;
     width: 100%;
     display: block;
     box-sizing: border-box;
-    margin-bottom: 10px;   /* space between buttons */
+    margin-bottom: 10px;
     transition: 0.3s;
 }
 
 .quickLinks a:last-child {
-    margin-bottom: 0;       /* remove margin for last button */
+    margin-bottom: 0;
 }
 
 .quickLinks a:hover {
@@ -199,3 +194,4 @@ footer {
     .hero-infoCard { font-size: 16px; padding: 30px 10px; }
     .infoSection { grid-template-columns: 1fr; margin-top: 120px; }
 }
+
