@@ -77,22 +77,25 @@ body {
 .subject-header {
     text-align: center;
     width: 80%;
-    margin: 40px auto 30px auto;
+    margin: 80px auto 30px auto;
 }
 
 .title {
     font-size: 70px;
     font-weight: 800;
     letter-spacing: 2px;
+    color: white;
 }
 
 .subtitle {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.6;
     max-width: 850px;
     margin: 20px auto;
     text-align: center;
+    color: white;
 }
+
 
 /* CARDS SECTION */
 .infoSection {
@@ -263,6 +266,7 @@ footer {
         padding: 15px;
     }
 }
+
 
 
 
