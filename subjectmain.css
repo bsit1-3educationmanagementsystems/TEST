@@ -78,16 +78,18 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
+    display: flex;           /* Flex container for sticky footer */
+    flex-direction: column;
 }
 
 /* SUBJECTS HEADER */
-
 .subject-header {
   margin: 50px auto;
   text-align: left;
   width: 85%;
   color: white;
   text-shadow: 1px 1px 4px black;
+  flex: 1 0 auto;          /* Let content grow to push footer down */
 }
 
 .title {
@@ -103,7 +105,6 @@ body {
   margin-top: 10px;
 }
 
-
 /* CARDS SECTION */
 .infoSection {
   width: 90%;
@@ -112,6 +113,7 @@ body {
   justify-content: space-between;
   gap: 15px;
   flex-wrap: wrap;
+  flex: 1 0 auto;          /* Fill space so footer is at bottom */
 }
 
 /* CARD STYLE */
@@ -122,6 +124,15 @@ body {
   border-radius: 25px;
   text-align: center;
   box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.infoCard a {
+    text-decoration: none; /* Remove underline */
+    color: inherit;        /* Keep text color */
+}
+
+.infoCard a:hover {
+    opacity: 0.9;
 }
 
 /* CIRCLE IMAGE */
@@ -153,17 +164,17 @@ body {
   font-size: 14px;
 }
 
-}
-
+/* FOOTER */
 footer {
+    flex-shrink: 0; /* Ensure footer is visible at bottom */
     background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
     color: white;
     padding: 15px;
     text-align: center;
-    margin-top: 50px;
     box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
-} 
- /* Responsive for mobile */
+}
+
+/* Responsive for mobile */
 @media (max-width: 768px) {
     .signin-section {
         flex-direction: column;
@@ -220,4 +231,3 @@ footer {
         margin: 0 5px;
     }
 }
-
