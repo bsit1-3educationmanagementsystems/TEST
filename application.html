@@ -5,90 +5,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I.S.K.O.L.A.R</title>
     <link rel="stylesheet" href="application.css">
-    <link rel="stylesheet" href="signin.css">
 </head>
 
-<body class="bg1">
-        <!-- Navigation Bar Header -->
-    <header class="header">
+<body class="bg-login">
+
+<header class="header">
     <nav class="navbar">
-        
+
         <div class="name">
-        <div class="logo">
-            <img src="!ISKOLAR.png" width="100%" height="100%">
-        </div>
+            <div class="logo">
+                <img src="!ISKOLAR.png" alt="ISKOLAR Logo">
+            </div>
 
             <div class="namePos">
-            ISKOLAR
-            <br>
-            <h3 style="font-size: 10px;
-            letter-spacing: 1px;
-            line-height: 1px;
-            ">Interactive System for Knowledge-Oriented Learning, Assistance, and Review</h3>
+                ISKOLAR
+                <h3>Interactive System for Knowledge-Oriented Learning, Assistance, and Review</h3>
             </div>
         </div>
 
         <nav class="nav">
-            <a href="index.html">Home</a>
-            <a href="sbjctGuestmain.html">Subjects</a>
-            <a href="application.html">Sign-in</a>
+            <a href="index.html">HOME</a>
+            <a href="sbjctGuestmain.html">SUBJECTS</a>
+            <a href="application.html">SIGN IN</a>
         </nav>
-        <div class="searchBar">
-        <input type="search" placeholder="Search…" aria-label="Search" id="searchbar"/>
+
+        <div class="search-wrapper">
+            <input type="search" placeholder="Search…" id="searchbar">
         </div>
+
     </nav>
-    </header>
+</header>
 
-    <!-- SIGN IN SYSTEM -->
-    
-<div class="account-type-grid">
-    <section class="account-type-section">
-        <h2 class = "signin-container">Select Account Type</h2>
+<section class="signin-section">
 
-    <div class="acc-btn-leftTop">
-        <div class="account-buttons">
-            <button id="teacherBtn" class="acc-btn">
-                <img src="!Professor2.png" alt="Teacher" class="acc-img">
-                <p>Teacher</p>
-            </button>
+    <div class="signin-left">
+        <h1>SIGN IN</h1>
+        <p>
+            Log in with your account to access modules, quizzes, and mock tests.  
+            For educators, once logged in you may upload and check the progress of the students.
+        </p>
     </div>
 
-    <div class="acc-btn-leftBottom">
-        <div class="account-buttons">
-            <button id="studentBtn" class="acc-btn">
-                <img src="!Student2.png" alt="Student" class="acc-img">
-                <p>Student</p>
-            </button>
+    <div class="signin-box">
+
+        <div class="tabs">
+            <button class="tab active" data-type="student">STUDENT</button>
+            <button class="tab" data-type="teacher">TEACHER</button>
         </div>
-    </div>
-
-    </section>
-
-
-    <!-- SIGN IN FORM -->
-    <section class="signin-container">
-        <h2 id="formTitle">Sign In</h2>
 
         <form id="signinForm">
-            <input type="text" id="name" placeholder="Full Name" required>
-            <input type="text" id="school" placeholder="School" required>
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="text" id="idnum" placeholder="ID Number" required>
 
-            <button type="submit" id="signinBtn">Sign In</button>
+            <input type="text" id="name" placeholder="FULL NAME" required>
+            <input type="text" id="school" placeholder="SCHOOL" required>
+            <input type="email" id="email" placeholder="EMAIL" required>
+            <input type="text" id="idnum" placeholder="ID NUMBER" required>
+
+            <button type="submit" class="signin-btn">SIGN IN</button>
+
         </form>
-    </section>
-</div>
 
+    </div>
 
-
-
-    <script src="application.js"></script>
-
-</body>
+</section>
 
 <footer>
-    <p>&copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br> Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
+    <p>&copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
 </footer>
+  
+<script>
+    const tabs = document.querySelectorAll('.tab');
+    let accountType = 'student'; // default tab
 
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            accountType = tab.getAttribute('data-type'); // set accountType
+        });
+    });
+
+    // Sign-in logic
+    const teachers = [
+        { name: "T1", school: "SHS", email: "teacher@test.com", id: "T001" }
+    ];
+
+    const students = [
+        { name: "S1", school: "SHS", email: "student@test.com", id: "S001" }
+    ];
+
+    document.getElementById("signinForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const school = document.getElementById("school").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const idnum = document.getElementById("idnum").value.trim();
+
+        let valid = false;
+
+        if (accountType === "teacher") {
+            valid = teachers.some(t =>
+                t.name === name &&
+                t.school === school &&
+                t.email === email &&
+                t.id === idnum
+            );
+            if (valid) window.location.href = "subjectsmain.html"; // redirect teacher
+        }
+
+        if (accountType === "student") {
+            valid = students.some(s =>
+                s.name === name &&
+                s.school === school &&
+                s.email === email &&
+                s.id === idnum
+            );
+            if (valid) window.location.href = "sbjctStudmain.html"; // redirect student
+        }
+
+        if (!valid) {
+            alert("Incorrect information. Please try again.");
+        }
+    });
+</script>
+</body>
 </html>
