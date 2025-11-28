@@ -3,100 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> I.S.K.O.L.A.R </title>
+    <title>ISKOLAR</title>
     <link rel="stylesheet" href="subjectmain.css">
 </head>
 
-<body data-role= "teacher" class="bg1">  
+<body style ="margin : 0; 
+             padding : 0;
+             " class="bg1">
 
-<header class= "header">
-    <nav class= "navbar">
-        
-        <div class= "name">
-            <div class= "logo">
-                <img src= "!ISKOLAR.png" width="100%" height="100%">
+<header class="header">
+    <nav class="navbar">
+
+        <div class="name">
+            <div class="logo">
+                <img src="!ISKOLAR.png" alt="Logo">
             </div>
 
-            <div class= "namePos">
+            <div class="namePos">
                 ISKOLAR
-                <br>
-                <h3 style= "font-size: 10px; letter-spacing: 1px; line-height: 0cm;">
+                <h3 class="tagline">
                     Interactive System for Knowledge-Oriented Learning, Assistance, and Review
                 </h3>
             </div>
         </div>
 
-        <nav class= "nav">
-            <a href= "index.html">Home</a>
-            <a href= "sbjctGuestmain.html">Subjects</a>
-            <a href= "application.html">Sign-in</a>
+        <nav class="nav">
+            <a href="index.html">HOME</a>
+            <a href="sbjctGuestmain.html">SUBJECTS</a>
+            <a href="application.html">SIGN IN</a>
         </nav>
 
-        <div>
-            <input type= "search" placeholder= "Search…" aria-label= "Search" id= "searchbar"/>
+        <div class="searchBox">
+            <input type="search" id="searchbar" placeholder="Search…" aria-label="Search">
         </div>
+
     </nav>
 </header>
 
-<section>
-    <!-- INFORMATION DIVISIONS -->
-    <div class="infoSection">
+<!-- SUBJECTS TITLE + DESCRIPTION -->
 
-        <!-- Feature Cards -->
+<div class="subject-header">
+    <h1 class="title">SUBJECTS</h1>
 
-        <div class="infoCard">
-            <a href= "sbjctGuest.html">
-            <img src="!Sci.png" class="subject-img">
-            <div class="subject-info">
-                <h1>Science</h1>
-            </div>
-            </a>
-        </div>
+    <p class="subtitle">
+        ISKOLAR offers modules and quizzes with the five (5) core subjects for
+        college entrance examinations (CETs) to help students gain the
+        fundamental information for their college entrance exam preparation.
+    </p>
+</div>
 
-        <div class="infoCard">
-            <a href= "sbjctGuestMath.html">
-            <img src="!Math.png" class="subject-img">
-            <div class="subject-info">
-                <h1>Mathematics</h1>
-            </div>
-            </a>
-        </div>
 
-        <div class="infoCard">
-            <a href= "sbjctGuestEng.html">
-            <img src="!Eng.png" class="subject-img">
-            <div class="subject-info">
-                <h1>English</h1>
-            </div>
-            </a>
-        </div>
+<!-- CARD SECTION -->
+<section class="infoSection">
 
-        <div class="infoCard">
-            <a href= "sbjctGuestRead.html">
-            <img src="!ReadingCompre.png" class="subject-img">
-            <div class="subject-info">
-                <h1>Reading Comprehension </h1>
-            </div>
-            </a>
-        </div>
+    <div class="infoCard">
+        <a href="sbjctGuestMath.html">
+        <img src="!Math.png" class="subject-img">
+        <p class="desc">Modules, quizzes, and mock tests on Math</p>
+        <h2 class="subject-btn">MATHEMATICS </h2>
+        </a>
+    </div>
 
-        <div class="infoCard">
-            <a href= "sbjctGuestAbs.html">
-            <img src="!Abstract.png" class="subject-img">
-            <div class="subject-info">
-                <h1> Abstract Reasoning </h1>
-            </div>
-            </a>
-        </div>
+    <div class="infoCard">
+        <a href="sbjctGuest.html">
+        <img src="!Sci.png" class="subject-img">
+        <p class="desc">Modules, quizzes, and mock tests on Science</p>
+         <h2 class="subject-btn"> SCIENCE </h2>
+        </a>
+    </div>
 
+    <div class="infoCard">
+        <a href="sbjctGuestEng.html">
+        <img src="!Eng.png" class="subject-img">
+        <p class="desc">Modules, quizzes, and mock tests on English</p>
+        <h2 class="subject-btn">ENGLISH </h2>
+        </a>
+    </div>
+
+    <div class="infoCard">
+        <a href="sbjctGuestAbs.html">
+        <img src="!Abstract.png" class="subject-img">
+        <p class="desc">Modules, quizzes, and mock tests on Logic</p>
+        <h2 class="subject-btn">ABSTRACT REASONING </h2>
+        </a>
+    </div>
+
+    <div class="infoCard">
+        <a href="sbjctGuestRead.html">
+        <img src="!ReadingCompre.png" class="subject-img">
+        <p class="desc">Modules, quizzes, and mock tests on Reading</p>
+        <h2 class="subject-btn"> READING COMPREHENSION </h2>
+        </a>
     </div>
 
 </section>
+
+
 </body>
 
-<footer>
+<footer style="margin-top: 125px;">
     <p>&copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br> Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
 </footer>
 
 </html>
-
