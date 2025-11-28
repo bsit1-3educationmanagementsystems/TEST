@@ -76,24 +76,25 @@ body {
 /* SUBJECTS HEADER */
 .subject-header {
   margin: 50px auto;
-  text-align: left;
+  text-align: center;
   width: 85%;
   color: white;
   text-shadow: 1px 1px 4px black;
-  flex: 1 0 auto;          /* Let content grow to push footer down */
+  flex: 1 0 auto;
 }
 
 .title {
-  font-size: 70px;
+  font-size: 85px;
   font-weight: 900;
-  letter-spacing: 5px;
+  letter-spacing: 6px;
   margin: 0;
 }
 
 .subtitle {
-  max-width: 750px;
-  font-size: 16px;
-  margin-top: 10px;
+  max-width: 850px;
+  font-size: 20px;
+  margin: 15px auto 0 auto;
+  line-height: 1.4;
 }
 
 /* CARDS SECTION */
@@ -265,4 +266,5 @@ footer {
         padding: 15px;
     }
 }
+
 
