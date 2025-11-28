@@ -4,17 +4,17 @@ const pics = document.getElementById('PICS');
 
 searchbar.addEventListener("keydown", function(event){
         
-        if (event.key === "Enter"){
-                
-            if (searchbar.value === "jc"){
-            easteregg.innerHTML = "BISAYAAAAAAAAAAAA"
-            easteregg.style = "font-size:400px;"
-            }
-                
+        if (event.key === "Enter"){      
             if (searchbar.value === "ezekiel") {
             pics.style.backgroundImage = "url('ezekiel.jpg')";
             pics.style.backgroundSize = "cover";      
             pics.style.backgroundPosition = "center"; 
+            }
+
+            } 
+            if (searchbar.value === "jc"){
+            easteregg.innerHTML = "BISAYAAAAAAAAAAAA"
+            easteregg.style = "font-size:400px;"
             }
 
             if (searchbar.value === "clarence") {
@@ -57,4 +57,5 @@ searchbar.addEventListener("keydown", function(event){
 
 
     //windows.location.href = "ss.html"
+
 
