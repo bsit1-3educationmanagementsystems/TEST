@@ -22,7 +22,6 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 12px 20px;
-    flex-wrap: wrap; /* allow wrapping on small screens */
 }
 
 .logo img {
@@ -33,7 +32,6 @@ body {
     display: flex;
     gap: 10px;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .namePos {
@@ -50,7 +48,7 @@ body {
 .nav a {
     text-decoration: none;
     font-size: 16px;
-    margin: 8px 10px; /* reduce spacing on small screens */
+    margin: 0 18px;
     color: #fff;
     transition: 0.3s;
 }
@@ -65,8 +63,8 @@ body {
     border-radius: 18px;
     border: none;
     width: 160px;
-    margin-top: 8px; /* for wrapping */
 }
+
 
 /* Hero Section */
 .hero {
@@ -222,3 +220,4 @@ footer {
         padding: 18px 0;
     }
 }
+
