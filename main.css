@@ -7,14 +7,8 @@
 
 body {
     font-family: "Times New Roman", serif;
-}
-
-/* Background */
-.bg-login {
-    background-image: url('ISKOLAR (1).png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
 }
 
@@ -69,174 +63,160 @@ body {
     width: 160px;
 }
 
-/* Background */
-
+/* Background Sections */
 .bg1 {
     background-image: url('iskolarhome.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.bg2 {
-    background-image: url('!bg1.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    }
-
-.bg3 {
-    background-image: url('#.png');
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-}
-
-/* Body */
-
+/* Heading Section */
 .heading {
     width: 85%;
-    margin: 1px auto; 
-    padding: 1px;
-    background-color: transparent;
+    text-align: center;
+    margin-top: 100px;
 }
 
+.heading h1 {
+    color: #d4d5c5;
+    font-size: 100px;
+    text-shadow: 2px 2px 4px #aaa;
+}
+
+.heading p {
+    color: #ffe2cc;
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+/* Intro Paragraph */
 .div1 {
-    margin-top: 300px;
-    width: 85% auto;
+    width: 85%;
+    background-color: #ecefeb;
     padding: 50px;
-    background-color: #ecefeb;
-    height: 100px;
+    margin: 40px auto;
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 1.5;
+    color: #040d01;
 }
 
-.div2 {
-    width: 85% auto;
-    margin: 0 auto; 
-    background-color: #ecefeb;
-    overflow: auto;
-}
-
-    .div2 div {
-        width: 50%;
-        float: left;
-        box-sizing: border-box;
-        overflow: auto;
-    }
-
-
-
-    
- .title {
-  color: #e7e1c9;
-  font-size: 150px;
-  font-family: 'Times New Roman', Times, serif, Helvetica, sans-serif;
-  margin: 0;
-  text-shadow:
-      0px 4px 10px rgba(0,0,0,0.6),
-      0px 0px 15px rgba(255,220,190,0.5);
-}
-
-.subtitle {
-  color: #ffe2cc;
-  font-size: 40px;
-  margin: 0;
-  text-shadow: 0px 2px 8px rgba(0,0,0,0.4);
-}
-
-
-/* Tagline Section */
-
-
-
-/* Info Section Cards */
+/* Info Cards Section */
 .infoSection {
-  width: 90%;
-  margin: 40px auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
+    width: 90%;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
 }
 
-/* CARDS WITH GRADIENT + SOFT SHADOWS */
+/* Info Cards */
 .infoCard {
-  background: linear-gradient(135deg, #ffffffdd, #f6f6f6ee);
-  backdrop-filter: blur(6px);
-  border-radius: 16px;
-  padding: 25px;
-  box-shadow: 
-      0 4px 14px rgba(0,0,0,0.25),
-      0 8px 24px rgba(0,0,0,0.15) inset;
-  transition: 0.35s ease;
-  font-family: 'Times New Roman', Times, serif;
+    background: linear-gradient(135deg, #ffffffdd, #f6f6f6ee);
+    backdrop-filter: blur(6px);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25), 0 8px 24px rgba(0,0,0,0.15) inset;
+    transition: 0.35s ease;
 }
 
-/* Hover Animation */
 .infoCard:hover {
-  transform: translateY(-10px) scale(1.04);
-  box-shadow: 
-      0 8px 25px rgba(0,0,0,0.35),
-      0 0 18px rgba(255,220,190,0.6);
-  font-family: 'Times New Roman', Times, serif;
+    transform: translateY(-10px) scale(1.04);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.35), 0 0 18px rgba(255,220,190,0.6);
 }
 
-
-/* QUICK LINKS */
+/* Quick Links */
 .quickLinks {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .quickLinks a {
-  text-decoration: none;
-  background: linear-gradient(90deg, #7c2b2b, #a83838);
-  color: white;
-  padding: 12px;
-  border-radius: 10px;
-  font-size: 15px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  transition: 0.3s ease;
+    text-decoration: none;
+    background: linear-gradient(90deg, #7c2b2b, #a83838);
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 15px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    transition: 0.3s ease;
 }
 
 .quickLinks a:hover {
-  transform: scale(1.07);
-  background: linear-gradient(90deg, #a83838, #c74949);
-  box-shadow:
-      0 6px 20px rgba(0,0,0,0.35),
-      0 0 15px rgba(255,200,180,0.8);
+    transform: scale(1.07);
+    background: linear-gradient(90deg, #a83838, #c74949);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35), 0 0 15px rgba(255,200,180,0.8);
 }
 
-/* FOOTER */
+/* Bottom Div2 Section */
+.div2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 50px 20px;
+    background-color: #f5f5f5;
+}
+
+.div2 > div {
+    flex: 1 1 300px;
+    background-color: #b81414;
+    color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+/* Footer */
 footer {
     background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
     color: white;
     padding: 15px;
     text-align: center;
-    margin-top: 50px;
     box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
-} 
+    flex-shrink: 0;
+}
 
- /* Responsive for mobile */
+/* Responsive */
+@media (max-width: 768px) {
+    .heading h1 {
+        font-size: 70px;
+    }
+    .heading p {
+        font-size: 24px;
+    }
+    .div1 {
+        padding: 30px;
+        font-size: 18px;
+    }
+    .div2 > div {
+        flex: 1 1 45%;
+        padding: 20px;
+    }
+}
+
 @media (max-width: 480px) {
-    .namePos {
+    .heading h1 {
+        font-size: 50px;
+    }
+    .heading p {
+        font-size: 20px;
+    }
+    .div1 {
+        padding: 20px;
         font-size: 16px;
     }
-
-    .namePos h3 {
-        font-size: 8px;
-    }
-
-    .nav a {
-        font-size: 12px;
-        margin: 0 5px;
+    .div2 > div {
+        flex: 1 1 90%;
+        padding: 15px;
     }
 }
