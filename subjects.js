@@ -32,8 +32,38 @@ searchbar.addEventListener("keydown", function(event){
             searchbar.value === "courses" ||
             searchbar.value === "guest"
             ) {
+            window.location.href = "sbjctGuestmain.html";
+            }
+
+            if (
+            searchbar.value === "science"
+            ) {
             window.location.href = "sbjctGuest.html";
-        }
+            }
+
+            if (
+            searchbar.value === "math"
+            ) {
+            window.location.href = "sbjctGuestMath.html";
+            }
+
+            if (
+            searchbar.value === "english"
+            ) {
+            window.location.href = "sbjctGuestEng.html";
+            }
+
+            if (
+            searchbar.value === "reading"
+            ) {
+            window.location.href = "sbjctGuestRead.html";
+            }
+
+            if (
+            searchbar.value === "abstract"
+            ) {
+            window.location.href = "sbjctGuestAbs.html";
+            }
 
   }})
 
@@ -234,4 +264,5 @@ uploadBtn.addEventListener("click", () => {
 subjectSelect.addEventListener("change", updateFileList);
 
 // Initial Load
+
 updateFileList();
