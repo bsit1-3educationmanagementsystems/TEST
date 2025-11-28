@@ -107,13 +107,14 @@ body {
 
 /* CARDS SECTION */
 .infoSection {
-  width: 90%;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
-  flex: 1 0 auto;          /* Fill space so footer is at bottom */
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    flex: 1 0 auto;
+    padding-bottom: 50px;
 }
 
 /* CARD STYLE */
@@ -231,3 +232,4 @@ footer {
         margin: 0 5px;
     }
 }
+
