@@ -226,8 +226,7 @@ uploadBtn.addEventListener("click", () => {
         url: fileURL
     });
 
-    uploadInput.value = "science";
-    uploadInput.value = "mathematics";  
+    uploadInput.value = "";
     updateFileList();
 });
 
@@ -236,4 +235,5 @@ subjectSelect.addEventListener("change", updateFileList);
 
 // Initial Load
 updateFileList();
+
 
