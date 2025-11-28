@@ -1,43 +1,73 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Times New Roman", serif;
+}
+
+/* Background */
+.bg-login {
+    background-image: url('ISKOLAR (1).png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* Header */
 .header .navbar {
     background: #7c2b2b;
     color: #fff;
     display: flex;
     align-items: center;
-    gap: 10px; 
-    padding: 14px 20px;
     justify-content: space-between;
+    padding: 12px 20px;
+}
+
+.logo img {
+    width: 70px;
 }
 
 .name {
-    display: grid;
-    grid-template-columns: 70px 1fr;
-}
-
-.logo {
     display: flex;
-    align-items: left;
+    gap: 10px;
+    align-items: center;
 }
 
 .namePos {
-    font-weight: 700;
-    letter-spacing: 10px;
-    font-size: 18px;
-    padding: 14px 20px;
-    font-family: 'Times New Roman', Times, serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.namePos h3 {
+    font-size: 10px;
+    font-weight: 400;
 }
 
 .nav a {
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 18px;
     color: #fff;
-    margin: 0 8px;
-    font-size: 14px;
+    transition: 0.3s;
 }
 
-.searchBar[type="search"]{
-    padding: 6px 10px;
+.nav a:hover {
+    color: #ffe2cc;
+}
+
+/* Search bar */
+.search-wrapper input {
+    padding: 6px 12px;
     border-radius: 18px;
     border: none;
-    min-width: 160px;
-  }
+    width: 160px;
+}
 
 /* Background */
 .bg1 {
@@ -96,13 +126,113 @@ h2 {
     border-radius: 10px;
 }
 
-
 /* website footer */
+/* FOOTER */
 footer {
-  background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
-  color: white;
-  padding: 15px;
-  text-align: center;
-  margin-top: 50px;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
-}   
+    flex-shrink: 0; /* Ensure footer is visible at bottom */
+    background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
+}
+
+/* MOBILE RESPONSIVE */
+
+/* Medium screens: tablets */
+@media (max-width: 768px) {
+    .subject-header {
+        width: 95%;
+        margin: 30px auto;
+        text-align: center;
+    }
+
+    .title {
+        font-size: 50px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+        max-width: 90%;
+        margin: 15px auto;
+    }
+
+    .infoSection {
+        width: 95%;
+        gap: 15px;
+        justify-content: center; /* center cards */
+    }
+
+    .infoCard {
+        width: 45%; /* two cards per row */
+        margin-bottom: 20px;
+    }
+
+    .subject-img {
+        width: 130px;
+        height: 130px;
+    }
+
+    .desc {
+        font-size: 11px;
+    }
+
+    .subject-btn {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    footer {
+        font-size: 14px;
+        padding: 15px;
+    }
+}
+
+/* Small screens: phones */
+@media (max-width: 480px) {
+    .subject-header {
+        width: 95%;
+        text-align: center;
+    }
+
+    .title {
+        font-size: 32px;
+    }
+
+    .subtitle {
+        font-size: 12px;
+        max-width: 100%;
+        margin: 10px auto 20px auto;
+    }
+
+    .infoSection {
+        flex-direction: column; /* stack cards vertically */
+        align-items: center;
+        width: 95%;
+        gap: 15px;
+    }
+
+    .infoCard {
+        width: 90%; /* full width on small phones */
+        margin-bottom: 20px;
+    }
+
+    .subject-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .desc {
+        font-size: 12px;
+    }
+
+    .subject-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    footer {
+        font-size: 12px;
+        padding: 15px;
+    }
+}
