@@ -62,7 +62,7 @@ body {
 
 /* BACKGROUND */
 .bg1 {
-    background-image: url('!2bg1.jpg');
+    background-image: url('subjectiskolar.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -265,4 +265,5 @@ footer {
         padding: 15px;
     }
 }
+
 
