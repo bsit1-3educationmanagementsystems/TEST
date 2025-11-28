@@ -11,7 +11,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: #7c2b2b; /* same as navbar */
-    color: white; /* default text color */
+    color: white;
 }
 
 /* Header */
@@ -22,6 +22,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 12px 20px;
+    flex-wrap: wrap; /* allow wrapping on small screens */
 }
 
 .logo img {
@@ -32,6 +33,7 @@ body {
     display: flex;
     gap: 10px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .namePos {
@@ -48,7 +50,7 @@ body {
 .nav a {
     text-decoration: none;
     font-size: 16px;
-    margin: 0 18px;
+    margin: 8px 10px; /* reduce spacing on small screens */
     color: #fff;
     transition: 0.3s;
 }
@@ -63,6 +65,7 @@ body {
     border-radius: 18px;
     border: none;
     width: 160px;
+    margin-top: 8px; /* for wrapping */
 }
 
 /* Hero Section */
@@ -79,6 +82,7 @@ body {
     align-items: center;
     text-shadow: 1px 1px 5px black;
     color: white;
+    padding: 0 10px;
 }
 
 .hero-content {
@@ -93,7 +97,7 @@ body {
 }
 
 .hero-content .tagline {
-    font-size: 48px; /* bigger ally to success */
+    font-size: 48px;
 }
 
 .hero-infoCard {
@@ -104,7 +108,7 @@ body {
     color: #fff;
     padding: 40px 20px;
     text-align: center;
-    width: 100%; /* full-width */
+    width: 100%;
     font-size: 20px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.25);
 }
@@ -114,9 +118,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-    padding: 40px 20px;
-    margin-top: 30px;
+    gap: 25px;
+    padding: 150px 20px 40px 20px; /* keep space below hero info card */
 }
 
 .infoCard {
@@ -148,7 +151,7 @@ body {
 .quickLinks {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     margin-top: 10px;
 }
 
@@ -163,12 +166,7 @@ body {
     width: 100%;
     display: block;
     box-sizing: border-box;
-    margin-bottom: 10px;
     transition: 0.3s;
-}
-
-.quickLinks a:last-child {
-    margin-bottom: 0;
 }
 
 .quickLinks a:hover {
@@ -186,18 +184,21 @@ footer {
     box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
 }
 
-/* Responsive */
+/* Responsive for tablets */
 @media (max-width: 768px) {
     .hero-content h1 { font-size: 90px; }
     .hero-content .tagline { font-size: 36px; }
     .hero-infoCard { font-size: 18px; padding: 35px 15px; }
+    .nav a { font-size: 15px; margin: 5px 8px; }
 }
 
+/* Responsive for phones */
 @media (max-width: 480px) {
-    .hero-content h1 { font-size: 70px; }
-    .hero-content .tagline { font-size: 28px; }
-    .hero-infoCard { font-size: 16px; padding: 30px 10px; }
-    .infoSection { grid-template-columns: 1fr; margin-top: 120px; }
+    .hero-content h1 { font-size: 60px; }
+    .hero-content .tagline { font-size: 24px; }
+    .hero-infoCard { font-size: 16px; padding: 25px 10px; }
+    .infoSection { flex-direction: column; padding-top: 100px; gap: 20px; }
+    .infoCard { width: 90%; margin: 0 auto; }
+    .quickLinks a { font-size: 17px; padding: 18px 0; }
+    .nav, .search-wrapper { width: 100%; display: flex; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
 }
-
-
