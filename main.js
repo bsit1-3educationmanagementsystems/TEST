@@ -5,8 +5,8 @@ const pics = document.getElementById('PICS');
 searchbar.addEventListener("keydown", function(event){
         
         if (event.key === "Enter"){
-                
-                if (searchbar.value === "ezekiel") {
+
+            if (searchbar.value === "ezekiel") {
             pics.style.backgroundImage = "url('ezekiel.jpg')";
             pics.style.backgroundSize = "cover";      
             pics.style.backgroundPosition = "center"; 
@@ -22,7 +22,7 @@ searchbar.addEventListener("keydown", function(event){
             easteregg.innerHTML = "BISAYAAAAAAAAAAAA"
             easteregg.style = "font-size:400px;"
             }
-                
+
             if (
             searchbar.value === "home" ||
             searchbar.value === "Home" ||
@@ -87,4 +87,3 @@ searchbar.addEventListener("keydown", function(event){
 
 
     //windows.location.href = "ss.html"
-
