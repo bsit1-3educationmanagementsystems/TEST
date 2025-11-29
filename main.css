@@ -95,6 +95,7 @@ body {
 
 .hero-content .tagline {
     font-size: 30px; /* bigger ally to success */
+    line-height: 1px;
 }
 
 .hero-infoCard {
@@ -200,6 +201,7 @@ footer {
     .hero-infoCard { font-size: 16px; padding: 30px 10px; }
     .infoSection { grid-template-columns: 1fr; margin-top: 120px; }
 }
+
 
 
 
