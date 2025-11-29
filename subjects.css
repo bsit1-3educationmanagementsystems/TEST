@@ -19,8 +19,9 @@ body {
     padding: 12px 20px;
 }
 
+/* nav br */
 .logo img {
-    width: 70px;
+    width: 100px;
 }
 
 .name {
@@ -30,7 +31,7 @@ body {
 }
 
 .namePos {
-    font-size: 22px;
+    font-size: 35px;
     letter-spacing: 3px;
     font-weight: bold;
 }
@@ -57,7 +58,7 @@ body {
     padding: 6px 12px;
     border-radius: 18px;
     border: none;
-    width: 160px;
+    width: 300px;
 }
 
 /* Background */
