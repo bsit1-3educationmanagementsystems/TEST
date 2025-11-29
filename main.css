@@ -83,7 +83,7 @@ body {
 
 .hero-content {
     text-align: center;
-    line-height: 1px;
+    line-height: 100px;
 }
 
 .hero-content h1 {
@@ -95,7 +95,7 @@ body {
 
 .hero-content .tagline {
     font-size: 30px; /* bigger ally to success */
-    line-height: 100px;
+    
 }
 
 .hero-infoCard {
@@ -201,6 +201,7 @@ footer {
     .hero-infoCard { font-size: 16px; padding: 30px 10px; }
     .infoSection { grid-template-columns: 1fr; margin-top: 120px; }
 }
+
 
 
 
