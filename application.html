@@ -69,12 +69,64 @@
 </section>
 
 <footer>
-    <p style="margin-top: 50px;">&copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
+    <p>&copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
 </footer>
   
-<script src= "application.js"></script>
-    
+<script>
+    const tabs = document.querySelectorAll('.tab');
+    let accountType = 'student'; // default tab
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            accountType = tab.getAttribute('data-type'); // set accountType
+        });
+    });
+
+    // Sign-in logic
+    const teachers = [
+        { name: "T1", school: "SHS", email: "teacher@test.com", id: "T001" }
+    ];
+
+    const students = [
+        { name: "S1", school: "SHS", email: "student@test.com", id: "S001" }
+    ];
+
+    document.getElementById("signinForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const school = document.getElementById("school").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const idnum = document.getElementById("idnum").value.trim();
+
+        let valid = false;
+
+        if (accountType === "teacher") {
+            valid = teachers.some(t =>
+                t.name === name &&
+                t.school === school &&
+                t.email === email &&
+                t.id === idnum
+            );
+            if (valid) window.location.href = "subjectsmain.html"; // redirect teacher
+        }
+
+        if (accountType === "student") {
+            valid = students.some(s =>
+                s.name === name &&
+                s.school === school &&
+                s.email === email &&
+                s.id === idnum
+            );
+            if (valid) window.location.href = "sbjctStudmain.html"; // redirect student
+        }
+
+        if (!valid) {
+            alert("Incorrect information. Please try again.");
+        }
+    });
+</script>
 </body>
 </html>
-
-
