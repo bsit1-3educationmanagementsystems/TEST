@@ -90,12 +90,11 @@ body {
     font-size: 120px; /* bigger ISKOLAR */
     font-weight: 900;
     letter-spacing: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .hero-content .tagline {
     font-size: 30px; /* bigger ally to success */
-    
 }
 
 .hero-infoCard {
@@ -201,6 +200,7 @@ footer {
     .hero-infoCard { font-size: 16px; padding: 30px 10px; }
     .infoSection { grid-template-columns: 1fr; margin-top: 120px; }
 }
+
 
 
 
