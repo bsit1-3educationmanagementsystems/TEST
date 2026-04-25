@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I.S.K.O.L.A.R</title>
+    <link rel="stylesheet" href="subjects.css">
+</head>
+
+<body data-role="guest" class="bg1">
+
+<header class="header">
+    <nav class="navbar">
+
+        <div class="name">
+            <div class="logo">
+                <img src="!ISKOLAR.png" alt="ISKOLAR Logo">
+            </div>
+
+            <div class="namePos">
+                <p style="letter-spacing: 10px;"> ISKOLAR</p>
+                <h3>Interactive System for Knowledge-Oriented <br> Learning, Assistance, and Review</h3>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a href="index.html">HOME</a>
+            <a href="sbjctGuestmain.html">SUBJECTS</a>
+            <a href="application.html">SIGN IN</a>
+        </nav>
+
+        <div class="search-wrapper">
+            <input type="search" placeholder="Search…" id="searchbar">
+        </div>
+
+    </nav>
+</header>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+    <h2>Subject PDF Manager</h2>
+    <!-- Viewer -->
+    <div class="viewer">
+        <h3 style= "justify-self: center;">PDF Viewer</h3>
+        <iframe id= "pdfViewer" src="" frameborder="0"></iframe>
+    </div>
+
+    <!-- Subject Selector -->
+    <label for="subjectSelect">Select Subject:</label>
+    <select id="subjectSelect">
+        <option value="abstract">Abstract Reasoning</option>
+        <option value="science">Science</option>
+        <option value="mathematics">Mathematics</option>
+        <option value="english">English</option>
+        <option value="reading">Reading Comprehension</option>
+    </select>
+
+    <!-- PDF List -->
+    <div class= "file-list-box">
+        <h3>Available Files</h3>
+        <button id= "uploadBtn"></button>
+
+
+        <ul id= "fileList"></ul>
+    </div>
+
+</div>
+
+<script src= "subjects.js"></script>
+
+</body>
+
+<footer>
+    <p>&copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
+</footer>
+
+</html>

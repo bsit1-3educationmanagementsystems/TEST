@@ -1,0 +1,284 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Times New Roman", serif;
+}
+
+/* Background */
+.bg-login {
+    background-image: url('ISKOLAR (1).png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* Header */
+.header .navbar {
+    background: #7c2b2b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+}
+
+/* nav br */
+.logo img {
+    width: 100px;
+}
+
+.name {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.namePos {
+    font-size: 35px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.namePos h3 {
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.nav a {
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 18px;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.nav a:hover {
+    color: #ffe2cc;
+}
+
+/* Search bar */
+.search-wrapper input {
+    padding: 6px 12px;
+    border-radius: 18px;
+    border: none;
+    width: 300px;
+}
+
+/* Layout */
+.signin-section {
+    width: 90%;
+    margin: 70px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    color: white;
+}
+
+.signin-left {
+    width: 40%;
+}
+
+.signin-left h1 {
+    font-size: 65px;
+    font-weight: 900;
+}
+
+.signin-left p {
+    width: 80%;
+    margin-top: 20px;
+    text-align: justify;
+}
+
+/* Sign-in Box */
+.signin-box {
+    width: 55%;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 35px;
+    color: #4a1a1a;
+}
+
+.password-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0;
+}
+
+.password-field input {
+    margin: 0;
+}
+
+.password-field button:hover {
+    background: #162d66;
+}
+
+.signin-btn:hover {
+    background: #622020;
+}
+
+.password-field button {
+    padding: 10px 14px;
+    border: none;
+    cursor: pointer;
+    background: #1f3c88;
+    color: white;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#school {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+#formMessage {
+    min-height: 20px;
+    font-size: 14px;
+    margin: 8px 0 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    border: 2px solid #641c1c;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #641c1c;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.tab:hover {
+    background-color: #f28b8b;
+    color: white;
+}
+
+.tab.active {
+    background-color: #b71c1c;
+    color: white;
+}
+
+/* Form Fields */
+form input,
+form select {
+    width: 100%;
+    padding: 10px 5px;
+    margin: 12px 0;
+    border: none;
+    border-bottom: 1px solid #9a7070;
+    background: transparent;
+    outline: none;
+    font-size: 15px;
+    color: #4a1a1a;
+}
+
+.signin-btn {
+    width: 45%;
+    padding: 12px;
+    background: #7c2b2b;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: 18px;
+    cursor: pointer;
+    float: right;
+}
+
+.forgot {
+    float: right;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #7c2b2b;
+    text-decoration: none;
+}
+
+footer {
+    background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin-top: 50px;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
+} 
+ /* Responsive for mobile */
+@media (max-width: 768px) {
+    .signin-section {
+        flex-direction: column;
+        align-items: center;
+        margin: 30px auto;
+    }
+
+    .signin-left, .signin-box {
+        width: 90%;
+    }
+
+    .signin-left h1 {
+        font-size: 40px;
+    }
+
+    .tab {
+        font-size: 16px;
+    }
+
+    .search-wrapper input {
+        width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .signin-left h1 {
+        font-size: 32px;
+    }
+
+    .signin-left p {
+        font-size: 14px;
+    }
+
+    .tab {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .signin-btn {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .namePos {
+        font-size: 16px;
+    }
+
+    .namePos h3 {
+        font-size: 8px;
+    }
+
+    .nav a {
+        font-size: 12px;
+        margin: 0 5px;
+    }
+}

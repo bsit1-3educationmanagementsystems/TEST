@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I.S.K.O.L.A.R</title>
+    <link rel="stylesheet" href="application.css">
+</head>
+
+<body class="bg-login">
+
+<header class="header">
+    <nav class="navbar">
+
+        <div class="name">
+            <div class="logo">
+                <img src="!ISKOLAR.png" alt="ISKOLAR Logo">
+            </div>
+
+            <div class="namePos">
+                <p style="letter-spacing: 10px;"> ISKOLAR</p>
+                <h3>Interactive System for Knowledge-Oriented <br> Learning, Assistance, and Review</h3>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a href="index.html">HOME</a>
+            <a href="sbjctGuestmain.html">SUBJECTS</a>
+            <a href="application.html">SIGN IN</a>
+        </nav>
+
+        <div class="search-wrapper">
+            <input type="search" placeholder="Search…" id="searchbar">
+        </div>
+
+    </nav>
+</header>
+
+<section class="signin-section">
+
+    <div class="signin-left">
+    <h1>SIGN UP</h1>
+    <p>
+        Create your ISKOLAR account to access modules, quizzes, and mock tests.
+        For educators, registered accounts may also be used to manage and monitor student learning progress.
+    </p>
+    </div>
+
+    <div class="signin-box">
+
+        <div class="tabs">
+            <button class="tab active" data-type="student">STUDENT</button>
+            <button class="tab" data-type="teacher">TEACHER</button>
+        </div>
+
+        <form id="signinForm">
+
+    <input type="text" id="name" placeholder="FULL NAME" required>
+
+    <select id="school" required>
+        <option value="">SELECT SCHOOL</option>
+    </select>
+
+    <input type="email" id="email" placeholder="EMAIL" required>
+
+    <div class="password-field">
+        <input type="password" id="password" placeholder="PASSWORD" required>
+        <button type="button" id="togglePassword">Show</button>
+    </div>
+
+    <div class="password-field">
+        <input type="password" id="confirmPassword" placeholder="CONFIRM PASSWORD" required>
+        <button type="button" id="toggleConfirmPassword">Show</button>
+    </div>
+
+    <p id="formMessage"></p>
+
+    <button type="submit" class="signin-btn">SIGN UP</button>
+
+    </form>
+
+    </div>
+
+</section>
+
+<footer>
+    <p style="margin-top: 50px;">&copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
+</footer>
+
+
+  
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDeXxlaxk1nCVQ9k8tMiEs9o-EcLrkTSPE",
+  authDomain: "iskolar-website.firebaseapp.com",
+  projectId: "iskolar-website",
+  appId: "1:1034904541958:web:39eee81131f0a09a991c87"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+console.log("Firebase connected");
+
+// Tabs
+const tabs = document.querySelectorAll(".tab");
+let accountType = "student";
+
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    accountType = tab.getAttribute("data-type");
+  });
+});
+
+// School dropdown entries
+const schools = [
+  "Pamantasan ng Lungsod ng Maynila",
+  "University of the Philippines Diliman",
+  "Polytechnic University of the Philippines",
+  "Technological University of the Philippines",
+  "De La Salle University",
+  "Ateneo de Manila University",
+  "Far Eastern University",
+  "National University",
+  "University of Santo Tomas",
+  "Adamson University",
+  "Centro Escolar University",
+  "Mapua University",
+  "Lyceum of the Philippines University",
+  "San Beda University",
+  "Arellano University",
+  "University of the East",
+  "Philippine Normal University",
+  "Eulogio 'Amang' Rodriguez Institute of Science and Technology",
+  "Bulacan State University",
+  "Cavite State University"
+];
+
+const schoolSelect = document.getElementById("school");
+
+schools.forEach(school => {
+  const option = document.createElement("option");
+  option.value = school;
+  option.textContent = school;
+  schoolSelect.appendChild(option);
+});
+
+// Show / hide password
+const passwordInput = document.getElementById("password");
+const confirmPasswordInput = document.getElementById("confirmPassword");
+const togglePassword = document.getElementById("togglePassword");
+const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+
+togglePassword.addEventListener("click", () => {
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    togglePassword.textContent = "Hide";
+  } else {
+    passwordInput.type = "password";
+    togglePassword.textContent = "Show";
+  }
+});
+
+toggleConfirmPassword.addEventListener("click", () => {
+  if (confirmPasswordInput.type === "password") {
+    confirmPasswordInput.type = "text";
+    toggleConfirmPassword.textContent = "Hide";
+  } else {
+    confirmPasswordInput.type = "password";
+    toggleConfirmPassword.textContent = "Show";
+  }
+});
+
+// Signup
+document.getElementById("signinForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const school = document.getElementById("school").value;
+  const email = document.getElementById("email").value.trim();
+  const password = passwordInput.value.trim();
+  const confirmPassword = confirmPasswordInput.value.trim();
+  const formMessage = document.getElementById("formMessage");
+
+  formMessage.textContent = "";
+  formMessage.style.color = "red";
+
+  if (!name || !school || !email || !password || !confirmPassword) {
+    formMessage.textContent = "Please fill in all fields.";
+    return;
+  }
+
+  if (password.length < 6) {
+    formMessage.textContent = "Password must be at least 6 characters long.";
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    formMessage.textContent = "Passwords do not match.";
+    return;
+  }
+
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    await setDoc(doc(db, "users", user.uid), {
+      name: name,
+      school: school,
+      email: email,
+      accountType: accountType,
+      emailVerified: false,
+      createdAt: serverTimestamp()
+    });
+
+    await sendEmailVerification(user);
+
+    formMessage.style.color = "green";
+    formMessage.textContent = "Account created successfully. Please check your email for verification.";
+
+    await signOut(auth);
+
+    document.getElementById("signinForm").reset();
+    document.querySelector('.tab[data-type="student"]').click();
+
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 2500);
+
+  } catch (error) {
+    console.error("ERROR:", error);
+
+    if (error.code === "auth/email-already-in-use") {
+      formMessage.textContent = "That email is already registered.";
+    } else if (error.code === "auth/invalid-email") {
+      formMessage.textContent = "Please enter a valid email address.";
+    } else if (error.code === "auth/weak-password") {
+      formMessage.textContent = "Password is too weak.";
+    } else {
+      formMessage.textContent = error.message;
+    }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Times New Roman", serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #7c2b2b; /* same as navbar */
+    color: white; /* default text color */
+}
+
+/* Header */
+.header .navbar {
+    background: #7c2b2b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+}
+
+
+/* nav br */
+.logo img {
+    width: 100px;
+}
+
+.name {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.namePos {
+    font-size: 35px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.namePos h3 {
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.nav a {
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 18px;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.nav a:hover {
+    color: #ffe2cc;
+}
+
+/* Search bar */
+.search-wrapper input {
+    padding: 6px 12px;
+    border-radius: 18px;
+    border: none;
+    width: 300px;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    background-image: url('iskolarhome.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 1px 1px 5px black;
+    color: white;
+}
+
+.hero-content {
+    text-align: center;
+    line-height: 80px;
+}
+
+.hero-content h1 {
+    font-size: 200px; /* bigger ISKOLAR */
+    font-weight: 900;
+    letter-spacing: 5px;
+    margin-bottom: 15px;
+}
+
+.hero-content .tagline {
+    font-size: 48px;
+  font-style: italic;   /* bigger ally to success */
+}
+
+.hero-infoCard {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    background: #051f09;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    width: 100%; /* full-width */
+    font-size: 20px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+}
+
+/* Info Section */
+.infoSection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 20px;
+    margin-top: 30px;
+}
+
+.infoCard {
+    background-color: #ecefeb;
+    padding: 25px;
+    border-radius: 15px;
+    width: 300px;
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+.infoCard h2 {
+    margin-bottom: 15px;
+    color: #7c2b2b;
+}
+
+.infoCard p, .infoCard ul {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.infoCard ul li {
+    margin-bottom: 8px;
+}
+
+.quickLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.quickLinks a {
+    text-decoration: none;
+    background: linear-gradient(90deg, #7c2b2b, #a83838);
+    color: #fff;
+    padding: 22px 0;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 19px;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.quickLinks a:last-child {
+    margin-bottom: 0;
+}
+
+.quickLinks a:hover {
+    background: linear-gradient(90deg, #a83838, #c74949);
+    transform: scale(1.03);
+}
+
+/* Footer */
+footer {
+    flex-shrink: 0;
+    background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 90px; }
+    .hero-content .tagline { font-size: 36px; }
+    .hero-infoCard { font-size: 18px; padding: 35px 15px; }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 { font-size: 70px; }
+    .hero-content .tagline { font-size: 28px; }
+    .hero-infoCard { font-size: 16px; padding: 30px 10px; }
+    .infoSection { grid-template-columns: 1fr; margin-top: 120px; }
+}
+
+
