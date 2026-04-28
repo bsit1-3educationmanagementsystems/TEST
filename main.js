@@ -84,6 +84,3 @@ searchbar.addEventListener("keydown", function(event){
             }
 
   }})
-
-
-    //windows.location.href = "ss.html"
