@@ -234,8 +234,12 @@ function removeFile(subject, index) {
 
     if (role !== "teacher") return;
 
-    else files[subject].splice(index, 1);
-    updateFileList();
+    const confirmDelete = confirm("Are you sure you want to remove this file?");
+
+    if (confirmDelete) {
+        files[subject].splice(index, 1);
+        updateFileList();
+    }
 }
 
 // Upload PDF
