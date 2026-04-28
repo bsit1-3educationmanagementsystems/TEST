@@ -11,7 +11,7 @@ body {
 
 /* Background */
 .bg-login {
-    background-image: url('ISKOLAR (1).png');
+    background-image: url('.assets/.img/ISKOLAR (1) (1).png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
