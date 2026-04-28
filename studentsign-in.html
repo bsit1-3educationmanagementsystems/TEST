@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I.S.K.O.L.A.R</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<script type="module" src="application.js">
+    console.log("SCRIPT IS RUNNING");
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDeXxlaxk1nCVQ9k8tMiEs9o-EcLrkTSPE",
+    authDomain: "iskolar-website.firebaseapp.com",
+    projectId: "iskolar-website",
+    storageBucket: "iskolar-website.firebasestorage.app",
+    messagingSenderId: "1034904541958",   
+    appId: "1:1034904541958:web:39eee81131f0a09a991c87"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  console.log("Firebase connected!");
+</script>
+
+<body>
+
+    <h1 id="EASTEREGG" style="display: none";></h1>
+
+    <!-- Navigation Bar Header -->
+<header class="header">
+    <nav class="navbar">
+
+        <div class="name">
+            <div class="logo">
+                <img src="!ISKOLAR.png" alt="ISKOLAR Logo">
+            </div>
+
+            <div class="namePos">
+                <p style="letter-spacing: 10px;"> ISKOLAR</p>
+                <h3>Interactive System for Knowledge-Oriented <br> Learning, Assistance, and Review</h3>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a href="studentsign-in.html">HOME</a>
+            <a href="sbjctStudmain.html">SUBJECTS</a>
+            <a href="studentAccount.html">ACCOUNT</a>
+        </nav>
+
+        <div class="search-wrapper">
+            <input type="search" placeholder="Search…" id="searchbar">
+        </div>
+
+    </nav>
+</header>
+
+    <section class="hero" id="PICS">
+        <div class="hero-content">
+            <h1>ISKOLAR</h1>
+            <p class="tagline"> Forging Your Path To Better Future</p>
+        </div>
+
+        <div class="hero-infoCard">
+            <p>
+                Level up your preparation with ISKOLAR’s complete set of modules, quizzes, and mock exams! <br>
+                Master Science, Math, English, Reading Comprehension, and Abstract Reasoning all in one place.
+            </p>
+        </div>
+    </section>
+
+    <section class="infoSection">
+            <div class="infoCard">
+            <h2>What is ISKOLAR?</h2>
+            <p>
+                A digital review center designed to support students' entrance exam preparations across a wide variety of universities through organized resources provided by the creators, teachers, and other individuals.
+            </p>
+            <p>
+            <br>
+                <strong>Why choose ISKOLAR?</strong>
+                <br>
+                <strong>Comprehensive Learning:</strong> Access modules, quizzes, and mock exams for Science, Math, English, Reading Comprehension, and Abstract Reasoning—all in one place.<br>
+                <strong>Flexible & Self-Paced:</strong> Study anytime, anywhere, at your own pace.<br>
+                <strong>Expertly Curated:</strong> Materials crafted by educators and exam specialists to help you focus on what matters most.<br>
+                <strong>Track Your Progress:</strong> Evaluate your performance with quizzes and mock tests to identify strengths and areas for improvement.
+            </p>
+        </div>
+
+        <div class="infoCard">
+            <h2>Key Benefits</h2>
+            <ul>
+                <li>Easy access to subjects and other materials</li>
+                <li>Dedicated teacher dashboards for file uploading and editing</li>
+                <li>Student-friendly resources and downloads</li>
+                <li>Fast and reliable system navigation</li>
+                <li>Interactive quizzes and mock exams to simulate real exam conditions</li>
+                <li>Regular updates with the latest modules, study guides, and exam formats</li>
+            </ul>
+            <p>
+                <strong>Level Up Your Preparation!</strong><br>
+                Join thousands of students who are maximizing their exam readiness with ISKOLAR—because success starts with the right tools.
+            </p>
+        </div>
+
+        <div class="infoCard">
+            <h2>Quick Access</h2>
+            <div class="quickLinks">
+                <a href="studentsign-in.html">Home</a>
+                <a href="sbjctStudmain.html">Subjects</a>
+                <a href="studentAccount.html">Account</a>
+            </div>
+        </div>
+
+    </section>
+
+    
+<script src= "main.js"></script>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 I.S.K.O.L.A.R. All rights reserved.<br>
+           Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
+    </footer>
+
+</body>
+</html>

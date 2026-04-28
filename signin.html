@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | ISKOLAR</title>
+    <link rel="stylesheet" href="application.css">
+</head>
+
+<body class="bg-login">
+
+<header class="header">
+    <nav class="navbar">
+
+        <div class="name">
+            <div class="logo">
+                <img src="!ISKOLAR.png" alt="ISKOLAR Logo">
+            </div>
+
+            <div class="namePos">
+                <p style="letter-spacing: 10px;"> ISKOLAR</p>
+                <h3>Interactive System for Knowledge-Oriented <br> Learning, Assistance, and Review</h3>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a href="index.html">HOME</a>
+            <a href="sbjctGuestmain.html">SUBJECTS</a>
+            <a href="application.html">SIGN IN</a>
+        </nav>
+
+        <div class="search-wrapper">
+            <input type="search" placeholder="Search…" id="searchbar">
+        </div>
+
+    </nav>
+</header>
+
+<section class="signin-section">
+
+    <div class="signin-left">
+        <h1>SIGN IN</h1>
+        <p>
+            Welcome back! Please log in to access your ISKOLAR account.
+        </p>
+    </div>
+
+    <div class="signin-box">
+
+        <form id="loginForm">
+
+            <input type="text" id="name" placeholder="FULL NAME">
+
+            <input type="email" id="email" placeholder="EMAIL" required>
+
+            <div class="password-field">
+                <input type="password" id="password" placeholder="PASSWORD" required>
+                <button type="button" id="togglePassword">Show</button>
+            </div>
+
+            <p id="formMessage"></p>
+
+            <button type="submit" class="signin-btn">SIGN IN</button>
+
+            <p class="signin-text">
+                Don't have an account?
+                <a href="application.html">Create one</a>
+            </p>
+
+        </form>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>
+        &copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>
+        Need help? Email us at bsiteducationmanagementsystem@gmail.com
+    </p>
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { 
+    getAuth, 
+    signInWithEmailAndPassword 
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDeXxlaxk1nCVQ9k8tMiEs9o-EcLrkTSPE",
+  authDomain: "iskolar-website.firebaseapp.com",
+  projectId: "iskolar-website",
+  appId: "1:1034904541958:web:39eee81131f0a09a991c87"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// PASSWORD TOGGLE
+const passwordInput = document.getElementById("password");
+const togglePassword = document.getElementById("togglePassword");
+
+togglePassword.addEventListener("click", () => {
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        togglePassword.textContent = "Hide";
+    } else {
+        passwordInput.type = "password";
+        togglePassword.textContent = "Show";
+    }
+});
+
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const formMessage = document.getElementById("formMessage");
+
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        formMessage.style.color = "green";
+        formMessage.textContent = "Login successful! Redirecting...";
+
+        setTimeout(() => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+
+                if (data.accountType === "teacher") {
+                    window.location.href = "teachersign-in.html";
+                } else {
+                    window.location.href = "studentsign-in.html";
+                }
+            } else {
+                window.location.href = "index.html";
+            }
+        }, 1500);
+
+    } catch (error) {
+        formMessage.style.color = "red";
+
+        if (error.code === "auth/user-not-found") {
+            formMessage.textContent = "No account found.";
+        } else if (error.code === "auth/wrong-password") {
+            formMessage.textContent = "Incorrect password.";
+        } else {
+            formMessage.textContent = error.message;
+        }
+    }
+});
+</script>
+
+</body>
+</html>
