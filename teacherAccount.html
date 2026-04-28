@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | ISKOLAR</title>
+    <link rel="stylesheet" href="application.css">
+</head>
+
+<body class="bg-login" style="min-height: 100vh; display: flex; flex-direction: column;">
+
+<header class="header">
+    <nav class="navbar">
+
+        <div class="name">
+            <div class="logo">
+                <img src="!ISKOLAR.png" alt="ISKOLAR Logo">
+            </div>
+
+            <div class="namePos">
+                <p style="letter-spacing: 10px;"> ISKOLAR</p>
+                <h3>Interactive System for Knowledge-Oriented <br> Learning, Assistance, and Review</h3>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a href="teachersign-in.html">HOME</a>
+            <a href="subjectsmain.html">SUBJECTS</a>
+            <a href="teacherAcount.html">ACCOUNT</a>
+        </nav>
+
+        <div class="search-wrapper">
+            <input type="search" placeholder="Search…" id="searchbar">
+        </div>
+
+    </nav>
+</header>
+
+<section class="signin-section" style="flex: 1;">
+
+    <div class="signin-left">
+        <h1>ACCOUNT</h1>
+        <p>
+            View your profile information and track your learning activity.
+        </p>
+    </div>
+
+    <div class="signin-box">
+
+        <h2 id="userName">Loading...</h2>
+
+        <!-- ✔ ADDED USER INFO -->
+        <p><strong>Full Name:</strong> <span id="fullName"></span></p>
+        <p><strong>Email:</strong> <span id="userEmail"></span></p>
+        <p><strong>School:</strong> <span id="userSchool"></span></p>
+        <p><strong>Account Type:</strong> <span id="userType"></span></p>
+
+        <hr style="margin: 15px 0;">
+
+        <button class="signin-btn" id="logoutBtn">LOG OUT</button>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>
+        &copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>
+        Need help? Email us at bsiteducationmanagementsystem@gmail.com
+    </p>
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDeXxlaxk1nCVQ9k8tMiEs9o-EcLrkTSPE",
+  authDomain: "iskolar-website.firebaseapp.com",
+  projectId: "iskolar-website",
+  appId: "1:1034904541958:web:39eee81131f0a09a991c87"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// Check logged in user
+onAuthStateChanged(auth, async (user) => {
+
+    if (!user) {
+        window.location.href = "signin.html";
+        return;
+    }
+
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        const data = docSnap.data();
+
+        // existing
+        document.getElementById("userName").textContent = data.name;
+
+        // ✔ NEW FIELDS
+        document.getElementById("fullName").textContent = data.name;
+        document.getElementById("userEmail").textContent = data.email;
+        document.getElementById("userSchool").textContent = data.school;
+        document.getElementById("userType").textContent = data.accountType;
+
+        // last subject
+        if (data.lastSubject) {
+            document.getElementById("lastSubject").textContent = data.lastSubject;
+        }
+    }
+});
+
+// Logout
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "signin.html";
+});
+</script>
+
+</body>
+</html>
