@@ -68,16 +68,6 @@ searchbar.addEventListener("keydown", function(event){
 
   }})
 
-
-
-
-
-
-
-
-
-
-
 let accountType = ""; // teacher or student
 
 // Account type buttons
