@@ -39,10 +39,10 @@
 <section class="signin-section">
 
     <div class="signin-left">
-        <h1>SIGN IN</h1>
+        <h1>SIGN UP</h1>
         <p>
-            Log in with your account to access modules, quizzes, and mock tests.  
-            For educators, once logged in you may upload and check the progress of the students.
+            Create your ISKOLAR account to access modules, quizzes, and mock tests.
+            For educators, registered accounts may also be used to manage and monitor student learning progress.
         </p>
     </div>
 
@@ -56,11 +56,33 @@
         <form id="signinForm">
 
             <input type="text" id="name" placeholder="FULL NAME" required>
-            <input type="text" id="school" placeholder="SCHOOL" required>
-            <input type="email" id="email" placeholder="EMAIL" required>
-            <input type="text" id="idnum" placeholder="ID NUMBER" required>
 
-            <button type="submit" class="signin-btn">SIGN IN</button>
+            <select id="school" required>
+                <option value="">SELECT SCHOOL</option>
+            </select>
+
+            <input type="email" id="email" placeholder="EMAIL" required>
+
+            <div class="password-field">
+                <input type="password" id="password" placeholder="PASSWORD" required>
+                <button type="button" id="togglePassword">Show</button>
+            </div>
+
+            <div class="password-field">
+                <input type="password" id="confirmPassword" placeholder="CONFIRM PASSWORD" required>
+                <button type="button" id="toggleConfirmPassword">Show</button>
+            </div>
+
+            <p id="formMessage"></p>
+
+            <!-- UPDATED BUTTON -->
+            <button type="submit" class="signin-btn">CREATE ACCOUNT</button>
+
+            <!-- CLEAN TEXT LINK -->
+            <p class="signin-text">
+                Already have an account?
+                <a href="signin.html">Sign in</a>
+            </p>
 
         </form>
 
@@ -69,135 +91,169 @@
 </section>
 
 <footer>
-    <p style="margin-top: 50px;">&copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
+    <p>
+        &copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>
+        Need help? Email us at bsiteducationmanagementsystem@gmail.com
+    </p>
 </footer>
 
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  
-<script>
-    const searchbar = document.getElementById('searchbar');
-const easteregg = document.getElementById('EASTEREGG');
-const pics = document.getElementById('PICS');
+const firebaseConfig = {
+  apiKey: "AIzaSyDeXxlaxk1nCVQ9k8tMiEs9o-EcLrkTSPE",
+  authDomain: "iskolar-website.firebaseapp.com",
+  projectId: "iskolar-website",
+  appId: "1:1034904541958:web:39eee81131f0a09a991c87"
+};
 
-searchbar.addEventListener("keydown", function(event){
-        
-        if (event.key === "Enter"){
-            if (
-            searchbar.value === "home" ||
-            searchbar.value === "Home" ||
-            searchbar.value === "Main" ||
-            searchbar.value === "main" ||
-            searchbar.value === "Index" ||
-            searchbar.value === "index"
-            ) {
-            window.location.href = "index.html";
-            }
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-            if (
-            searchbar.value === "application" ||
-            searchbar.value === "sign-in" ||
-            searchbar.value === "student" ||
-            searchbar.value === "teacher" ||
-            searchbar.value === "users"
-            ) {
-            window.location.href = "application.html";
-            }
+// Tabs
+const tabs = document.querySelectorAll(".tab");
+let accountType = "student";
 
-            if (
-            searchbar.value === "subjects" ||
-            searchbar.value === "subject" ||
-            searchbar.value === "courses" ||
-            searchbar.value === "guest"
-            ) {
-            window.location.href = "sbjctGuestmain.html";
-            }
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    accountType = tab.getAttribute("data-type");
+  });
+});
 
-            if (
-            searchbar.value === "science"
-            ) {
-            window.location.href = "sbjctGuest.html";
-            }
+// Schools
+const schools = [
+  "Pamantasan ng Lungsod ng Maynila",
+  "University of the Philippines Diliman",
+  "Polytechnic University of the Philippines",
+  "Technological University of the Philippines",
+  "De La Salle University",
+  "Ateneo de Manila University",
+  "Far Eastern University",
+  "National University",
+  "University of Santo Tomas",
+  "Adamson University",
+  "Centro Escolar University",
+  "Mapua University",
+  "Lyceum of the Philippines University",
+  "San Beda University",
+  "Arellano University",
+  "University of the East",
+  "Philippine Normal University",
+  "Eulogio 'Amang' Rodriguez Institute of Science and Technology",
+  "Bulacan State University",
+  "Cavite State University"
+];
 
-            if (
-            searchbar.value === "math"
-            ) {
-            window.location.href = "sbjctGuestMath.html";
-            }
+const schoolSelect = document.getElementById("school");
 
-            if (
-            searchbar.value === "english"
-            ) {
-            window.location.href = "sbjctGuestEng.html";
-            }
+schools.forEach(school => {
+  const option = document.createElement("option");
+  option.value = school;
+  option.textContent = school;
+  schoolSelect.appendChild(option);
+});
 
-            if (
-            searchbar.value === "reading"
-            ) {
-            window.location.href = "sbjctGuestRead.html";
-            }
+// Password toggle
+const passwordInput = document.getElementById("password");
+const confirmPasswordInput = document.getElementById("confirmPassword");
+const togglePassword = document.getElementById("togglePassword");
+const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
 
-            if (
-            searchbar.value === "abstract"
-            ) {
-            window.location.href = "sbjctGuestAbs.html";
-            }
+togglePassword.addEventListener("click", () => {
+  passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+  togglePassword.textContent = passwordInput.type === "password" ? "Show" : "Hide";
+});
 
-  }})
+toggleConfirmPassword.addEventListener("click", () => {
+  confirmPasswordInput.type = confirmPasswordInput.type === "password" ? "text" : "password";
+  toggleConfirmPassword.textContent = confirmPasswordInput.type === "password" ? "Show" : "Hide";
+});
 
-    const tabs = document.querySelectorAll('.tab');
-    let accountType = 'student'; // default tab
+// Signup
+document.getElementById("signinForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            accountType = tab.getAttribute('data-type'); // set accountType
-        });
+  const name = document.getElementById("name").value.trim();
+  const school = document.getElementById("school").value;
+  const email = document.getElementById("email").value.trim();
+  const password = passwordInput.value.trim();
+  const confirmPassword = confirmPasswordInput.value.trim();
+  const formMessage = document.getElementById("formMessage");
+
+  formMessage.textContent = "";
+  formMessage.style.color = "red";
+
+  if (!name || !school || !email || !password || !confirmPassword) {
+    formMessage.textContent = "Please fill in all fields.";
+    return;
+  }
+
+  if (password.length < 6) {
+    formMessage.textContent = "Password must be at least 6 characters long.";
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    formMessage.textContent = "Passwords do not match.";
+    return;
+  }
+
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    await setDoc(doc(db, "users", user.uid), {
+      name,
+      school,
+      email,
+      accountType,
+      emailVerified: false,
+      createdAt: serverTimestamp()
     });
 
-    // Sign-in logic
-    const teachers = [
-        { name: "T1", school: "SHS", email: "teacher@test.com", id: "T001" }
-    ];
+    await sendEmailVerification(user);
 
-    const students = [
-        { name: "S1", school: "SHS", email: "student@test.com", id: "S001" }
-    ];
+    formMessage.style.color = "green";
+    formMessage.textContent = "Account created successfully. Please check your email for verification.";
 
-    document.getElementById("signinForm").addEventListener("submit", function (e) {
-        e.preventDefault();
+    await signOut(auth);
 
-        const name = document.getElementById("name").value.trim();
-        const school = document.getElementById("school").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const idnum = document.getElementById("idnum").value.trim();
+    document.getElementById("signinForm").reset();
 
-        let valid = false;
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 2500);
 
-        if (accountType === "teacher") {
-            valid = teachers.some(t =>
-                t.name === name &&
-                t.school === school &&
-                t.email === email &&
-                t.id === idnum
-            );
-            if (valid) window.location.href = "subjectsmain.html"; // redirect teacher
-        }
+  } catch (error) {
+    formMessage.style.color = "red";
 
-        if (accountType === "student") {
-            valid = students.some(s =>
-                s.name === name &&
-                s.school === school &&
-                s.email === email &&
-                s.id === idnum
-            );
-            if (valid) window.location.href = "sbjctStudmain.html"; // redirect student
-        }
-
-        if (!valid) {
-            alert("Incorrect information. Please try again.");
-        }
-    });
+    if (error.code === "auth/email-already-in-use") {
+      formMessage.textContent = "That email is already registered.";
+    } else if (error.code === "auth/invalid-email") {
+      formMessage.textContent = "Please enter a valid email address.";
+    } else if (error.code === "auth/weak-password") {
+      formMessage.textContent = "Password is too weak.";
+    } else {
+      formMessage.textContent = error.message;
+    }
+  }
+});
 </script>
+
 </body>
 </html>
