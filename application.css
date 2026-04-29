@@ -166,6 +166,7 @@ form input {
     margin-top: 28px;
     font-size: 19px;
     color: #4a1a1a;
+    text-align: left;
 }
 
 .signin-text a {
