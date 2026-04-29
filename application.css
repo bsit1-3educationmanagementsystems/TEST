@@ -11,7 +11,7 @@ body {
 
 /* Background */
 .bg-login {
-    background-image: url('.assets/.img/ISKOLAR (1) (1).png');
+    background-image: url('ISKOLAR (1).png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -163,10 +163,10 @@ form input {
 }
 
 .signin-text {
-    margin-top: 15px;
-    font-size: 14px;
+    margin-top: 28px;
+    font-size: 19px;
     color: #4a1a1a;
-    text-align: center;
+    text-align: left;
 }
 
 .signin-text a {
@@ -178,6 +178,10 @@ form input {
 
 .signin-text a:hover {
     opacity: 0.7;
+}
+
+form {
+    position: relative;
 }
 
 .forgot {
