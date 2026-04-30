@@ -47,26 +47,44 @@
 
     <div class="signin-box">
 
-        <!-- Flex Container to hold Image on the left and Info on the right -->
-        <div style="display: flex; align-items: center; gap: 30px; margin-bottom: 20px;">
+        <!-- Flex Container: Changed align-items to flex-start so PFP stays at the top -->
+        <div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 20px;">
             
-            <!-- ✔ PROFILE PICTURE UI (LEFT) -->
-            <div class="profile-pic-wrapper" style="text-align: center; flex-shrink: 0;">
-                <!-- Updated src to use local default profile picture -->
-                <img id="profileImg" src=".assets/.img/nopfp.jpg" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #ccc;">
+            <!-- PROFILE PICTURE UI (LEFT) -->
+            <div class="profile-pic-wrapper" style="text-align: center; flex-shrink: 0; padding-top: 15px;">
+                <img id="profileImg" src="0assets/0img/nopfp.jpg" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #ccc;">
                 <br>
                 <input type="file" id="fileInput" accept="image/*" style="display: none;">
-                <!-- Red pill button styling -->
                 <label for="fileInput" style="cursor: pointer; background-color: #dc3545; color: white; font-size: 14px; text-decoration: none; padding: 6px 18px; border-radius: 50px; display: inline-block; margin-top: 12px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background-color 0.3s;">Change Picture</label>
             </div>
 
-            <!-- USER INFO -->
-            <div class="user-info-wrapper" style="text-align: left;">
-                <h2 id="userName" style="margin-top: 0; margin-bottom: 15px;">Loading...</h2>
-                <p style="margin: 5px 0;"><strong>Full Name:</strong> <span id="fullName"></span></p>
-                <p style="margin: 5px 0;"><strong>Email:</strong> <span id="userEmail"></span></p>
-                <p style="margin: 5px 0;"><strong>Current Institution:</strong> <span id="userSchool"></span></p>
-                <p style="margin: 5px 0;"><strong>Account Type:</strong> <span id="userType"></span></p>
+            <!-- USER INFO CARD (RIGHT) -->
+            <div class="user-info-wrapper" style="text-align: left; background-color: #ffffff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); flex: 1; max-width: 500px;">
+                
+                <!-- Editable Username Row -->
+                <div style="display: flex; align-items: stretch; gap: 10px; margin-bottom: 20px;">
+                    <input type="text" id="userName" style="font-size: 1.5em; font-weight: bold; margin: 0; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; flex: 1;" value="Loading...">
+                    <button id="saveNameBtn" style="background-color: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Save</button>
+                </div>
+
+                <p style="margin: 8px 0; font-size: 16px; letter-spacing: 2px;"><strong style="color: #4a2511;">Full Name:</strong> <span id="fullName" style="color: #333;"></span></p>
+                <p style="margin: 8px 0; font-size: 16px; letter-spacing: 2px;"><strong style="color: #4a2511;">Email:</strong> <span id="userEmail" style="color: #333;"></span></p>
+                <p style="margin: 8px 0; font-size: 16px; letter-spacing: 2px;"><strong style="color: #4a2511;">Account Type:</strong> <span id="userType" style="color: #333;"></span></p>
+
+                <!-- Editable Institutions Row -->
+                <div style="margin-top: 15px;">
+                    <p style="margin: 0 0 10px 0; font-size: 16px; letter-spacing: 2px;"><strong style="color: #4a2511;">Current Institutions:</strong></p>
+                    
+                    <div id="schoolList" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; letter-spacing: 2px;">
+                        <span style="color: #666; font-style: italic; font-size: 14px;">Loading...</span>
+                    </div>
+
+                    <div style="display: flex; align-items: stretch; gap: 10px; letter-spacing: 2px;">
+                        <input type="text" id="newSchoolInput" placeholder="Add a university..." style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; flex: 1; font-size: 14px;">
+                        <button id="addSchoolBtn" style="background-color: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Add</button>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -112,6 +130,61 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+// Global array to manage schools in memory
+let currentSchools = [];
+
+// Renders the schools into pill tags matching the screenshot
+function renderSchools(schoolsArray) {
+    const list = document.getElementById("schoolList");
+    list.innerHTML = "";
+    
+    if(schoolsArray.length === 0) {
+        list.innerHTML = "<span style='color: #666; font-style: italic; font-size: 14px;'>No institutions added.</span>";
+        return;
+    }
+
+    schoolsArray.forEach(school => {
+        const tag = document.createElement("div");
+        tag.style.cssText = "background-color: #ffffff; color: #333; padding: 6px 12px; border-radius: 20px; font-size: 14px; display: flex; align-items: center; gap: 8px; border: 1px solid #ccc;";
+        
+        const span = document.createElement("span");
+        span.textContent = school;
+        
+        const removeBtn = document.createElement("span");
+        removeBtn.innerHTML = "&times;";
+        removeBtn.title = "Remove";
+        removeBtn.style.cssText = "cursor: pointer; color: #dc3545; font-weight: normal; font-size: 18px; line-height: 0.8; padding: 0 2px;";
+        removeBtn.onclick = () => removeSchoolLocal(school);
+
+        tag.appendChild(span);
+        tag.appendChild(removeBtn);
+        list.appendChild(tag);
+    });
+}
+
+// Logic to remove a school with confirmation
+async function removeSchoolLocal(schoolName) {
+    const user = auth.currentUser;
+    if (!user) return;
+    
+    const confirmRemove = confirm(`Are you sure you want to remove "${schoolName}" from your institutions?`);
+    if (confirmRemove) {
+        try {
+            const updatedSchools = currentSchools.filter(s => s !== schoolName);
+            const userRef = doc(db, "users", user.uid);
+            await updateDoc(userRef, {
+                school: updatedSchools 
+            });
+            
+            currentSchools = updatedSchools;
+            renderSchools(currentSchools);
+        } catch (error) {
+            console.error("Error removing institution: ", error);
+            alert("Failed to remove institution.");
+        }
+    }
+}
+
 // Check logged in user
 onAuthStateChanged(auth, async (user) => {
 
@@ -126,36 +199,111 @@ onAuthStateChanged(auth, async (user) => {
     if (docSnap.exists()) {
         const data = docSnap.data();
 
-        // existing
-        document.getElementById("userName").textContent = data.name;
+        if (data.username) {
+            document.getElementById("userName").value = data.username;
+        } else {
+            document.getElementById("userName").value = data.name;
+        }
 
-        // ✔ CHECK FOR PROFILE PICTURE
         if (data.profilePic) {
             document.getElementById("profileImg").src = data.profilePic;
         }
 
-        // ✔ NEW FIELDS
         document.getElementById("fullName").textContent = data.name;
         document.getElementById("userEmail").textContent = data.email;
-        document.getElementById("userSchool").textContent = data.school;
         document.getElementById("userType").textContent = data.accountType;
 
-        // last subject
+        if (Array.isArray(data.school)) {
+            currentSchools = data.school;
+        } else if (typeof data.school === 'string' && data.school.trim() !== "") {
+            currentSchools = [data.school];
+        } else {
+            currentSchools = [];
+        }
+        
+        renderSchools(currentSchools);
+
         if (data.lastSubject) {
             document.getElementById("lastSubject").textContent = data.lastSubject;
         }
     }
 });
 
-// Profile Picture Upload Logic
+// Logic to add a school with confirmation
+document.getElementById("addSchoolBtn").addEventListener("click", async () => {
+    const newSchool = document.getElementById("newSchoolInput").value.trim();
+    const user = auth.currentUser;
+    
+    if (user && newSchool !== "") {
+        if (currentSchools.includes(newSchool)) {
+            alert("This institution is already in your list.");
+            return;
+        }
+
+        const confirmAdd = confirm(`Are you sure you want to add "${newSchool}" to your institutions?`);
+        
+        if (confirmAdd) {
+            try {
+                const updatedSchools = [...currentSchools, newSchool];
+                const userRef = doc(db, "users", user.uid);
+                
+                await updateDoc(userRef, {
+                    school: updatedSchools 
+                });
+                
+                currentSchools = updatedSchools;
+                renderSchools(currentSchools);
+                document.getElementById("newSchoolInput").value = ""; 
+            } catch (error) {
+                console.error("Error adding institution: ", error);
+                alert("Failed to add institution.");
+            }
+        }
+    } else {
+        alert("Institution name cannot be empty.");
+    }
+});
+
+// Save Username Logic with Confirmation
+document.getElementById("saveNameBtn").addEventListener("click", async () => {
+    const newUserName = document.getElementById("userName").value.trim();
+    const user = auth.currentUser;
+    
+    if (user && newUserName !== "") {
+        const confirmSave = confirm(`Are you sure you want to change your username to "${newUserName}"?`);
+        
+        if (confirmSave) {
+            try {
+                const userRef = doc(db, "users", user.uid);
+                await updateDoc(userRef, {
+                    username: newUserName
+                });
+                alert("Username updated successfully!");
+            } catch (error) {
+                console.error("Error updating username: ", error);
+                alert("Failed to save username.");
+            }
+        }
+    } else {
+        alert("Username cannot be empty.");
+    }
+});
+
+// Profile Picture Upload Logic with Confirmation
 document.getElementById("fileInput").addEventListener("change", (event) => {
     const file = event.target.files[0];
     if (file) {
+        const confirmPic = confirm("Are you sure you want to change your profile picture?");
+        
+        if (!confirmPic) {
+            event.target.value = ""; 
+            return;
+        }
+
         const reader = new FileReader();
         
         reader.onload = async (e) => {
             const base64String = e.target.result;
-            document.getElementById("profileImg").src = base64String;
 
             const user = auth.currentUser;
             if (user) {
@@ -164,6 +312,7 @@ document.getElementById("fileInput").addEventListener("change", (event) => {
                     await updateDoc(userRef, {
                         profilePic: base64String
                     });
+                    document.getElementById("profileImg").src = base64String;
                     alert("Profile picture updated successfully!");
                 } catch (error) {
                     console.error("Error updating profile picture: ", error);
@@ -176,10 +325,14 @@ document.getElementById("fileInput").addEventListener("change", (event) => {
     }
 });
 
-// Logout
+// Logout with Confirmation
 document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await signOut(auth);
-    window.location.href = "signin.html";
+    const confirmLogout = confirm("Are you sure you want to log out?");
+    
+    if (confirmLogout) {
+        await signOut(auth);
+        window.location.href = "signin.html";
+    }
 });
 </script>
 

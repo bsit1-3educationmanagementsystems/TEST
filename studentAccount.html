@@ -47,9 +47,10 @@
 
     <div class="signin-box">
 
-        <div style="display: flex; align-items: center; gap: 30px; margin-bottom: 20px;">
+        <!-- Flex Container: Changed align-items to flex-start so PFP stays at the top -->
+        <div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 20px;">
             
-            <div class="profile-pic-wrapper" style="text-align: center; flex-shrink: 0;">
+            <div class="profile-pic-wrapper" style="text-align: center; flex-shrink: 0; padding-top: 15px;">
                 <img id="profileImg" src=".assets/.img/nopfp.jpg" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #ccc;">
                 <br>
                 <input type="file" id="fileInput" accept="image/*" style="display: none;">
@@ -58,12 +59,19 @@
                 </label>
             </div>
 
-            <div class="user-info-wrapper" style="text-align: left;">
-                <h2 id="userName" style="margin-top: 0; margin-bottom: 15px;">Loading...</h2>
-                <p style="margin: 5px 0;"><strong>Full Name:</strong> <span id="fullName"></span></p>
-                <p style="margin: 5px 0;"><strong>Email:</strong> <span id="userEmail"></span></p>
-                <p style="margin: 5px 0;"><strong>Preferred University:</strong> <span id="userSchool"></span></p>
-                <p style="margin: 5px 0;"><strong>Account Type:</strong> <span id="userType"></span></p>
+            <!-- USER INFO CARD (RIGHT) -->
+            <div class="user-info-wrapper" style="text-align: left; background-color: #ffffff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); flex: 1; max-width: 500px;">
+                
+                <!-- Editable Username Row -->
+                <div style="display: flex; align-items: stretch; gap: 10px; margin-bottom: 20px;">
+                    <input type="text" id="userName" style="font-size: 1.5em; font-weight: bold; margin: 0; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; flex: 1;" value="Loading...">
+                    <button id="saveNameBtn" style="background-color: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Save</button>
+                </div>
+
+                <p style="margin: 8px 0; font-size: 16px; letter-spacing: 2px;"><strong style="color: #4a2511;">Full Name:</strong> <span id="fullName" style="color: #333;"></span></p>
+                <p style="margin: 8px 0; font-size: 16px; letter-spacing: 2px;"><strong style="color: #4a2511;">Email:</strong> <span id="userEmail" style="color: #333;"></span></p>
+                <p style="margin: 8px 0; font-size: 16px; letter-spacing: 2px;"><strong style="color: #4a2511;">Preferred University:</strong> <span id="userSchool" style="color: #333;"></span></p>
+                <p style="margin: 8px 0; font-size: 16px; letter-spacing: 2px;"><strong style="color: #4a2511;">Account Type:</strong> <span id="userType" style="color: #333;"></span></p>
             </div>
 
         </div>
@@ -126,7 +134,11 @@ onAuthStateChanged(auth, async (user) => {
     if (docSnap.exists()) {
         const data = docSnap.data();
 
-        document.getElementById("userName").textContent = data.name;
+        if (data.username) {
+            document.getElementById("userName").value = data.username;
+        } else {
+            document.getElementById("userName").value = data.name;
+        }
 
         if (data.profilePic) {
             document.getElementById("profileImg").src = data.profilePic;
@@ -143,22 +155,60 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
-// proflie
+// Save Username Logic with Confirmation
+document.getElementById("saveNameBtn").addEventListener("click", async () => {
+    const newUserName = document.getElementById("userName").value.trim();
+    const user = auth.currentUser;
+    
+    if (user && newUserName !== "") {
+        const confirmSave = confirm(`Are you sure you want to change your username to "${newUserName}"?`);
+        
+        if (confirmSave) {
+            try {
+                const userRef = doc(db, "users", user.uid);
+                await updateDoc(userRef, {
+                    username: newUserName
+                });
+                alert("Username updated successfully!");
+            } catch (error) {
+                console.error("Error updating username: ", error);
+                alert("Failed to save username.");
+            }
+        }
+    } else {
+        alert("Username cannot be empty.");
+    }
+});
+
+// Profile Picture Upload Logic with Confirmation
 document.getElementById("fileInput").addEventListener("change", (event) => {
     const file = event.target.files[0];
     if (file) {
+        const confirmPic = confirm("Are you sure you want to change your profile picture?");
+        
+        if (!confirmPic) {
+            event.target.value = ""; 
+            return;
+        }
+
         const reader = new FileReader();
         
         reader.onload = async (e) => {
             const base64String = e.target.result;
-            document.getElementById("profileImg").src = base64String;
 
             const user = auth.currentUser;
             if (user) {
-                const userRef = doc(db, "users", user.uid);
-                await updateDoc(userRef, {
-                    profilePic: base64String
-                });
+                try {
+                    const userRef = doc(db, "users", user.uid);
+                    await updateDoc(userRef, {
+                        profilePic: base64String
+                    });
+                    document.getElementById("profileImg").src = base64String;
+                    alert("Profile picture updated successfully!");
+                } catch (error) {
+                    console.error("Error updating profile picture: ", error);
+                    alert("Failed to save picture.");
+                }
             }
         };
         
@@ -166,10 +216,14 @@ document.getElementById("fileInput").addEventListener("change", (event) => {
     }
 });
 
-// Logout
+// Logout with Confirmation
 document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await signOut(auth);
-    window.location.href = "signin.html";
+    const confirmLogout = confirm("Are you sure you want to log out?");
+    
+    if (confirmLogout) {
+        await signOut(auth);
+        window.location.href = "signin.html";
+    }
 });
 </script>
 
