@@ -215,26 +215,33 @@ document.getElementById("signinForm").addEventListener("submit", async function 
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // Determine default status based on account type
-    const accountStatus = accountType === "teacher" ? "pending" : "approved";
-
-    await setDoc(doc(db, "users", user.uid), {
+    // Define the base user data
+    const userData = {
       name,
       school,
       email,
       accountType,
-      status: accountStatus, // <-- New status field added here
       emailVerified: false,
       createdAt: serverTimestamp()
-    });
+    };
+
+    // Require admin approval for teachers
+    if (accountType === "teacher") {
+      userData.status = "pending";
+    } else {
+      userData.status = "approved"; 
+    }
+
+    // Save to Firestore
+    await setDoc(doc(db, "users", user.uid), userData);
 
     await sendEmailVerification(user);
 
     formMessage.style.color = "green";
     
-    // Change messaging based on account type
+    // Customize the success message based on the account type
     if (accountType === "teacher") {
-        formMessage.textContent = "Teacher account created. Please wait for an Admin to approve your account before signing in.";
+        formMessage.textContent = "Teacher account created! Please check your email for verification. An admin must approve your account before you can sign in.";
     } else {
         formMessage.textContent = "Account created successfully. Please check your email for verification.";
     }
@@ -245,11 +252,22 @@ document.getElementById("signinForm").addEventListener("submit", async function 
 
     setTimeout(() => {
       window.location.href = "index.html";
-    }, 4000); // Extended time slightly so teachers can read the message
+    }, 3500);
 
   } catch (error) {
-    // ... your existing error handling ...
-}});
+    formMessage.style.color = "red";
+
+    if (error.code === "auth/email-already-in-use") {
+      formMessage.textContent = "That email is already registered.";
+    } else if (error.code === "auth/invalid-email") {
+      formMessage.textContent = "Please enter a valid email address.";
+    } else if (error.code === "auth/weak-password") {
+      formMessage.textContent = "Password is too weak.";
+    } else {
+      formMessage.textContent = error.message;
+    }
+  }
+});
 </script>
 
 </body>
