@@ -2,12 +2,6 @@
 const searchbar = document.getElementById('searchbar');
 const easteregg = document.getElementById('EASTEREGG');
 const pics = document.getElementById('PICS');
-const email = document.getElementById("email").value.trim().toLowerCase();
-
-if (!email.endsWith("@gmail.com")) {
-    alert("Only Gmail accounts are allowed. Please use an email ending in @gmail.com.");
-    return;
-}
 
 searchbar.addEventListener("keydown", function(event){
         
@@ -96,7 +90,12 @@ document.getElementById("signinForm").addEventListener("submit", function (e) {
 
     const name = document.getElementById("name").value.trim();
     const school = document.getElementById("school").value.trim();
-    const email = document.getElementById("email").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+
+    if (!email.endsWith("@gmail.com")) {
+        alert("Only Gmail accounts are allowed. Please use an email ending in @gmail.com.");
+        return;
+    }
     const idnum = document.getElementById("idnum").value.trim();
 
     if (!accountType) {
