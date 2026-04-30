@@ -85,97 +85,97 @@ const role = document.body.dataset.role;
  
 const files = {
     science: [
-        { name: "Science Lessons 1 - Academic Clinic", url: ".assets/.materials/1Science-Readings-1.pdf" },
-        { name: "Science Lessons 2 - Academic Clinic", url: ".assets/.materials/1Science-Readings-2.pdf" },
-        { name: "Science Lessons 3 - Academic Clinic", url: ".assets/.materials/1Science-Readings-3.pdf" },
-        { name: "Science Lessons 4 - Academic Clinic", url: ".assets/.materials/1Science-Readings-4.pdf" },
+        { name: "Science Lessons 1 - Academic Clinic", url: "1Science-Readings-1.pdf" },
+        { name: "Science Lessons 2 - Academic Clinic", url: "1Science-Readings-2.pdf" },
+        { name: "Science Lessons 3 - Academic Clinic", url: "1Science-Readings-3.pdf" },
+        { name: "Science Lessons 4 - Academic Clinic", url: "1Science-Readings-4.pdf" },
 
-        { name: "Science Practice Test 1 - Academic Clinic", url: ".assets/.materials/1Science-Module-1.pdf" },
-        { name: "Science Practice Test 2 - Academic Clinic", url: ".assets/.materials/1Science-Module-2.pdf" },
-        { name: "Science Practice Test 3 - Academic Clinic", url: ".assets/.materials/1Science-Module-3.pdf" },
-        { name: "Science Practice Test 4 - Academic Clinic", url: ".assets/.materials/1Science-Module-4.pdf" },
+        { name: "Science Practice Test 1 - Academic Clinic", url: "1Science-Module-1.pdf" },
+        { name: "Science Practice Test 2 - Academic Clinic", url: "1Science-Module-2.pdf" },
+        { name: "Science Practice Test 3 - Academic Clinic", url: "1Science-Module-3.pdf" },
+        { name: "Science Practice Test 4 - Academic Clinic", url: "1Science-Module-4.pdf" },
 
-        { name: "Science Practice Test 5 - UPCAT", url: ".assets/.materials/1Science-Review-part-1.pdf" },
-        { name: "Science Practice Test 6 - UPCAT", url: ".assets/.materials/1Science-Review-part-2.pdf" },
-        { name: "Science Practice Test 7 - UPCAT", url: ".assets/.materials/1Science-Review-part-3.pdf" },
-        { name: "Science Practice Test 8 - UPCAT", url: ".assets/.materials/1Science-Review-part-4.pdf" },
+        { name: "Science Practice Test 5 - UPCAT", url: "1Science-Review-part-1.pdf" },
+        { name: "Science Practice Test 6 - UPCAT", url: "1Science-Review-part-2.pdf" },
+        { name: "Science Practice Test 7 - UPCAT", url: "1Science-Review-part-3.pdf" },
+        { name: "Science Practice Test 8 - UPCAT", url: "1Science-Review-part-4.pdf" },
 
-        { name: "Science UPCAT Mock Exam", url: ".assets/.materials/1Science-UPCAT.pdf" },
+        { name: "Science UPCAT Mock Exam", url: "1Science-UPCAT.pdf" },
     ],
 
     mathematics: [
-        { name: "Basic Calculus - Commission on Higher Education", url: ".assets/.materials/2Basic-Calculus.pdf" },
+        { name: "Basic Calculus - Commission on Higher Education", url: "2Basic-Calculus.pdf" },
 
-        { name: "Math 9 - FreeVocabulary.com", url: ".assets/.materials/2Math-9.pdf" },
+        { name: "Math 9 - FreeVocabulary.com", url: "2Math-9.pdf" },
 
-        { name: "Math Readings 2 - Academic Clinic", url: ".assets/.materials/2Math-Readings-2.pdf" },
-        { name: "Math Readings 3 - Academic Clinic", url: ".assets/.materials/2Math-Readings-3.pdf" },
-        { name: "Math Readings 4 - Academic Clinic", url: ".assets/.materials/2Math-Readings-4.pdf" },
+        { name: "Math Readings 2 - Academic Clinic", url: "2Math-Readings-2.pdf" },
+        { name: "Math Readings 3 - Academic Clinic", url: "2Math-Readings-3.pdf" },
+        { name: "Math Readings 4 - Academic Clinic", url: "2Math-Readings-4.pdf" },
 
-        { name: "Math Formula Guide - Magoosh", url: ".assets/.materials/2Math-Formula-Guide.pdf" },
+        { name: "Math Formula Guide - Magoosh", url: "2Math-Formula-Guide.pdf" },
 
-        { name: "Math Diagnostic - Reason Prep' SAT Diagnostic", url: ".assets/.materials/2Math-Diagnostic.pdf" },
+        { name: "Math Diagnostic - Reason Prep' SAT Diagnostic", url: "2Math-Diagnostic.pdf" },
 
-        { name: "Math Practice Test 1 - UPCAT", url: ".assets/.materials/2Practice-Test-1.pdf" },
+        { name: "Math Practice Test 1 - UPCAT", url: "2Practice-Test-1.pdf" },
         
-        { name: "Math Practice Test 2 - Academic Clinic", url: ".assets/.materials/2Math-Module-2.pdf" },
+        { name: "Math Practice Test 2 - Academic Clinic", url: "2Math-Module-2.pdf" },
 
-        { name: "Math Practice Test 3", url: ".assets/.materials/2Math-Review.pdf" },
+        { name: "Math Practice Test 3", url: "2Math-Review.pdf" },
 
     ],
 
      abstract: [
-        { name: "Abstract Reasoning (Testing Series) Mike Bryon", url: ".assets/.materials/3(Testing Series)-Mike-Bryon.pdf" },
+        { name: "Abstract Reasoning (Testing Series) Mike Bryon", url: "3(Testing Series)-Mike-Bryon.pdf" },
 
-        { name: "Abstract Reasoning Test 1 - Psychometric Success", url: ".assets/.materials/3Abstract-Reasoning-test(1).pdf" },
-        { name: "Abstract Reasoning Test 2 - Practice4Me", url: ".assets/.materials/3Abstract-Reasoning-test(2).pdf" },
-        { name: "Abstract Reasoning Test 3 - Practice Aptitude Test", url: ".assets/.materials/3Abstract-Reasoning-test(3).pdf" },
-        { name: "Abstract Reasoning Test 4 - Psychometric Test Online", url: ".assets/.materials/3Abstract-Reasoning-test(4).pdf" },
-        { name: "Abstract Reasoning Test 5 - Psychometric Success", url: ".assets/.materials/3Abstract-Reasoning-test(5).pdf" },
-        { name: "Abstract Reasoning Test 6 - Psychometric Success", url: ".assets/.materials/3Abstract-Reasoning-test(6).pdf" },
+        { name: "Abstract Reasoning Test 1 - Psychometric Success", url: "3Abstract-Reasoning-test(1).pdf" },
+        { name: "Abstract Reasoning Test 2 - Practice4Me", url: "3Abstract-Reasoning-test(2).pdf" },
+        { name: "Abstract Reasoning Test 3 - Practice Aptitude Test", url: "3Abstract-Reasoning-test(3).pdf" },
+        { name: "Abstract Reasoning Test 4 - Psychometric Test Online", url: "3Abstract-Reasoning-test(4).pdf" },
+        { name: "Abstract Reasoning Test 5 - Psychometric Success", url: "3Abstract-Reasoning-test(5).pdf" },
+        { name: "Abstract Reasoning Test 6 - Psychometric Success", url: "3Abstract-Reasoning-test(6).pdf" },
 
-        { name: "ASET Abstract Reasoning Sample Test - Department of Education Australia", url: ".assets/.materials/3ASET-Abstract-Reasoning-sample-test.pdf" },
+        { name: "ASET Abstract Reasoning Sample Test - Department of Education Australia", url: "3ASET-Abstract-Reasoning-sample-test.pdf" },
 
-        { name: "NCE Abstract Reasoning Reviewer", url: ".assets/.materials/3NCE-ABSTRACT-Reviewer.pdf" },
+        { name: "NCE Abstract Reasoning Reviewer", url: "3NCE-ABSTRACT-Reviewer.pdf" },
 
-        { name: "ACET 2015 Simulated Exam Abstract Reasoning", url: ".assets/.materials/3ACET2015_SIMULATED-EXAM-SET-B_SECTION-4_ABSTRACT-REASONING.pdf" },
+        { name: "ACET 2015 Simulated Exam Abstract Reasoning", url: "3ACET2015_SIMULATED-EXAM-SET-B_SECTION-4_ABSTRACT-REASONING.pdf" },
     ],
 
     english: [
-        { name: "English Lessons 1 - Academic Clinic", url: ".assets/.materials/4English-Readings-1.pdf" },
-        { name: "English Lessons 2 - Academic Clinic", url: ".assets/.materials/4English-Readings-2.pdf" },
-        { name: "English Lessons 3 - Academic Clinic", url: ".assets/.materials/4English-Readings-3.pdf" },
-        { name: "English Lessons 4 - Academic Clinic", url: ".assets/.materials/4English-Readings-4.pdf" },
-        { name: "English Lessons 5 - EPS Book", url: ".assets/.materials/4English-reading_comp.pdf" },
-        { name: "Subject-Verb Agreement - Diana Hacker", url: ".assets/.materials/4SUBJECT-VERB_AGREEMENT.pdf" },
+        { name: "English Lessons 1 - Academic Clinic", url: "4English-Readings-1.pdf" },
+        { name: "English Lessons 2 - Academic Clinic", url: "4English-Readings-2.pdf" },
+        { name: "English Lessons 3 - Academic Clinic", url: "4English-Readings-3.pdf" },
+        { name: "English Lessons 4 - Academic Clinic", url: "4English-Readings-4.pdf" },
+        { name: "English Lessons 5 - EPS Book", url: "4English-reading_comp.pdf" },
+        { name: "Subject-Verb Agreement - Diana Hacker", url: "4SUBJECT-VERB_AGREEMENT.pdf" },  
 
-        { name: "English Practice Test 4 - Academic Clinic", url: ".assets/.materials/4English-Module-4.pdf" },
+        { name: "English Practice Test 4 - Academic Clinic", url: "4English-Module-4.pdf" },
 
-        { name: "Compiled UPCAT Questions Language Reading", url: ".assets/.materials/4Compiled-UPCAT-Questions-Language-Reading.pdf" },
+        { name: "Compiled UPCAT Questions Language Reading", url: "4Compiled-UPCAT-Questions-Language-Reading.pdf" },
 
-        { name: "UPCAT Language", url: ".assets/.materials/4UPCAT_LANGUAGE.pdf" },
+        { name: "UPCAT Language", url: "4UPCAT_LANGUAGE.pdf" },
     ],
 
     reading: [
-        { name: "Reading Comprehension Lesson 1", url: ".assets/.materials/5reading-review.pdf" },
+        { name: "Reading Comprehension Lesson 1", url: "5reading-review.pdf" },
 
-        { name: "Reading Comprehension Practice Test 1 - Academic Clinic", url: ".assets/.materials/5Academic-Clinic-Eng-Module-4.pdf" },
+        { name: "Reading Comprehension Practice Test 1 - Academic Clinic", url: "5Academic-Clinic-Eng-Module-4.pdf" },
 
-        { name: "ACET 2015 Reading Comprehension Practice Test 2", url: ".assets/.materials/5ACET2015_SIMULATED-EXAM-SET-B_SECTION-5_READING-COMPREHENSION.pdf" },
+        { name: "ACET 2015 Reading Comprehension Practice Test 2", url: "5ACET2015_SIMULATED-EXAM-SET-B_SECTION-5_RE55ADING-COMPREHENSION.pdf" },
         
-        { name: "DCAT 2014 Reading Comprehension Practice Test 3", url: ".assets/.materials/5DCAT2014_SIMULATED-SET-B_SECTION-3_READING-COMPREHENSION_final.pdf" },
+        { name: "DCAT 2014 Reading Comprehension Practice Test 3", url: "5DCAT2014_SIMULATED-SET-B_SECTION-3_READING-COMPREHENSION_final.pdf" },
 
-        { name: "Reading Comprehension Practice Test 4 - Academic Clinic", url: ".assets/.materials/5English-Module-4.pdf" },
+        { name: "Reading Comprehension Practice Test 4 - Academic Clinic", url: "5English-Module-4.pdf" },
 
-        { name: "Practice Test 5 - MCAS g10ela 2012", url: ".assets/.materials/5MCAS-g10ela-2012.pdf" },
+        { name: "Practice Test 5 - MCAS g10ela 2012", url: "5MCAS-g10ela-2012.pdf" },
 
-        { name: "Practice Test 6 - Department of Human Resources County of Los Angeles", url: ".assets/.materials/5Reading-Comprehension-v1.pdf" },
+        { name: "Practice Test 6 - Department of Human Resources County of Los Angeles", url: "5Reading-Comprehension-v1.pdf" },
 
-        { name: "Practice Test 7", url: ".assets/.materials/5READING-COMPREHENSION1.pdf" },
+        { name: "Practice Test 7", url: "5READING-COMPREHENSION1.pdf" },
 
-        { name: "UPCAT 2014 Reading Comprehension", url: ".assets/.materials/5UPCAT-2014_SIMULATED-EXAM_SET-A_SECTION-4_READING-COMPREHENSION-v.5.26.2014.pdf" },
+        { name: "UPCAT 2014 Reading Comprehension", url: "5UPCAT-2014_SIMULATED-EXAM_SET-A_SECTION-4_READING-COMPREHENSION-v.5.26.2014.pdf" },
 
-        { name: "UPCAT 2015 Reading Comprehension", url: ".assets/.materials/5UPCAT-2015_SIMULATED-EXAM_SET-B_SECTION-4_READING-COMPREHENSION-Final-Copy_v08.08.2015.pdf" },
+        { name: "UPCAT 2015 Reading Comprehension", url: "5UPCAT-2015_SIMULATED-EXAM_SET-B_SECTION-4_READING-COMPREHENSION-Final-Copy_v08.08.2015.pdf" },
     ]
     
 };
@@ -270,3 +270,220 @@ subjectSelect.addEventListener("change", updateFileList);
 
 // Initial Load
 updateFileList();
+
+// Quiz chuchu
+
+const quizBtn = document.getElementById("quizBtn");
+const quizModal = document.getElementById("quizModal");
+const quizForm = document.getElementById("quizForm");
+const quizResult = document.getElementById("quizResult");
+
+// quiz subject
+const quizzes = {
+    abstract: {
+        questions: [
+        {
+            q: "Select a suitable option that would complete the figure matrix.",
+            image: "abstract_qstn1.png",
+            options: ["A", "B", "C", "D"],
+            answer: "D"
+        },
+        {
+            q: "Which figure is the odd one out?",
+            image: "abstract_qstn2.png",
+            options: ["A", "B", "C", "D"],
+            answer: "C"
+        },
+        {
+            q: "Which figure belongs in neither group?",
+            image: "abstract_qstn3.png",
+            options: ["A", "B", "C", "D"],
+            answer: "C"
+        },
+        {
+            q: "Which figure is next in the series?",
+            image: "abstract_qstn4.png",
+            options: ["A", "B", "C", "D"],
+            answer: "B"
+        },
+        {
+            q: "Choose the image that completes the pattern (From left to right).",
+            image: "abstract_qstn5.png",
+            options: ["A", "B", "C", "D"],
+            answer: "D"
+        },
+        {
+            q: "Which figure is the odd one out?",
+            image: "abstract_qstn6.png",
+            options: ["A", "B", "C", "D"],
+            answer: "D"
+        },
+        {
+            q: "Which figure is the odd one out?",
+            image: "abstract_qstn7.png",
+            options: ["A", "B", "C", "D"],
+            answer: "D"
+        },
+        {
+            q: "Which figure belongs in neither group?",
+            image: "abstract_qstn8.png",
+            options: ["A", "B", "C", "D"],
+            answer: "A"
+        },
+        {
+            q: "Which figure is next in the series?",
+            image: "abstract_qstn9.png",
+            options: ["A", "B", "C", "D"],
+            answer: "D"
+        },
+        {
+            q: "Which figure is the odd one out?.",
+            image: "abstract_qstn10.png",
+            options: ["A", "B", "C", "D"],
+            answer: "C"
+        },
+        {
+            q: "Choose the analogy that best matches the example provided. <br>Drip : Gush",
+            options: ["A. Cry : Laugh", "B. Curl : Roll", "C. Stream : Tributary", "D. Dent : Destroy"],
+            answer: "D. Dent : Destroy"
+        },
+        {
+            q: "Find the odd one out.",
+            options: ["A. 121", "B. 144", "C. 169", "D. 196"],
+            answer: "A. 121"
+        },
+        {
+            q: "Choose the analogy that best matches the example provided. <br>Enfranchise : Slavery",
+            options: ["A. Equation : Mathematics", "B. Liberate : Confine", "C. Bondage : Subjugation", "D. Appeasement : Unreasonable"],
+            answer: "B. Liberate : Confine"
+        },
+        {
+            q: "If RED = 27, BLUE = 40, what is GREEN?",
+            options: ["A. 49", "B. 50", "C. 51", "D. 52"],
+            answer: "D. 52"
+        },
+        {
+            q: "A, C, G, M, U",
+            options: ["A. C", "B. D", "C. E", "D. F"],
+            answer: "C. E"
+        }
+        
+    ]
+    },
+    mathematics: {
+        questions: [
+        {
+            q: "Decreasing a number by 40% and then decreasing the result by 30% is the same as decreasing the original number by what percent?",
+            options: ["A. 70", "B. 58", "C. 42", "D. 35"],
+            answer: "B. 58"
+        },
+        {
+            q: "Simplify and write using positive exponents: (-3x<sup>-2</sup>)(-3x)<sup>2</sup> ÷ 3 - x<sup>0</sup>",
+            options: ["A. -10", "B. 13.5", "C. -9x", "D. -2x<sup>-4</sup>"],
+            answer: "A. -10"
+        }
+        ]
+    },
+    science: {
+        questions: [
+            {
+            q: "la pa hehe",
+            options: ["A", "B", "C", "D"],
+            answer: "A"
+        }
+        ]
+    },
+    english: {
+        questions: [
+            {
+            q: "la pa hehe",
+            options: ["A", "B", "C", "D"],
+            answer: "A"
+        }
+        ]
+    },
+    reading: {
+        questions: [
+            {
+            q: "la pa hehe",
+            options: ["A", "B", "C", "D"],
+            answer: "A"
+        }
+        ]
+    }
+};
+
+// open quiz
+quizBtn.addEventListener("click", () => {
+    quizModal.style.display = "block";
+    loadQuiz();
+});
+
+function loadQuiz() {
+    const subject = subjectSelect.value;
+    const quiz = quizzes[subject];
+
+    let html = "";
+
+    quiz.questions.forEach((item, index) => {
+        html += `<div style="margin-bottom:15px;">`;
+
+        html += `<p>${index + 1}. ${item.q}</p>`;
+
+        // image kemerlu
+        if (item.image) {
+            html += `<img src="${item.image}" style="max-width:100%; margin:10px 0;">`;
+        }
+
+    item.options.forEach(opt => {
+        html += `
+            <label style="
+                display:block;
+                padding:8px;
+                margin:6px 0;
+                border:1px solid #ccc;
+                border-radius:6px;
+                cursor:pointer;
+            ">
+                <input type="radio" name="q${index}" value="${opt}" style="margin-right:8px;">
+                ${opt}
+            </label>
+        `;
+    });
+
+        html += `</div>`;
+    });
+
+    html += `<br>
+        <button type="submit">Submit Quiz</button>
+        <button type="button" onclick="document.getElementById('quizModal').style.display='none'">Close</button>`;
+
+    quizForm.innerHTML = html;
+}
+
+// submission
+quizForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const subject = subjectSelect.value;
+    const quiz = quizzes[subject];
+
+    let score = 0;
+    let output = "";
+
+    quiz.questions.forEach((item, index) => {
+        const userAnswer = quizForm[`q${index}`].value;
+
+        if (userAnswer === item.answer) {
+            score++;
+            output += `<p>Q${index + 1}: ✔ Correct</p>`;
+        } else {
+            output += `<p>Q${index + 1}: ❌ Wrong (Correct: ${item.answer})</p>`;
+        }
+    });
+
+    quizResult.innerHTML = `
+        <h3>Score: ${score} / ${quiz.questions.length}</h3>
+        ${output}
+    `;
+});
