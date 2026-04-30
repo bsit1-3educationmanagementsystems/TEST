@@ -454,7 +454,7 @@ const quizzes = {
     },
     science: {
         questions: [
-            {
+        {
             q: "la pa hehe",
             options: ["A", "B", "C", "D"],
             answer: "A"
@@ -463,17 +463,87 @@ const quizzes = {
     },
     english: {
         questions: [
-            {
-            q: "la pa hehe",
-            options: ["A", "B", "C", "D"],
-            answer: "A"
+        { // 1
+            q: "Identify the incorrect part of the sentence. Choose the letter of the error.<br>Joyce's salad is better than Janice.",
+            options: ["A. Joyce's", "B. salad", "C. better", "D. Janice", "E. No error"],
+            answer: "D. Janice"
+        },
+        { // 2
+            q: "One must consider their strengths and weaknesses in dealing with difficult decisions.",
+            options: ["A. must", "B. their", "C. in", "D. difficult", "E. No error"],
+            answer: "B. their"
+        },
+        { // 3
+            q: "The informations he gave us was not advantageous so I consulted our professor instead.",
+            options: ["A. The informations", "B. was not", "C. advantageous", "D. instead", "E. No error"],
+            answer: "A. The informations"
+        },
+        { // 4 
+            q: "Choose the correct answer for the underlined part.<br>The results of the examination <u>is posted on the bulletin board beside the Dean's Office.</u>",
+            options: ["A. No error", "B. have posted on the bulletin board besides the Dean's Office.", "C. are posted on the bulletin board beside the Dean's Office.", "D. is posted on the bulletin board besides the Dean's Office."],
+            answer: "C. are posted on the bulletin board beside the Dean's Office."
+        },
+        { // 5 
+            q: "<u>The number of participants in the poster making competition is higher than any division of the program.</u>",
+            options: ["A. No error", "B. The number of participants in the poster making competition is higher than those of any other division of the program.", "C. The number of participants in the poster making competition is higher than that of any other division of the program.", "D. The number of participants in the poster making competition is higher than any other division of the program."],
+            answer: "C. The number of participants in the poster making competition is higher than that of any other division of the program."
+        },
+        { // 6
+            q: "Read each sentence. Use context clues to determine the meaning of the boldfaced word.<br>After the robbery, the bank became <b>insolvent.</b>",
+            options: ["A. Filled", "B. Bankrupt", "C. Rife", "D. Full"],
+            answer: "B. Bankrupt"
+        },
+        { // 7
+            q: "Most Filipinos, as long as they are not directly affected, can still seem to continue a <b>cavalier</b> attitude despite all the injustices happening around the country.",
+            options: ["A. Attentive", "B. Indifferent", "C. Emphatic", "D. Sympathetic"],
+            answer: "C. Emphatic"
+        },
+        { // 8
+            q: "Humans go through crises all throughout their lives and question the mundanity of their <b>quotidian</b> lives.",
+            options: ["A. Everyday", "B. Own", "C. Family", "D. Mortal"],
+            answer: "A. Everyday"
+        },
+        { // 9
+            q: "They think that Robert is <b>morose</b> because he gets easily angry.",
+            options: ["A. Cordial", "B. Sullen", "C. Irritable", "D. Festive"],
+            answer: "B. Sullen"
+        },
+        { // 10
+            q: "Read each sentence. Use context clues to choose the most appropriate word.<br>Brittany was greatly saddened to see her long time friend ______ from cancer.",
+            options: ["A. Emaciated", "B. Incited", "C. Rectified", "D. Adroited"],
+            answer: "A. Emaciated"
+        },
+        { // 11
+            q: "Dr. Meredith Grey felt ______ after conducting a whole day of surgery.",
+            options: ["A. Isolated", "B. Braced", "C. Secluded", "D. Enervated"],
+            answer: "D. Enervated"
+        },
+        { // 12
+            q: "Temperance has always had a great sense of self-assurance and deals with people with such ______.",
+            options: ["A. Rudeness", "B. Indolence", "C. Aversion", "D. Panache"],
+            answer: "B. Indolence"
+        },
+        { // 13
+            q: "Choose the word with the same meaning as the given word.<br>Splenetic",
+            options: ["A. Irascible", "B. Static", "C. Marvelous", "D. Extravagant"],
+            answer: "A. Irascible"
+        },
+        { // 14
+            q: "Piquant",
+            options: ["A. Bland", "B. Unique", "C. Boring", "D. Fascinating"],
+            answer: "D. Fascinating"
+        },
+        { // 15
+            q: "Aphorism",
+            options: ["A. Verb", "B. Adages", "C. Act", "D. Deed"],
+            answer: "B. Adages"
         }
         ]
-    },
+    }, // <u> <br> <b>
     reading: {
         questions: [
-            {
-            q: "la pa hehe",
+        {
+            q: "Choose the correct answer for the underlined part.<br>The results of the examination is posted on the bulletin board beside the Dean's Office.",
             options: ["A", "B", "C", "D"],
             answer: "A"
         }
