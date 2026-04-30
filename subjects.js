@@ -484,11 +484,21 @@ const quizzes = {
 // open quiz
 quizBtn.addEventListener("click", () => {
     quizModal.style.display = "block";
+    quizSubmitted = false;
     loadQuiz();
 });
 
+// bawal close pag di tapos!
+function closeQuiz() {
+    if (!quizSubmitted) {
+        alert("You must complete and submit the quiz first.");
+        return;
+    }
+    quizModal.style.display = "none";
+}
+
 function loadQuiz() {
-    quizResult.innerHTML = ""; // clear old result 
+    quizResult.innerHTML = "";
 
     const subject = subjectSelect.value;
     const quiz = quizzes[subject];
@@ -497,45 +507,51 @@ function loadQuiz() {
 
     quiz.questions.forEach((item, index) => {
         html += `<div style="margin-bottom:15px;">`;
-
         html += `<p>${index + 1}. ${item.q}</p>`;
 
-        // image kemerlu
         if (item.image) {
             html += `<img src="${item.image}" style="max-width:100%; margin:10px 0;">`;
         }
 
-    item.options.forEach(opt => {
-        html += `
-            <label style="
-                display:block;
-                padding:8px;
-                margin:6px 0;
-                border:1px solid #ccc;
-                border-radius:6px;
-                cursor:pointer;
-            ">
-                <input type="radio" name="q${index}" value="${opt}" style="margin-right:8px;">
-                ${opt}
-            </label>
-        `;
-    });
+        item.options.forEach(opt => {
+            html += `
+                <label style="display:block;padding:8px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;">
+                    <input type="radio" name="q${index}" value="${opt}">
+                    ${opt}
+                </label>
+            `;
+        });
 
         html += `</div>`;
     });
 
-    html += `<br>
-        <button type="submit">Submit Quiz</button>
-        <button type="button" onclick="document.getElementById('quizModal').style.display='none'">Close</button>`;
+    html += `
+        <button id="submitQuizBtn" type="submit">Submit Quiz</button>
+        <button type="button" onclick="closeQuiz()">Close</button>
+    `;
 
     quizForm.innerHTML = html;
+
+    const submitBtn = document.getElementById("submitQuizBtn");
+    submitBtn.disabled = true;
+
+    // submit pag lahat may answers!
+    quizForm.addEventListener("change", () => {
+        const total = quiz.questions.length;
+        let answered = 0;
+
+        for (let i = 0; i < total; i++) {
+            if (quizForm[`q${i}`]?.value) answered++;
+        }
+
+        submitBtn.disabled = answered !== total;
+    });
 }
 
 // submission
 quizForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // confirmation keme
     const confirmSubmit = confirm("Are you sure you want to submit your answers?");
     if (!confirmSubmit) return;
 
@@ -560,4 +576,6 @@ quizForm.addEventListener("submit", (e) => {
         <h3>Score: ${score} / ${quiz.questions.length}</h3>
         ${output}
     `;
+
+    quizSubmitted = true;
 });
