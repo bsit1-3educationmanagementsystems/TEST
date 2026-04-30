@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - I.S.K.O.L.A.R</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7f6; padding: 20px; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #004d40; color: white; }
+        .approve-btn { background-color: #28a745; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px; }
+        .approve-btn:hover { background-color: #218838; }
+        .empty-message { padding: 20px; color: #666; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <h1>Admin Dashboard - Pending Teacher Approvals</h1>
+    <p>Review and approve teacher accounts below.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Institution</th>
+                <th>Date Applied</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="pendingTeachersList">
+            <!-- Data will be injected here via JavaScript -->
+        </tbody>
+    </table>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { 
+    getFirestore, 
+    collection, 
+    query, 
+    where, 
+    getDocs, 
+    updateDoc, 
+    doc 
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDeXxlaxk1nCVQ9k8tMiEs9o-EcLrkTSPE",
+  authDomain: "iskolar-website.firebaseapp.com",
+  projectId: "iskolar-website",
+  appId: "1:1034904541958:web:39eee81131f0a09a991c87"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const tableBody = document.getElementById('pendingTeachersList');
+
+// Fetch Pending Teachers
+async function loadPendingTeachers() {
+    tableBody.innerHTML = "<tr><td colspan='5'>Loading...</td></tr>";
+    
+    try {
+        const q = query(
+            collection(db, "users"), 
+            where("accountType", "==", "teacher"), 
+            where("status", "==", "pending")
+        );
+        
+        const querySnapshot = await getDocs(q);
+        tableBody.innerHTML = ""; // Clear loading text
+
+        if (querySnapshot.empty) {
+            tableBody.innerHTML = "<tr><td colspan='5' class='empty-message'>No pending teacher approvals at this time.</td></tr>";
+            return;
+        }
+
+        querySnapshot.forEach((document) => {
+            const data = document.data();
+            const dateStr = data.createdAt ? data.createdAt.toDate().toLocaleDateString() : 'N/A';
+            
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${data.name}</td>
+                <td>${data.email}</td>
+                <td>${data.school}</td>
+                <td>${dateStr}</td>
+                <td>
+                    <button class="approve-btn" data-id="${document.id}">Approve</button>
+                </td>
+            `;
+            tableBody.appendChild(tr);
+        });
+
+        // Add event listeners to the new buttons
+        document.querySelectorAll('.approve-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => approveTeacher(e.target.getAttribute('data-id')));
+        });
+
+    } catch (error) {
+        console.error("Error fetching teachers: ", error);
+        tableBody.innerHTML = "<tr><td colspan='5' style='color:red;'>Error loading data. Check console.</td></tr>";
+    }
+}
+
+// Approve Teacher Function
+async function approveTeacher(userId) {
+    if(!confirm("Are you sure you want to approve this teacher?")) return;
+
+    try {
+        const userRef = doc(db, "users", userId);
+        await updateDoc(userRef, {
+            status: "approved"
+        });
+        
+        alert("Teacher approved successfully!");
+        loadPendingTeachers(); // Refresh the list
+
+    } catch (error) {
+        console.error("Error approving teacher: ", error);
+        alert("Failed to approve teacher. Check console for details.");
+    }
+}
+
+// Load data on page load
+window.onload = loadPendingTeachers;
+</script>
+
+</body>
+</html>
