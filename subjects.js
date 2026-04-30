@@ -85,97 +85,97 @@ const role = document.body.dataset.role;
  
 const files = {
     science: [
-        { name: "Science Lessons 1 - Academic Clinic", url: "0assets/0img/1Science-Readings-1.pdf" },
-        { name: "Science Lessons 2 - Academic Clinic", url: "0assets/0img/1Science-Readings-2.pdf" },
-        { name: "Science Lessons 3 - Academic Clinic", url: "0assets/0img/1Science-Readings-3.pdf" },
-        { name: "Science Lessons 4 - Academic Clinic", url: "0assets/0img/1Science-Readings-4.pdf" },
+        { name: "Science Lessons 1 - Academic Clinic", url: "0assets/0materials/1Science-Readings-1.pdf" },
+        { name: "Science Lessons 2 - Academic Clinic", url: "0assets/0materials/1Science-Readings-2.pdf" },
+        { name: "Science Lessons 3 - Academic Clinic", url: "0assets/0materials/1Science-Readings-3.pdf" },
+        { name: "Science Lessons 4 - Academic Clinic", url: "0assets/0materials/1Science-Readings-4.pdf" },
 
-        { name: "Science Practice Test 1 - Academic Clinic", url: "0assets/0img/1Science-Module-1.pdf" },
-        { name: "Science Practice Test 2 - Academic Clinic", url: "0assets/0img/1Science-Module-2.pdf" },
-        { name: "Science Practice Test 3 - Academic Clinic", url: "0assets/0img/1Science-Module-3.pdf" },
-        { name: "Science Practice Test 4 - Academic Clinic", url: "0assets/0img/1Science-Module-4.pdf" },
+        { name: "Science Practice Test 1 - Academic Clinic", url: "0assets/0materials/1Science-Module-1.pdf" },
+        { name: "Science Practice Test 2 - Academic Clinic", url: "0assets/0materials/1Science-Module-2.pdf" },
+        { name: "Science Practice Test 3 - Academic Clinic", url: "0assets/0materials/1Science-Module-3.pdf" },
+        { name: "Science Practice Test 4 - Academic Clinic", url: "0assets/0materials/1Science-Module-4.pdf" },
 
-        { name: "Science Practice Test 5 - UPCAT", url: "0assets/0img/1Science-Review-part-1.pdf" },
-        { name: "Science Practice Test 6 - UPCAT", url: "0assets/0img/1Science-Review-part-2.pdf" },
-        { name: "Science Practice Test 7 - UPCAT", url: "0assets/0img/1Science-Review-part-3.pdf" },
-        { name: "Science Practice Test 8 - UPCAT", url: "0assets/0img/1Science-Review-part-4.pdf" },
+        { name: "Science Practice Test 5 - UPCAT", url: "0assets/0materials/1Science-Review-part-1.pdf" },
+        { name: "Science Practice Test 6 - UPCAT", url: "0assets/0materials/1Science-Review-part-2.pdf" },
+        { name: "Science Practice Test 7 - UPCAT", url: "0assets/0materials/1Science-Review-part-3.pdf" },
+        { name: "Science Practice Test 8 - UPCAT", url: "0assets/0materials/1Science-Review-part-4.pdf" },
 
-        { name: "Science UPCAT Mock Exam", url: "0assets/0img/1Science-UPCAT.pdf" },
+        { name: "Science UPCAT Mock Exam", url: "0assets/0materials/1Science-UPCAT.pdf" },
     ],
 
     mathematics: [
-        { name: "Basic Calculus - Commission on Higher Education", url: "0assets/0img/2Basic-Calculus.pdf" },
+        { name: "Basic Calculus - Commission on Higher Education", url: "0assets/0materials/2Basic-Calculus.pdf" },
 
-        { name: "Math 9 - FreeVocabulary.com", url: "0assets/0img/2Math-9.pdf" },
+        { name: "Math 9 - FreeVocabulary.com", url: "0assets/0materials/2Math-9.pdf" },
 
-        { name: "Math Readings 2 - Academic Clinic", url: "0assets/0img/2Math-Readings-2.pdf" },
-        { name: "Math Readings 3 - Academic Clinic", url: "0assets/0img/2Math-Readings-3.pdf" },
-        { name: "Math Readings 4 - Academic Clinic", url: "0assets/0img/2Math-Readings-4.pdf" },
+        { name: "Math Readings 2 - Academic Clinic", url: "0assets/0materials/2Math-Readings-2.pdf" },
+        { name: "Math Readings 3 - Academic Clinic", url: "0assets/0materials/2Math-Readings-3.pdf" },
+        { name: "Math Readings 4 - Academic Clinic", url: "0assets/0materials/2Math-Readings-4.pdf" },
 
-        { name: "Math Formula Guide - Magoosh", url: "0assets/0img/2Math-Formula-Guide.pdf" },
+        { name: "Math Formula Guide - Magoosh", url: "0assets/0materials/2Math-Formula-Guide.pdf" },
 
-        { name: "Math Diagnostic - Reason Prep' SAT Diagnostic", url: "0assets/0img/2Math-Diagnostic.pdf" },
+        { name: "Math Diagnostic - Reason Prep' SAT Diagnostic", url: "0assets/0materials/2Math-Diagnostic.pdf" },
 
-        { name: "Math Practice Test 1 - UPCAT", url: "0assets/0img/2Practice-Test-1.pdf" },
+        { name: "Math Practice Test 1 - UPCAT", url: "0assets/0materials/2Practice-Test-1.pdf" },
         
-        { name: "Math Practice Test 2 - Academic Clinic", url: "0assets/0img/2Math-Module-2.pdf" },
+        { name: "Math Practice Test 2 - Academic Clinic", url: "0assets/0materials/2Math-Module-2.pdf" },
 
-        { name: "Math Practice Test 3", url: "0assets/0img/2Math-Review.pdf" },
+        { name: "Math Practice Test 3", url: "0assets/0materials/2Math-Review.pdf" },
 
     ],
 
      abstract: [
-        { name: "Abstract Reasoning (Testing Series) Mike Bryon", url: "0assets/0img/3(Testing Series)-Mike-Bryon.pdf" },
+        { name: "Abstract Reasoning (Testing Series) Mike Bryon", url: "0assets/0materials/3(Testing Series)-Mike-Bryon.pdf" },
 
-        { name: "Abstract Reasoning Test 1 - Psychometric Success", url: "0assets/0img/3Abstract-Reasoning-test(1).pdf" },
-        { name: "Abstract Reasoning Test 2 - Practice4Me", url: "0assets/0img/3Abstract-Reasoning-test(2).pdf" },
-        { name: "Abstract Reasoning Test 3 - Practice Aptitude Test", url: "0assets/0img/3Abstract-Reasoning-test(3).pdf" },
-        { name: "Abstract Reasoning Test 4 - Psychometric Test Online", url: "0assets/0img/3Abstract-Reasoning-test(4).pdf" },
-        { name: "Abstract Reasoning Test 5 - Psychometric Success", url: "0assets/0img/3Abstract-Reasoning-test(5).pdf" },
-        { name: "Abstract Reasoning Test 6 - Psychometric Success", url: "0assets/0img/3Abstract-Reasoning-test(6).pdf" },
+        { name: "Abstract Reasoning Test 1 - Psychometric Success", url: "0assets/0materials/3Abstract-Reasoning-test(1).pdf" },
+        { name: "Abstract Reasoning Test 2 - Practice4Me", url: "0assets/0materials/3Abstract-Reasoning-test(2).pdf" },
+        { name: "Abstract Reasoning Test 3 - Practice Aptitude Test", url: "0assets/0materials/3Abstract-Reasoning-test(3).pdf" },
+        { name: "Abstract Reasoning Test 4 - Psychometric Test Online", url: "0assets/0materials/3Abstract-Reasoning-test(4).pdf" },
+        { name: "Abstract Reasoning Test 5 - Psychometric Success", url: "0assets/0materials/3Abstract-Reasoning-test(5).pdf" },
+        { name: "Abstract Reasoning Test 6 - Psychometric Success", url: "0assets/0materials/3Abstract-Reasoning-test(6).pdf" },
 
-        { name: "ASET Abstract Reasoning Sample Test - Department of Education Australia", url: "0assets/0img/3ASET-Abstract-Reasoning-sample-test.pdf" },
+        { name: "ASET Abstract Reasoning Sample Test - Department of Education Australia", url: "0assets/0materials/3ASET-Abstract-Reasoning-sample-test.pdf" },
 
-        { name: "NCE Abstract Reasoning Reviewer", url: "0assets/0img/3NCE-ABSTRACT-Reviewer.pdf" },
+        { name: "NCE Abstract Reasoning Reviewer", url: "0assets/0materials/3NCE-ABSTRACT-Reviewer.pdf" },
 
-        { name: "ACET 2015 Simulated Exam Abstract Reasoning", url: "0assets/0img/3ACET2015_SIMULATED-EXAM-SET-B_SECTION-4_ABSTRACT-REASONING.pdf" },
+        { name: "ACET 2015 Simulated Exam Abstract Reasoning", url: "0assets/0materials/3ACET2015_SIMULATED-EXAM-SET-B_SECTION-4_ABSTRACT-REASONING.pdf" },
     ],
 
     english: [
-        { name: "English Lessons 1 - Academic Clinic", url: "0assets/0img/4English-Readings-1.pdf" },
-        { name: "English Lessons 2 - Academic Clinic", url: "0assets/0img/4English-Readings-2.pdf" },
-        { name: "English Lessons 3 - Academic Clinic", url: "0assets/0img/4English-Readings-3.pdf" },
-        { name: "English Lessons 4 - Academic Clinic", url: "0assets/0img/4English-Readings-4.pdf" },
-        { name: "English Lessons 5 - EPS Book", url: "0assets/0img/4English-reading_comp.pdf" },
-        { name: "Subject-Verb Agreement - Diana Hacker", url: "0assets/0img/4SUBJECT-VERB_AGREEMENT.pdf" },
+        { name: "English Lessons 1 - Academic Clinic", url: "0assets/0materials/4English-Readings-1.pdf" },
+        { name: "English Lessons 2 - Academic Clinic", url: "0assets/0materials/4English-Readings-2.pdf" },
+        { name: "English Lessons 3 - Academic Clinic", url: "0assets/0materials/4English-Readings-3.pdf" },
+        { name: "English Lessons 4 - Academic Clinic", url: "0assets/0materials/4English-Readings-4.pdf" },
+        { name: "English Lessons 5 - EPS Book", url: "0assets/0materials/4English-reading_comp.pdf" },
+        { name: "Subject-Verb Agreement - Diana Hacker", url: "0assets/0materials/4SUBJECT-VERB_AGREEMENT.pdf" },
 
-        { name: "English Practice Test 4 - Academic Clinic", url: "0assets/0img/4English-Module-4.pdf" },
+        { name: "English Practice Test 4 - Academic Clinic", url: "0assets/0materials/4English-Module-4.pdf" },
 
-        { name: "Compiled UPCAT Questions Language Reading", url: "0assets/0img/4Compiled-UPCAT-Questions-Language-Reading.pdf" },
+        { name: "Compiled UPCAT Questions Language Reading", url: "0assets/0materials/4Compiled-UPCAT-Questions-Language-Reading.pdf" },
 
-        { name: "UPCAT Language", url: "0assets/0img/4UPCAT_LANGUAGE.pdf" },
+        { name: "UPCAT Language", url: "0assets/0materials/4UPCAT_LANGUAGE.pdf" },
     ],
 
     reading: [
-        { name: "Reading Comprehension Lesson 1", url: "0assets/0img/5reading-review.pdf" },
+        { name: "Reading Comprehension Lesson 1", url: "0assets/0materials/5reading-review.pdf" },
 
-        { name: "Reading Comprehension Practice Test 1 - Academic Clinic", url: "0assets/0img/5Academic-Clinic-Eng-Module-4.pdf" },
+        { name: "Reading Comprehension Practice Test 1 - Academic Clinic", url: "0assets/0materials/5Academic-Clinic-Eng-Module-4.pdf" },
 
-        { name: "ACET 2015 Reading Comprehension Practice Test 2", url: "0assets/0img/5ACET2015_SIMULATED-EXAM-SET-B_SECTION-5_RE55ADING-COMPREHENSION.pdf" },
+        { name: "ACET 2015 Reading Comprehension Practice Test 2", url: "0assets/0materials/5ACET2015_SIMULATED-EXAM-SET-B_SECTION-5_READING-COMPREHENSION.pdf" },
         
-        { name: "DCAT 2014 Reading Comprehension Practice Test 3", url: "0assets/0img/5DCAT2014_SIMULATED-SET-B_SECTION-3_READING-COMPREHENSION_final.pdf" },
+        { name: "DCAT 2014 Reading Comprehension Practice Test 3", url: "0assets/0materials/5DCAT2014_SIMULATED-SET-B_SECTION-3_READING-COMPREHENSION_final.pdf" },
 
-        { name: "Reading Comprehension Practice Test 4 - Academic Clinic", url: "0assets/0img/5English-Module-4.pdf" },
+        { name: "Reading Comprehension Practice Test 4 - Academic Clinic", url: "0assets/0materials/5English-Module-4.pdf" },
 
-        { name: "Practice Test 5 - MCAS g10ela 2012", url: "0assets/0img/5MCAS-g10ela-2012.pdf" },
+        { name: "Practice Test 5 - MCAS g10ela 2012", url: "0assets/0materials/5MCAS-g10ela-2012.pdf" },
 
-        { name: "Practice Test 6 - Department of Human Resources County of Los Angeles", url: "0assets/0img/5Reading-Comprehension-v1.pdf" },
+        { name: "Practice Test 6 - Department of Human Resources County of Los Angeles", url: "0assets/0materials/5Reading-Comprehension-v1.pdf" },
 
-        { name: "Practice Test 7", url: "0assets/0img/5READING-COMPREHENSION1.pdf" },
+        { name: "Practice Test 7", url: "0assets/0materials/5READING-COMPREHENSION1.pdf" },
 
-        { name: "UPCAT 2014 Reading Comprehension", url: "0assets/0img/5UPCAT-2014_SIMULATED-EXAM_SET-A_SECTION-4_READING-COMPREHENSION-v.5.26.2014.pdf" },
+        { name: "UPCAT 2014 Reading Comprehension", url: "0assets/0materials/5UPCAT-2014_SIMULATED-EXAM_SET-A_SECTION-4_READING-COMPREHENSION-v.5.26.2014.pdf" },
 
-        { name: "UPCAT 2015 Reading Comprehension", url: "0assets/0img/5UPCAT-2015_SIMULATED-EXAM_SET-B_SECTION-4_READING-COMPREHENSION-Final-Copy_v08.08.2015.pdf" },
+        { name: "UPCAT 2015 Reading Comprehension", url: "0assets/0materials/5UPCAT-2015_SIMULATED-EXAM_SET-B_SECTION-4_READING-COMPREHENSION-Final-Copy_v08.08.2015.pdf" },
     ]
     
 };
