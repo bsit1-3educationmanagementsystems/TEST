@@ -94,10 +94,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDeXxlaxk1nCVQ9k8tMiEs9o-EcLrkTSPE",
-  authDomain: "iskolar-website.firebaseapp.com",
-  projectId: "iskolar-website",
-  appId: "1:1034904541958:web:39eee81131f0a09a991c87"
+apiKey: "AIzaSyDeXxlaxk1nCVQ9k8tMiEs9o-EcLrkTSPE",
+authDomain: "iskolar-website.firebaseapp.com",
+projectId: "iskolar-website",
+appId: "1:1034904541958:web:39eee81131f0a09a991c87"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -121,6 +121,7 @@ togglePassword.addEventListener("click", () => {
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const nameInput = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const formMessage = document.getElementById("formMessage");
@@ -139,7 +140,10 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
             if (docSnap.exists()) {
                 const data = docSnap.data();
 
-                if (data.accountType === "teacher") {
+                // Hardcoded check for "T1" name or "admin" account type
+                if (nameInput === "T1" || data.name === "T1" || data.accountType === "admin") {
+                    window.location.href = "admin.html";
+                } else if (data.accountType === "teacher") {
                     window.location.href = "teachersign-in.html";
                 } else {
                     window.location.href = "studentsign-in.html";
