@@ -2,6 +2,12 @@
 const searchbar = document.getElementById('searchbar');
 const easteregg = document.getElementById('EASTEREGG');
 const pics = document.getElementById('PICS');
+const email = document.getElementById("email").value.trim().toLowerCase();
+
+if (!email.endsWith("@gmail.com")) {
+    alert("Only Gmail accounts are allowed. Please use an email ending in @gmail.com.");
+    return;
+}
 
 searchbar.addEventListener("keydown", function(event){
         
@@ -82,23 +88,7 @@ document.getElementById("studentBtn").addEventListener("click", () => {
 });
 
 // login credentials
-const teachers = [
-    {
-        name: "T1",
-        school: "SHS",
-        email: "teacher@test.com",
-        id: "T001"
-    }
-];
 
-const students = [
-    {
-        name: "S1",
-        school: "SHS",
-        email: "student@test.com",
-        id: "S001"
-    }
-];
 
 // Sign-in logic
 document.getElementById("signinForm").addEventListener("submit", function (e) {
