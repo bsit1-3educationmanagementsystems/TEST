@@ -47,20 +47,17 @@
 
     <div class="signin-box">
 
-        <!-- Flex Container to hold Image on the left and Info on the right -->
         <div style="display: flex; align-items: center; gap: 30px; margin-bottom: 20px;">
             
-            <!-- ✔ PROFILE PICTURE UI (LEFT) -->
             <div class="profile-pic-wrapper" style="text-align: center; flex-shrink: 0;">
-                <!-- Updated src to use local default profile picture -->
                 <img id="profileImg" src=".assets/.img/nopfp.jpg" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #ccc;">
                 <br>
                 <input type="file" id="fileInput" accept="image/*" style="display: none;">
-                <!-- Red pill button styling -->
-                <label for="fileInput" style="cursor: pointer; background-color: #dc3545; color: white; font-size: 14px; text-decoration: none; padding: 6px 18px; border-radius: 50px; display: inline-block; margin-top: 12px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background-color 0.3s;">Change Picture</label>
+                <label for="fileInput" style="cursor: pointer; background-color: #dc3545; color: white; font-size: 14px; text-decoration: none; padding: 6px 18px; border-radius: 50px; display: inline-block; margin-top: 12px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background-color 0.3s;">
+                    Change Picture
+                </label>
             </div>
 
-            <!-- ✔ USER INFO (RIGHT) -->
             <div class="user-info-wrapper" style="text-align: left;">
                 <h2 id="userName" style="margin-top: 0; margin-bottom: 15px;">Loading...</h2>
                 <p style="margin: 5px 0;"><strong>Full Name:</strong> <span id="fullName"></span></p>
@@ -70,15 +67,6 @@
             </div>
 
         </div>
-
-        <hr style="margin: 15px 0;">
-
-        <p><strong>Last Viewed Subject:</strong></p>
-        <p id="lastSubject">No subject viewed yet.</p>
-
-        <button class="signin-btn" id="logoutBtn" style="margin-top: 15px;">LOG OUT</button>
-
-    </div>
 
         <hr style="margin: 15px 0;">
 
@@ -138,10 +126,8 @@ onAuthStateChanged(auth, async (user) => {
     if (docSnap.exists()) {
         const data = docSnap.data();
 
-        // existing
         document.getElementById("userName").textContent = data.name;
 
-        // ✔ CHECK FOR PROFILE PICTURE
         if (data.profilePic) {
             document.getElementById("profileImg").src = data.profilePic;
         }
@@ -151,14 +137,13 @@ onAuthStateChanged(auth, async (user) => {
         document.getElementById("userSchool").textContent = data.school;
         document.getElementById("userType").textContent = data.accountType;
 
-        // last subject
         if (data.lastSubject) {
             document.getElementById("lastSubject").textContent = data.lastSubject;
         }
     }
 });
 
-// Profile Picture Upload Logic
+// proflie
 document.getElementById("fileInput").addEventListener("change", (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -170,16 +155,10 @@ document.getElementById("fileInput").addEventListener("change", (event) => {
 
             const user = auth.currentUser;
             if (user) {
-                try {
-                    const userRef = doc(db, "users", user.uid);
-                    await updateDoc(userRef, {
-                        profilePic: base64String
-                    });
-                    alert("Profile picture updated successfully!");
-                } catch (error) {
-                    console.error("Error updating profile picture: ", error);
-                    alert("Failed to save picture.");
-                }
+                const userRef = doc(db, "users", user.uid);
+                await updateDoc(userRef, {
+                    profilePic: base64String
+                });
             }
         };
         
