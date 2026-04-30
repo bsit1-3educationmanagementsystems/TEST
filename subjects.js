@@ -282,87 +282,87 @@ const quizResult = document.getElementById("quizResult");
 const quizzes = {
     abstract: {
         questions: [
-        {
+        { // 1
             q: "Select a suitable option that would complete the figure matrix.",
             image: "abstract_qstn1.png",
             options: ["A", "B", "C", "D"],
             answer: "D"
         },
-        {
+        { // 2
             q: "Which figure is the odd one out?",
             image: "abstract_qstn2.png",
             options: ["A", "B", "C", "D"],
             answer: "C"
         },
-        {
+        { // 3
             q: "Which figure belongs in neither group?",
             image: "abstract_qstn3.png",
             options: ["A", "B", "C", "D"],
             answer: "C"
         },
-        {
+        { // 4
             q: "Which figure is next in the series?",
             image: "abstract_qstn4.png",
             options: ["A", "B", "C", "D"],
             answer: "B"
         },
-        {
+        { // 5
             q: "Choose the image that completes the pattern (From left to right).",
             image: "abstract_qstn5.png",
             options: ["A", "B", "C", "D"],
             answer: "D"
         },
-        {
+        { // 6
             q: "Which figure is the odd one out?",
             image: "abstract_qstn6.png",
             options: ["A", "B", "C", "D"],
             answer: "D"
         },
-        {
+        { // 7
             q: "Which figure is the odd one out?",
             image: "abstract_qstn7.png",
             options: ["A", "B", "C", "D"],
             answer: "D"
         },
-        {
+        { // 8
             q: "Which figure belongs in neither group?",
             image: "abstract_qstn8.png",
             options: ["A", "B", "C", "D"],
             answer: "A"
         },
-        {
+        { // 9
             q: "Which figure is next in the series?",
             image: "abstract_qstn9.png",
             options: ["A", "B", "C", "D"],
             answer: "D"
         },
-        {
+        { // 10
             q: "Which figure is the odd one out?.",
             image: "abstract_qstn10.png",
             options: ["A", "B", "C", "D"],
             answer: "C"
         },
-        {
-            q: "Choose the analogy that best matches the example provided. <br>Drip : Gush",
+        { // 11
+            q: "Choose the analogy that best matches the example provided.<br>Drip : Gush",
             options: ["A. Cry : Laugh", "B. Curl : Roll", "C. Stream : Tributary", "D. Dent : Destroy"],
             answer: "D. Dent : Destroy"
         },
-        {
+        { // 12
             q: "Find the odd one out.",
             options: ["A. 121", "B. 144", "C. 169", "D. 196"],
             answer: "A. 121"
         },
-        {
-            q: "Choose the analogy that best matches the example provided. <br>Enfranchise : Slavery",
+        { // 13
+            q: "Choose the analogy that best matches the example provided.<br>Enfranchise : Slavery",
             options: ["A. Equation : Mathematics", "B. Liberate : Confine", "C. Bondage : Subjugation", "D. Appeasement : Unreasonable"],
             answer: "B. Liberate : Confine"
         },
-        {
+        { // 14
             q: "If RED = 27, BLUE = 40, what is GREEN?",
             options: ["A. 49", "B. 50", "C. 51", "D. 52"],
             answer: "D. 52"
         },
-        {
+        { // 15
             q: "A, C, G, M, U",
             options: ["A. C", "B. D", "C. E", "D. F"],
             answer: "C. E"
@@ -372,15 +372,83 @@ const quizzes = {
     },
     mathematics: {
         questions: [
-        {
+        { // 1
             q: "Decreasing a number by 40% and then decreasing the result by 30% is the same as decreasing the original number by what percent?",
             options: ["A. 70", "B. 58", "C. 42", "D. 35"],
             answer: "B. 58"
         },
-        {
-            q: "Simplify and write using positive exponents: (-3x<sup>-2</sup>)(-3x)<sup>2</sup> ÷ 3 - x<sup>0</sup>",
-            options: ["A. -10", "B. 13.5", "C. -9x", "D. -2x<sup>-4</sup>"],
+        { // 2
+            q: "Simplify and write using positive exponents: (-3x⁻²)(-3x)² ÷ 3 - x⁰",
+            options: ["A. -10", "B. 13.5", "C. -9x", "D. -2x⁻⁴"],
             answer: "A. -10"
+        },
+        { // 3
+            q: "How many permutations are there of the letters A, B, and C?",
+            options: ["A. 4", "B. 7", "C. 6", "D. 3"],
+            answer: "C. 6"
+        },
+        { // 4
+            q: "Simplify 4y² + 5y - 3y² - 4y",
+            options: ["A. 2y² + 2y", "B. y² + y", "C. 2y + 2y²", "D. y + y²"],
+            answer: "B. y² + y"
+        },
+        { // 5
+            q: "Suppose K, A, and I are statements such that I is true if exactly one of K and A is true. If I is false, which of the following statements must be true?",
+            options: ["A. If K is true, then A is false", "B. If K is false, then A is false", "C. Both K and A are true", "D. Both K and A are false"],
+            answer: "B. If K is false, then A is false"
+        },
+        { // 6
+            q: "In the figure below, what is the area of the shaded region?",
+            image: "math_qstn6.png",
+            options: ["A. (32 - 8π)cm²", "B. (32 - 16π)cm²", "C. (64 - 16π)cm²", "D. (16π - 64)cm²"],
+            answer: "A. (32 - 8π)cm²"
+        },
+        { // 7
+            q: "A car runs 375 km in 10,800 seconds. What’s the car’s speed in km/hr?",
+            options: ["A. 180 km/hr", "B. 120 km/hr", "C. 125 km/hr", "D. 25 km/hr"],
+            answer: "C. 125 km/hr"
+        },
+        { // 8
+            q: "Five horses are in the race. A woman picks two of the horses at random and bets one of them. Find the probability that a person picked the winner.",
+            options: ["A. 10%", "B. 20%", "C. 30%", "D. 40%"],
+            answer: "D. 40%"
+        },
+        { // 9
+            q: "Find the root mean square of 11, 23, and 35.",
+            options: ["A. 24", "B. 25", "C. 26", "D. 27"],
+            answer: "B. 25"
+        },
+        { // 10
+            q: "John is 24 years old. When John was the age that James is now, James was half the age that John is now. How old is James?",
+            options: ["A. 32", "B. 24", "C. 16", "D. 12"],
+            answer: "C. 16"
+        },
+        { // 11
+            q: "Evaluate the limit.",
+            image: "math_qstn11.png",
+            options: ["A. 4", "B. 5", "C. 6", "D. 7"],
+            answer: "B. 5"
+        },
+        { // 12
+            q: "In the given triangle, find h.",
+            image: "math_qstn12.png",
+            options: ["A. 3", "B. 6", "C. 9", "D. 12"],
+            answer: "B. 6"
+        },
+        { // 13
+            q: "Lola Penyang who wishes to fence her agricultural land using only a 600-meter-long material. If the land is quadrilateral in shape, what should be the dimensions of the fence in order to enclose the maximum area?",
+            options: ["A. 200m x 100m", "B. 150m x 150m", "C. 250m x 50m", "D. 270m x 30m"],
+            answer: "B. 150m x 150m"
+        },
+        { // 14
+            q: "Find the derivative of the function:<br>f(x) = x² sin(x³)",
+            options: ["A. 2x sin(x³) + 3x⁴ cos(x³)", "B. 2x² sin(x³) + 3x³ cos(x³)", "C. 2x sin(x⁴) + 3x⁴ cos(x³)", "D. 4x sin(x³) + 6x⁴ cos(x³)"],
+            answer: "A. 2x sin(x³) + 3x⁴ cos(x³)"
+        },
+        { // 15
+            q: "Alice can complete a project in 10 hours, while Bob can complete the same project in 15 hours. If Alice and Bob work together on the project, how long will it take them to complete it?",
+            options: ["A. 5 hours", "B. 6 hours", "C. 7 hours", "D. 8 hours"],
+            answer: "B. 6 hours"
         }
         ]
     },
@@ -465,6 +533,10 @@ function loadQuiz() {
 quizForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    // confirmation keme
+    const confirmSubmit = confirm("Are you sure you want to submit your answers?");
+    if (!confirmSubmit) return;
+
     const subject = subjectSelect.value;
     const quiz = quizzes[subject];
 
@@ -472,7 +544,7 @@ quizForm.addEventListener("submit", (e) => {
     let output = "";
 
     quiz.questions.forEach((item, index) => {
-        const userAnswer = quizForm[`q${index}`].value;
+        const userAnswer = quizForm[`q${index}`]?.value;
 
         if (userAnswer === item.answer) {
             score++;
