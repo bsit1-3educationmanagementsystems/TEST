@@ -63,7 +63,7 @@ body {
 
 /* BACKGROUND */
 .bg1 {
-    background-image: url('.assets/.img/subjectiskolar.png');
+    background-image: url('0assets/0img/subjectiskolar.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
