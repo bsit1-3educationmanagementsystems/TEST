@@ -488,6 +488,8 @@ quizBtn.addEventListener("click", () => {
 });
 
 function loadQuiz() {
+    quizResult.innerHTML = ""; // clear old result 
+
     const subject = subjectSelect.value;
     const quiz = quizzes[subject];
 
