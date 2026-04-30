@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I.S.K.O.L.A.R</title>
-    <link rel="stylesheet" href="subjects.css">
+    <title>My Account | ISKOLAR</title>
+    <link rel="stylesheet" href="application.css">
 </head>
 
-<body data-role="student" class="bg1">  
+<body class="bg-login" style="min-height: 100vh; display: flex; flex-direction: column;">
 
 <header class="header">
     <nav class="navbar">
@@ -25,8 +25,8 @@
 
         <nav class="nav">
             <a href="studentsign-in.html">HOME</a>
-            <a href="sbjctStud.html">SUBJECTS</a>
-            <a href="account.html">ACCOUNT</a>
+            <a href="sbjctStudmain.html">SUBJECTS</a>
+            <a href="studentAccount.html">ACCOUNT</a>
         </nav>
 
         <div class="search-wrapper">
@@ -36,43 +36,163 @@
     </nav>
 </header>
 
-<!-- MAIN CONTENT -->
-<div class="container">
+<section class="signin-section" style="flex: 1;">
 
-    <h2>Subject PDF Manager</h2>
-    <!-- Viewer -->
-    <div class="viewer">
-        <h3 style= "justify-self: center;">PDF Viewer</h3>
-        <iframe id= "pdfViewer" src="" frameborder="0"></iframe>
+    <div class="signin-left">
+        <h1>ACCOUNT</h1>
+        <p>
+            View your profile information and track your learning activity.
+        </p>
     </div>
 
-    <!-- Subject Selector -->
-    <label for="subjectSelect">Select Subject:</label>
-    <select id="subjectSelect">
-        <option value="science">Science</option>
-        <option value="mathematics">Mathematics</option>
-        <option value="english">English</option>
-        <option value="reading">Reading Comprehension</option>
-        <option value="abstract">Abstract Reasoning</option>
-    </select>
+    <div class="signin-box">
 
-    <!-- PDF List -->
-    <div class= "file-list-box">
-        <h3>Available Files</h3>
-        <button id= "uploadBtn"></button>
+        <!-- Flex Container to hold Image on the left and Info on the right -->
+        <div style="display: flex; align-items: center; gap: 30px; margin-bottom: 20px;">
+            
+            <!-- ✔ PROFILE PICTURE UI (LEFT) -->
+            <div class="profile-pic-wrapper" style="text-align: center; flex-shrink: 0;">
+                <!-- Updated src to use local default profile picture -->
+                <img id="profileImg" src=".assets/.img/nopfp.jpg" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #ccc;">
+                <br>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                <!-- Red pill button styling -->
+                <label for="fileInput" style="cursor: pointer; background-color: #dc3545; color: white; font-size: 14px; text-decoration: none; padding: 6px 18px; border-radius: 50px; display: inline-block; margin-top: 12px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background-color 0.3s;">Change Picture</label>
+            </div>
 
-        
-        <ul id= "fileList"></ul>
+            <!-- ✔ USER INFO (RIGHT) -->
+            <div class="user-info-wrapper" style="text-align: left;">
+                <h2 id="userName" style="margin-top: 0; margin-bottom: 15px;">Loading...</h2>
+                <p style="margin: 5px 0;"><strong>Full Name:</strong> <span id="fullName"></span></p>
+                <p style="margin: 5px 0;"><strong>Email:</strong> <span id="userEmail"></span></p>
+                <p style="margin: 5px 0;"><strong>School:</strong> <span id="userSchool"></span></p>
+                <p style="margin: 5px 0;"><strong>Account Type:</strong> <span id="userType"></span></p>
+            </div>
+
+        </div>
+
+        <hr style="margin: 15px 0;">
+
+        <p><strong>Last Viewed Subject:</strong></p>
+        <p id="lastSubject">No subject viewed yet.</p>
+
+        <button class="signin-btn" id="logoutBtn" style="margin-top: 15px;">LOG OUT</button>
+
     </div>
 
-</div>
+        <hr style="margin: 15px 0;">
 
-<script src= "subjects.js"></script>
+        <p><strong>Last Viewed Subject:</strong></p>
+        <p id="lastSubject">No subject viewed yet.</p>
 
-</body>
+        <button class="signin-btn" id="logoutBtn" style="margin-top: 15px;">LOG OUT</button>
+
+    </div>
+
+</section>
 
 <footer>
-    <p>&copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
+    <p>
+        &copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>
+        Need help? Email us at bsiteducationmanagementsystem@gmail.com
+    </p>
 </footer>
 
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDeXxlaxk1nCVQ9k8tMiEs9o-EcLrkTSPE",
+  authDomain: "iskolar-website.firebaseapp.com",
+  projectId: "iskolar-website",
+  appId: "1:1034904541958:web:39eee81131f0a09a991c87"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// Check logged in user
+onAuthStateChanged(auth, async (user) => {
+
+    if (!user) {
+        window.location.href = "signin.html";
+        return;
+    }
+
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        const data = docSnap.data();
+
+        // existing
+        document.getElementById("userName").textContent = data.name;
+
+        // ✔ CHECK FOR PROFILE PICTURE
+        if (data.profilePic) {
+            document.getElementById("profileImg").src = data.profilePic;
+        }
+
+        document.getElementById("fullName").textContent = data.name;
+        document.getElementById("userEmail").textContent = data.email;
+        document.getElementById("userSchool").textContent = data.school;
+        document.getElementById("userType").textContent = data.accountType;
+
+        // last subject
+        if (data.lastSubject) {
+            document.getElementById("lastSubject").textContent = data.lastSubject;
+        }
+    }
+});
+
+// Profile Picture Upload Logic
+document.getElementById("fileInput").addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        
+        reader.onload = async (e) => {
+            const base64String = e.target.result;
+            document.getElementById("profileImg").src = base64String;
+
+            const user = auth.currentUser;
+            if (user) {
+                try {
+                    const userRef = doc(db, "users", user.uid);
+                    await updateDoc(userRef, {
+                        profilePic: base64String
+                    });
+                    alert("Profile picture updated successfully!");
+                } catch (error) {
+                    console.error("Error updating profile picture: ", error);
+                    alert("Failed to save picture.");
+                }
+            }
+        };
+        
+        reader.readAsDataURL(file);
+    }
+});
+
+// Logout
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "signin.html";
+});
+</script>
+
+</body>
 </html>
