@@ -78,8 +78,8 @@ async function loadPendingTeachers() {
             return;
         }
 
-        querySnapshot.forEach((document) => {
-            const data = document.data();
+        querySnapshot.forEach((docSnapshot) => {
+            const data = docSnapshot.data();
             const dateStr = data.createdAt ? data.createdAt.toDate().toLocaleDateString() : 'N/A';
             
             const tr = document.createElement('tr');
@@ -89,7 +89,7 @@ async function loadPendingTeachers() {
                 <td>${data.school}</td>
                 <td>${dateStr}</td>
                 <td>
-                    <button class="approve-btn" data-id="${document.id}">Approve</button>
+                    <button class="approve-btn" data-id="${docSnapshot.id}">Approve</button>
                 </td>
             `;
             tableBody.appendChild(tr);
