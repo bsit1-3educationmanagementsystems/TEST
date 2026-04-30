@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I.S.K.O.L.A.R</title>
-    <link rel="stylesheet" href="subjects.css">
+    <title>I.S.K.O.L.A.R.</title>
+    <link rel="stylesheet" href="subjectmain.css">
 </head>
 
-<body data-role="guest" class="bg1">
+<body style ="margin : 0; 
+             padding : 0;
+             " class="bg1">
 
 <header class="header">
     <nav class="navbar">
@@ -36,42 +38,77 @@
     </nav>
 </header>
 
-<!-- MAIN CONTENT -->
-<div class="container">
+<!-- SUBJECTS TITLE + DESCRIPTION -->
 
-    <h2>Subject PDF Manager</h2>
-    <!-- Viewer -->
-    <div class="viewer">
-        <h3 style= "justify-self: center;">PDF Viewer</h3>
-        <iframe id= "pdfViewer" src="" frameborder="0"></iframe>
-    </div>
+<div class="subject-header">
+    <h1 class="title">SUBJECTS</h1>
 
-    <!-- Subject Selector -->
-    <label for="subjectSelect">Select Subject:</label>
-    <select id="subjectSelect">
-        <option value="mathematics">Mathematics</option>
-        <option value="science">Science</option>
-        <option value="english">English</option>
-        <option value="reading">Reading Comprehension</option>
-        <option value="abstract">Abstract Reasoning</option>
-    </select>
-
-    <!-- PDF List -->
-    <div class= "file-list-box">
-        <h3>Available Files</h3>
-        <button id= "uploadBtn"></button>
-
-        <ul id= "fileList"></ul>
-    </div>
-
+    <p class="subtitle">
+        ISKOLAR offers modules and quizzes with the five (5) core subjects for
+        college entrance examinations (CETs) to help students gain the
+        fundamental information for their college entrance exam preparation.
+    </p>
 </div>
 
+
+<!-- CARD SECTION -->
+<section class="infoSection">
+
+    <div class="infoCard">
+        <a href="sbjctGuestMath.html">
+        <img src=".assets/.img/!Math.png" class="subject-img">
+        <p class="desc">Modules, quizzes, and mock tests on Math</p>
+        <h2 class="subject-btn">MATHEMATICS </h2>
+        </a>
+    </div>
+
+    <div class="infoCard">
+        <a href="sbjctGuest.html">
+        <img src=".assets/.img/!Sci.png" class="subject-img">
+        <p class="desc">Modules, quizzes, and mock tests on Science</p>
+         <h2 class="subject-btn"> SCIENCE </h2>
+        </a>
+    </div>
+
+    <div class="infoCard">
+        <a href="sbjctGuestEng.html">
+        <img src=".assets/.img/!Eng.png" class="subject-img">
+        <p class="desc">Modules, quizzes, and mock tests on English</p>
+        <h2 class="subject-btn">ENGLISH </h2>
+        </a>
+    </div>
+
+    <div class="infoCard">
+        <a href="sbjctGuestAbs.html">
+        <img src=".assets/.img/!Abstract.png" class="subject-img">
+        <p class="desc">Modules, quizzes, and mock tests on Logic</p>
+        <h2 class="subject-btn">ABSTRACT REASONING </h2>
+        </a>
+    </div>
+
+    <div class="infoCard">
+        <a href="sbjctGuestRead.html">
+        <img src=".assets/.img/!ReadingCompre.png" class="subject-img">
+        <p class="desc">Modules, quizzes, and mock tests on Reading</p>
+        <h2 class="subject-btn"> READING COMPREHENSION </h2>
+        </a>
+    </div>
+
+</section>
+
 <script src= "subjects.js"></script>
+
 
 </body>
 
 <footer>
-    <p>&copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
+    <p style="margin-top: 25px;">&copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
 </footer>
 
+
 </html>
+
+
+
+
+
