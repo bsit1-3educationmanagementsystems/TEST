@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Account | ISKOLAR</title>
-    <link rel="stylesheet" href="application.css">
+    <title>I.S.K.O.L.A.R</title>
+    <link rel="stylesheet" href="subjects.css">
 </head>
 
-<body class="bg-login" style="min-height: 100vh; display: flex; flex-direction: column;">
+<body data-role="student" class="bg1">  
 
 <header class="header">
     <nav class="navbar">
@@ -25,8 +25,8 @@
 
         <nav class="nav">
             <a href="studentsign-in.html">HOME</a>
-            <a href="sbjctStudmain.html">SUBJECTS</a>
-            <a href="studentAccount.html">ACCOUNT</a>
+            <a href="sbjctStud.html">SUBJECTS</a>
+            <a href="account.html">ACCOUNT</a>
         </nav>
 
         <div class="search-wrapper">
@@ -36,103 +36,43 @@
     </nav>
 </header>
 
-<section class="signin-section" style="flex: 1;">
+<!-- MAIN CONTENT -->
+<div class="container">
 
-    <div class="signin-left">
-        <h1>ACCOUNT</h1>
-        <p>
-            View your profile information and track your learning activity.
-        </p>
+    <h2>Subject PDF Manager</h2>
+    <!-- Viewer -->
+    <div class="viewer">
+        <h3 style= "justify-self: center;">PDF Viewer</h3>
+        <iframe id= "pdfViewer" src="" frameborder="0"></iframe>
     </div>
 
-    <div class="signin-box">
+    <!-- Subject Selector -->
+    <label for="subjectSelect">Select Subject:</label>
+    <select id="subjectSelect">
+        <option value="science">Science</option>
+        <option value="mathematics">Mathematics</option>
+        <option value="english">English</option>
+        <option value="reading">Reading Comprehension</option>
+        <option value="abstract">Abstract Reasoning</option>
+    </select>
 
-        <h2 id="userName">Loading...</h2>
+    <!-- PDF List -->
+    <div class= "file-list-box">
+        <h3>Available Files</h3>
+        <button id= "uploadBtn"></button>
 
-        <!-- ✔ ADDED USER INFO -->
-        <p><strong>Full Name:</strong> <span id="fullName"></span></p>
-        <p><strong>Email:</strong> <span id="userEmail"></span></p>
-        <p><strong>School:</strong> <span id="userSchool"></span></p>
-        <p><strong>Account Type:</strong> <span id="userType"></span></p>
-
-        <hr style="margin: 15px 0;">
-
-        <p><strong>Last Viewed Subject:</strong></p>
-        <p id="lastSubject">No subject viewed yet.</p>
-
-        <button class="signin-btn" id="logoutBtn">LOG OUT</button>
-
+        
+        <ul id= "fileList"></ul>
     </div>
 
-</section>
+</div>
 
-<footer>
-    <p>
-        &copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>
-        Need help? Email us at bsiteducationmanagementsystem@gmail.com
-    </p>
-</footer>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import {
-  getAuth,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-import {
-  getFirestore,
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDeXxlaxk1nCVQ9k8tMiEs9o-EcLrkTSPE",
-  authDomain: "iskolar-website.firebaseapp.com",
-  projectId: "iskolar-website",
-  appId: "1:1034904541958:web:39eee81131f0a09a991c87"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// Check logged in user
-onAuthStateChanged(auth, async (user) => {
-
-    if (!user) {
-        window.location.href = "signin.html";
-        return;
-    }
-
-    const docRef = doc(db, "users", user.uid);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-        const data = docSnap.data();
-
-        // existing
-        document.getElementById("userName").textContent = data.name;
-
-        document.getElementById("fullName").textContent = data.name;
-        document.getElementById("userEmail").textContent = data.email;
-        document.getElementById("userSchool").textContent = data.school;
-        document.getElementById("userType").textContent = data.accountType;
-
-        // last subject (di ko na alam TT)
-        if (data.lastSubject) {
-            document.getElementById("lastSubject").textContent = data.lastSubject;
-        }
-    }
-});
-
-// Logout
-document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await signOut(auth);
-    window.location.href = "signin.html";
-});
-</script>
+<script src= "subjects.js"></script>
 
 </body>
+
+<footer>
+    <p>&copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
+</footer>
+
 </html>
