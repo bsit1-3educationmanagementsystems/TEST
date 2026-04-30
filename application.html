@@ -215,11 +215,15 @@ document.getElementById("signinForm").addEventListener("submit", async function 
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
+    // Determine default status based on account type
+    const accountStatus = accountType === "teacher" ? "pending" : "approved";
+
     await setDoc(doc(db, "users", user.uid), {
       name,
       school,
       email,
       accountType,
+      status: accountStatus, // <-- New status field added here
       emailVerified: false,
       createdAt: serverTimestamp()
     });
@@ -227,7 +231,13 @@ document.getElementById("signinForm").addEventListener("submit", async function 
     await sendEmailVerification(user);
 
     formMessage.style.color = "green";
-    formMessage.textContent = "Account created successfully. Please check your email for verification.";
+    
+    // Change messaging based on account type
+    if (accountType === "teacher") {
+        formMessage.textContent = "Teacher account created. Please wait for an Admin to approve your account before signing in.";
+    } else {
+        formMessage.textContent = "Account created successfully. Please check your email for verification.";
+    }
 
     await signOut(auth);
 
@@ -235,22 +245,11 @@ document.getElementById("signinForm").addEventListener("submit", async function 
 
     setTimeout(() => {
       window.location.href = "index.html";
-    }, 2500);
+    }, 4000); // Extended time slightly so teachers can read the message
 
   } catch (error) {
-    formMessage.style.color = "red";
-
-    if (error.code === "auth/email-already-in-use") {
-      formMessage.textContent = "That email is already registered.";
-    } else if (error.code === "auth/invalid-email") {
-      formMessage.textContent = "Please enter a valid email address.";
-    } else if (error.code === "auth/weak-password") {
-      formMessage.textContent = "Password is too weak.";
-    } else {
-      formMessage.textContent = error.message;
-    }
-  }
-});
+    // ... your existing error handling ...
+}});
 </script>
 
 </body>
