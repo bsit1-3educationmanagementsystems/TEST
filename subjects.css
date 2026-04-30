@@ -1,79 +1,231 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> I.S.K.O.L.A.R </title>
-    <link rel="stylesheet" href="subjects.css">
-</head>
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-<body data-role= "teacher" class="bg1">  
+body {
+    font-family: "Times New Roman", serif;
+}
 
-<header class="header">
-    <nav class="navbar">
+/* Header */
+.header .navbar {
+    background: #7c2b2b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+}
 
-        <div class="name">
-            <div class="logo">
-                <img src=".assets/.img/!ISKOLAR.png" alt="ISKOLAR Logo">
-            </div>
+/* nav br */
+.logo img {
+    width: 100px;
+}
 
-            <div class="namePos">
-                <p style="letter-spacing: 10px;"> ISKOLAR</p>
-                <h3>Interactive System for Knowledge-Oriented <br> Learning, Assistance, and Review</h3>
-            </div>
-        </div>
+.name {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
 
-        <nav class="nav">
-            <a href="teachersign-in.html">HOME</a>
-            <a href="subjects.html">SUBJECTS</a>
-            <a href="teacherAccount.html">ACCOUNT</a>
-        </nav>
+.namePos {
+    font-size: 35px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
 
-        <div class="search-wrapper">
-            <input type="search" placeholder="Search…" id="searchbar">
-        </div>
+.namePos h3 {
+    font-size: 10px;
+    font-weight: 400;
+}
 
-    </nav>
-</header>
+.nav a {
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 18px;
+    color: #fff;
+    transition: 0.3s;
+}
 
-<!-- MAIN CONTENT -->
-<div class= "container">
+.nav a:hover {
+    color: #ffe2cc;
+}
 
-    <h2> Subject PDF Manager </h2>
-    <!-- Viewer -->
-    <div class= "viewer">
-        <h3 style= "justify-self: center;"> PDF Viewer </h3>
-        <iframe id= "pdfViewer" src= "" frameborder= "0"></iframe>
-    </div>
+/* Search bar */
+.search-wrapper input {
+    padding: 6px 12px;
+    border-radius: 18px;
+    border: none;
+    width: 300px;
+}
 
-    <!-- Subject Selector -->
-    <label for= "subjectSelect"> Select Subject: </label>
-    <select id= "subjectSelect">
-        <option value= "science"> Science </option>
-        <option value= "mathematics"> Mathematics </option>
-        <option value= "english"> English </option>
-        <option value= "reading"> Reading Comprehension </option>
-        <option value= "abstract"> Abstract Reasoning </option>
-    </select>
+/* Background */
+.bg1 {
+    background-image: url('.assets/.img/!ISKOLAR3.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 150vh;
+    margin: 0;
+    padding-top: 0;
+}
 
-    <!-- PDF List -->
-    <div class= "file-list-box">
-        <h3> Available Files </h3>
-        <input type= "file" id="uploadInput" accept="application/pdf">
-        <button id= "uploadBtn">Upload PDF</button>
-        
-        <ul id= "fileList"></ul>
-    </div>
+/* MAIN CONTENT */
+.container {
+    margin: 40px auto;
+    max-width: 1100px;
+    padding: 20px;
+}
 
-</div>
+h2 {
+    text-align: center;
+}
 
-<script src= "subjects.js"></script>
+.file-list-box {
+    margin-top: 20px;
+}
 
+.file-list-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
 
-</body>
+.file-list-box li {
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-<footer>
-    <p>&copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br> Need help? Email us at bsiteducationmanagementsystem@gmail.com</p>
-</footer>
+.file-list-box button {
+    margin-left: 10px;
+}
 
-</html>
+.viewer {
+    margin-top: 30px;
+}
+
+#pdfViewer {
+    width: 100%;
+    height: 800px;
+    border: 1px solid #7c2b2b;
+    border-radius: 10px;
+}
+
+/* website footer */
+/* FOOTER */
+footer {
+    flex-shrink: 0;
+    background: linear-gradient(90deg, #5e1f1f, #8b2f2f);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.35);
+}
+
+/* MOBILE RESPONSIVE */
+
+/* Medium screens: tablets */
+@media (max-width: 768px) {
+    .subject-header {
+        width: 95%;
+        margin: 30px auto;
+        text-align: center;
+    }
+
+    .title {
+        font-size: 50px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+        max-width: 90%;
+        margin: 15px auto;
+    }
+
+    .infoSection {
+        width: 95%;
+        gap: 15px;
+        justify-content: center; /* center cards */
+    }
+
+    .infoCard {
+        width: 45%; /* two cards per row */
+        margin-bottom: 20px;
+    }
+
+    .subject-img {
+        width: 130px;
+        height: 130px;
+    }
+
+    .desc {
+        font-size: 11px;
+    }
+
+    .subject-btn {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    footer {
+        font-size: 14px;
+        padding: 15px;
+    }
+}
+
+/* Small screens: phones */
+@media (max-width: 480px) {
+    .subject-header {
+        width: 95%;
+        text-align: center;
+    }
+
+    .title {
+        font-size: 32px;
+    }
+
+    .subtitle {
+        font-size: 12px;
+        max-width: 100%;
+        margin: 10px auto 20px auto;
+    }
+
+    .infoSection {
+        flex-direction: column; /* stack cards vertically */
+        align-items: center;
+        width: 95%;
+        gap: 15px;
+    }
+
+    .infoCard {
+        width: 90%; /* full width on small phones */
+        margin-bottom: 20px;
+    }
+
+    .subject-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .desc {
+        font-size: 12px;
+    }
+
+    .subject-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    footer {
+        font-size: 12px;
+        padding: 15px;
+    }
+}
+
