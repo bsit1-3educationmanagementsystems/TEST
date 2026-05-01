@@ -10,14 +10,17 @@
         /* Added a container to position the heading and logout button */
         .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         h1 { color: #333; margin: 0; }
+        h2 { color: #333; margin-top: 40px; margin-bottom: 5px; }
         
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
         th { background-color: #004d40; color: white; }
         .approve-btn { background-color: #28a745; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px; }
         .approve-btn:hover { background-color: #218838; }
         .decline-btn { background-color: #dc3545; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px; margin-left: 8px; }
         .decline-btn:hover { background-color: #c82333; }
+        .delete-btn { background-color: #343a40; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px; }
+        .delete-btn:hover { background-color: #23272b; }
         
         /* Styling for the logout button */
         .logout-btn { background-color: #6c757d; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; font-weight: bold; }
@@ -50,6 +53,23 @@
         </tbody>
     </table>
 
+    <h2>Declined Teachers</h2>
+    <p>List of declined teacher applications. You can permanently delete their records.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Institution</th>
+                <th>Date Applied</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="declinedTeachersList">
+            <!-- Data will be injected here via JavaScript -->
+        </tbody>
+    </table>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { 
@@ -63,7 +83,8 @@ import {
     where, 
     getDocs, 
     updateDoc, 
-    doc 
+    doc,
+    deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -78,6 +99,7 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 const tableBody = document.getElementById('pendingTeachersList');
+const declinedTableBody = document.getElementById('declinedTeachersList');
 
 // Fetch Pending Teachers
 async function loadPendingTeachers() {
@@ -133,6 +155,55 @@ async function loadPendingTeachers() {
     }
 }
 
+// Fetch Declined Teachers
+async function loadDeclinedTeachers() {
+    declinedTableBody.innerHTML = "<tr><td colspan='5'>Loading...</td></tr>";
+    
+    try {
+        const q = query(
+            collection(db, "users"), 
+            where("accountType", "==", "teacher"), 
+            where("status", "==", "declined")
+        );
+        
+        const querySnapshot = await getDocs(q);
+        declinedTableBody.innerHTML = ""; // Clear loading text
+
+        if (querySnapshot.empty) {
+            declinedTableBody.innerHTML = "<tr><td colspan='5' class='empty-message'>No declined teachers.</td></tr>";
+            return;
+        }
+
+        querySnapshot.forEach((docSnapshot) => {
+            const data = docSnapshot.data();
+            const dateStr = data.createdAt ? data.createdAt.toDate().toLocaleDateString() : 'N/A';
+            
+            const tr = document.createElement('tr');
+            
+            tr.innerHTML = `
+                <td>${data.name}</td>
+                <td>${data.email}</td>
+                <td>${data.school}</td>
+                <td>${dateStr}</td>
+                <td>
+                    <button class="delete-btn" data-id="${docSnapshot.id}">Delete Account</button>
+                </td>
+            `;
+            declinedTableBody.appendChild(tr);
+        });
+
+        // Add event listeners to the delete buttons
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => deleteTeacherAccount(e.target.getAttribute('data-id')));
+        });
+
+    } catch (error) {
+        console.error("Error fetching declined teachers: ", error);
+        declinedTableBody.innerHTML = "<tr><td colspan='5' style='color:red;'>Error loading data. Check console.</td></tr>";
+    }
+}
+
+
 // Approve Teacher Function
 async function approveTeacher(userId) {
     if(!confirm("Are you sure you want to approve this teacher?")) return;
@@ -163,11 +234,29 @@ async function declineTeacher(userId) {
         });
         
         alert("Teacher request declined.");
-        loadPendingTeachers(); // Refresh the list
+        loadPendingTeachers(); // Refresh the pending list
+        loadDeclinedTeachers(); // Refresh the declined list
 
     } catch (error) {
         console.error("Error declining teacher: ", error);
         alert("Failed to decline teacher. Check console for details.");
+    }
+}
+
+// Delete Teacher Account Function
+async function deleteTeacherAccount(userId) {
+    if(!confirm("Are you sure you want to permanently delete this account? This action cannot be undone.")) return;
+
+    try {
+        const userRef = doc(db, "users", userId);
+        await deleteDoc(userRef); 
+        
+        alert("Account successfully deleted.");
+        loadDeclinedTeachers(); // Refresh the declined list
+
+    } catch (error) {
+        console.error("Error deleting teacher: ", error);
+        alert("Failed to delete account. Check console for details.");
     }
 }
 
@@ -186,7 +275,10 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
 });
 
 // Load data on page load
-window.onload = loadPendingTeachers;
+window.onload = () => {
+    loadPendingTeachers();
+    loadDeclinedTeachers();
+};
 </script>
 
 </body>

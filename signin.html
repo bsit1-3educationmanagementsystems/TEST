@@ -133,13 +133,21 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
 
-        formMessage.style.color = "green";
-        formMessage.textContent = "Login successful! Redirecting...";
+        if (docSnap.exists()) {
+            const data = docSnap.data();
 
-        setTimeout(() => {
-            if (docSnap.exists()) {
-                const data = docSnap.data();
+            // NEW CHECK: Block declined teachers from logging in
+            if (data.accountType === "teacher" && data.status === "declined") {
+                formMessage.style.color = "red";
+                formMessage.textContent = "Access Denied: Your teacher application was declined.";
+                await auth.signOut(); // Log them out immediately
+                return; // Stop the script so it doesn't redirect
+            }
 
+            formMessage.style.color = "green";
+            formMessage.textContent = "Login successful! Redirecting...";
+
+            setTimeout(() => {
                 // Hardcoded check for "T1" name or "admin" account type
                 if (nameInput === "T1" || data.name === "T1" || data.accountType === "admin") {
                     window.location.href = "admin.html";
@@ -148,10 +156,12 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
                 } else {
                     window.location.href = "studentsign-in.html";
                 }
-            } else {
-                window.location.href = "index.html";
-            }
-        }, 1500);
+            }, 1500);
+        } else {
+            formMessage.style.color = "red";
+            formMessage.textContent = "User data not found.";
+            window.location.href = "index.html";
+        }
 
     } catch (error) {
         formMessage.style.color = "red";
