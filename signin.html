@@ -84,8 +84,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { 
     getAuth, 
-    signInWithEmailAndPassword,
-    signOut
+    signInWithEmailAndPassword 
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 import {
@@ -127,9 +126,6 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const password = document.getElementById("password").value;
     const formMessage = document.getElementById("formMessage");
 
-    formMessage.style.color = "black";
-    formMessage.textContent = "Signing in...";
-
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
@@ -137,21 +133,13 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-            const data = docSnap.data();
+        formMessage.style.color = "green";
+        formMessage.textContent = "Login successful! Redirecting...";
 
-            // CHECK FOR PENDING TEACHER APPROVAL
-            if (data.accountType === "teacher" && data.status === "pending") {
-                await signOut(auth); // Force sign out
-                formMessage.style.color = "red";
-                formMessage.textContent = "Your account is pending admin approval. Please try again later.";
-                return; // Stop the function from redirecting
-            }
+        setTimeout(() => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
 
-            formMessage.style.color = "green";
-            formMessage.textContent = "Login successful! Redirecting...";
-
-            setTimeout(() => {
                 // Hardcoded check for "T1" name or "admin" account type
                 if (nameInput === "T1" || data.name === "T1" || data.accountType === "admin") {
                     window.location.href = "admin.html";
@@ -160,20 +148,16 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
                 } else {
                     window.location.href = "studentsign-in.html";
                 }
-            }, 1500);
-            
-        } else {
-            formMessage.style.color = "red";
-            formMessage.textContent = "No user data found in the database.";
-            await signOut(auth);
-        }
+            } else {
+                window.location.href = "index.html";
+            }
+        }, 1500);
 
     } catch (error) {
         formMessage.style.color = "red";
 
-        // Firebase has updated some error codes (e.g., auth/invalid-credential)
-        if (error.code === "auth/user-not-found" || error.code === "auth/invalid-credential") {
-            formMessage.textContent = "Invalid email or password.";
+        if (error.code === "auth/user-not-found") {
+            formMessage.textContent = "No account found.";
         } else if (error.code === "auth/wrong-password") {
             formMessage.textContent = "Incorrect password.";
         } else {
