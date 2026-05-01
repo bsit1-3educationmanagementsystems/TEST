@@ -247,22 +247,60 @@ uploadBtn.addEventListener("click", () => {
     const file = uploadInput.files[0];
 
     if (role !== "teacher") return;
-    else if (!file || file.type !== "application/pdf") {
+
+    if (!file || file.type !== "application/pdf") {
         alert("Please upload a valid PDF file.");
         return;
     }
 
     const subject = subjectSelect.value;
 
-    const fileURL = URL.createObjectURL(file);
+    // create UI status element (popup-like)
+    const statusMsg = document.createElement("div");
+    statusMsg.style.position = "fixed";
+    statusMsg.style.top = "20px";
+    statusMsg.style.right = "20px";
+    statusMsg.style.padding = "12px 16px";
+    statusMsg.style.background = "#333";
+    statusMsg.style.color = "#fff";
+    statusMsg.style.borderRadius = "8px";
+    statusMsg.style.zIndex = "9999";
+    statusMsg.textContent = "Uploading file... please wait";
 
-    files[subject].push({
-        name: file.name,
-        url: fileURL
-    });
+    document.body.appendChild(statusMsg);
+
+    // simulate upload delay
+    setTimeout(() => {
+        statusMsg.textContent = "Upload submitted!";
+    }, 1500);
+
+    // simulate processing → pending approval
+    setTimeout(() => {
+        statusMsg.textContent =
+            "Pending approval: This file must be reviewed by an admin before it appears.";
+
+        // store as pending (not visible to students)
+        if (!files.pending) files.pending = {};
+        if (!files.pending[subject]) {
+            files.pending[subject] = [];
+        }
+
+        files.pending[subject].push({
+            name: file.name,
+            file: file,
+            status: "pending_admin_approval",
+            uploadedBy: role,
+            timestamp: Date.now()
+        });
+
+        updateFileList();
+    }, 3500);
+
+    setTimeout(() => {
+        setTimeout(() => statusMsg.remove(), 500);
+    }, 8000);
 
     uploadInput.value = "";
-    updateFileList();
 });
 
 // Update list when changing subjects
