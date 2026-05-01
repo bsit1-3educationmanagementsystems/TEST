@@ -14,7 +14,7 @@
 
         <div class="name">
             <div class="logo">
-                <img src="0assets/0img/!ISKOLAR.png" alt="ISKOLAR Logo">
+                <img src="!ISKOLAR.png" alt="ISKOLAR Logo">
             </div>
 
             <div class="namePos">
@@ -56,17 +56,36 @@
         <option value="abstract">Abstract Reasoning</option>
     </select>
 
-    <!-- PDF List -->
-    <div class= "file-list-box">
-        <h3>Available Files</h3>
-        <button id= "uploadBtn"></button>
+    <!-- quiz button -->
+    <button id="quizBtn">Take Quiz</button>
 
-        <ul id= "fileList"></ul>
+    <!-- PDF List -->
+    <div class="file-list-box">
+        <h3>Available Files</h3>
+        <button id="uploadBtn"></button>
+
+        <ul id="fileList"></ul>
     </div>
 
 </div>
 
-<script src= "subjects.js"></script>
+<!-- pop quiz -->
+<div id="quizModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:999;">
+
+    <div style="background:white; width:80%; max-width:600px; margin:50px auto; padding:20px; border-radius:10px; color:black;">
+
+        <h2>Reading Comprehension Practice Quiz</h2><br>
+
+        <form id="quizForm">
+            <!-- QUESTIONS WILL LOAD HERE -->
+        </form>
+
+        <div id="quizResult" style="margin-top:15px;"></div>
+
+    </div>
+</div>
+
+<script src="subjects.js"></script>
 
 </body>
 
