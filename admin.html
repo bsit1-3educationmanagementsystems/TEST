@@ -81,20 +81,22 @@ async function loadPendingTeachers() {
             return;
         }
 
-        querySnapshot.forEach((document) => {
-            const data = document.data();
+        // FIX APPLIED HERE: Changed 'document' to 'docSnapshot' to prevent variable shadowing
+        querySnapshot.forEach((docSnapshot) => {
+            const data = docSnapshot.data();
             const dateStr = data.createdAt ? data.createdAt.toDate().toLocaleDateString() : 'N/A';
             
+            // This global document call will now work correctly
             const tr = document.createElement('tr');
-            // Added the Decline button to the table row
+            
             tr.innerHTML = `
                 <td>${data.name}</td>
                 <td>${data.email}</td>
                 <td>${data.school}</td>
                 <td>${dateStr}</td>
                 <td>
-                    <button class="approve-btn" data-id="${document.id}">Approve</button>
-                    <button class="decline-btn" data-id="${document.id}">Decline</button>
+                    <button class="approve-btn" data-id="${docSnapshot.id}">Approve</button>
+                    <button class="decline-btn" data-id="${docSnapshot.id}">Decline</button>
                 </td>
             `;
             tableBody.appendChild(tr);
