@@ -274,11 +274,15 @@ updateFileList();
 // Quiz chuchu
 
 const quizBtn = document.getElementById("quizBtn");
+const deleteQuizBtn = document.getElementById("deleteQuizBtn");
 const quizModal = document.getElementById("quizModal");
 const quizForm = document.getElementById("quizForm");
 const quizResult = document.getElementById("quizResult");
 
-// quiz subject
+// role detection
+const isTeacher = document.body.dataset.role === "teacher";
+
+// quiz subjects and questions
 const quizzes = {
     abstract: {
         questions: [
@@ -694,18 +698,42 @@ const quizzes = {
 // open quiz
 quizBtn.addEventListener("click", () => {
     quizModal.style.display = "block";
-    quizSubmitted = false;
+    quizSubmitted = isTeacher ? true : false;
     loadQuiz();
 });
 
+
+// delete quiz sa teachers
+deleteQuizBtn.addEventListener("click", () => {
+    const confirmDelete = confirm("Are you sure you want to delete this quiz? This action cannot be undone.");
+
+    if (!confirmDelete) return;
+
+    const subject = subjectSelect.value;
+
+    delete quizzes[subject];
+
+    quizForm.innerHTML = "";
+    quizResult.innerHTML = "";
+
+    // deleted except close
+    quizForm.innerHTML = `
+        <button type="button" onclick="closeQuiz()">Close</button>
+    `;
+
+    alert("Quiz deleted successfully.");
+});
+
+
 // bawal close pag di tapos!
 function closeQuiz() {
-    if (!quizSubmitted) {
+    if (!isTeacher && !quizSubmitted) {
         alert("You must complete and submit the quiz first.");
         return;
     }
     quizModal.style.display = "none";
 }
+
 
 function loadQuiz() {
     quizResult.innerHTML = "";
@@ -736,26 +764,27 @@ function loadQuiz() {
     });
 
     html += `
-        <button id="submitQuizBtn" type="submit">Submit Quiz</button>
+        ${!isTeacher ? `<button id="submitQuizBtn" type="submit">Submit Quiz</button>` : ""}
         <button type="button" onclick="closeQuiz()">Close</button>
     `;
 
     quizForm.innerHTML = html;
 
-    const submitBtn = document.getElementById("submitQuizBtn");
-    submitBtn.disabled = true;
+    if (!isTeacher) {
+        const submitBtn = document.getElementById("submitQuizBtn");
+        submitBtn.disabled = true;
 
-    // submit pag lahat may answers!
-    quizForm.addEventListener("change", () => {
-        const total = quiz.questions.length;
-        let answered = 0;
+        quizForm.addEventListener("change", () => {
+            const total = quiz.questions.length;
+            let answered = 0;
 
-        for (let i = 0; i < total; i++) {
-            if (quizForm[`q${i}`]?.value) answered++;
-        }
+            for (let i = 0; i < total; i++) {
+                if (quizForm[`q${i}`]?.value) answered++;
+            }
 
-        submitBtn.disabled = answered !== total;
-    });
+            submitBtn.disabled = answered !== total;
+        });
+    }
 }
 
 // submission
