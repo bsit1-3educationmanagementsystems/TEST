@@ -53,10 +53,10 @@
 
         <select id="subjectSelect">
             <option value="reading">Reading Comprehension</option>
-            <option value="english">English</option>
-            <option value="abstract">Abstract Reasoning</option>
             <option value="science">Science</option>
             <option value="mathematics">Mathematics</option>
+            <option value="english">English</option>
+            <option value="abstract">Abstract Reasoning</option>
         </select>
 
         <!-- student + teacher shared button -->
@@ -64,6 +64,7 @@
 
         <!-- teacher only button -->
         <button id="deleteQuizBtn">Delete Quiz</button>
+        <button id="viewRecordsBtn">View Records</button>
 
     </div>
 
@@ -91,6 +92,18 @@
 
         <div id="quizResult" style="margin-top:15px;"></div>
 
+    </div>
+</div>
+
+<!-- view records -->
+<div id="recordsModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:999;">
+    <div style="background:white; width:80%; max-width:600px; margin:50px auto; padding:20px; border-radius:10px; color:black;">
+        <div id="recordsContent" style="margin-top:15px;">
+            <!-- RECRDS WILL LOAD HERE -->
+        </div>
+        <button type="button" onclick="closeRecords()" style="margin-top:15px;">
+            Close
+        </button>
     </div>
 </div>
 
