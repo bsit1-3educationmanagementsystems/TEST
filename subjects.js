@@ -90,8 +90,8 @@ const files = {
         { name: "Science Lessons 3 - Academic Clinic", url: "0assets/0materials/1Science-Readings-3.pdf" },
         { name: "Science Lessons 4 - Academic Clinic", url: "0assets/0materials/1Science-Readings-4.pdf" },
 
-        { name: "Science Practice Test 1 - Academic Clinic", url: "0assets/0materials/1Science-Module-1.pdf" },
-        { name: "Science Practice Test 2 - Academic Clinic", url: "0assets/0materials/1Science-Module-2.pdf" },
+        { name: "Science Practice Test 1 - Academic Clinic", url: "0assets/0materials/Science-Module-1.pdf" },
+        { name: "Science Practice Test 2 - Academic Clinic", url: "0assets/0materials/Science-Module-2.pdf" },
         { name: "Science Practice Test 3 - Academic Clinic", url: "0assets/0materials/1Science-Module-3.pdf" },
         { name: "Science Practice Test 4 - Academic Clinic", url: "0assets/0materials/1Science-Module-4.pdf" },
 
@@ -161,7 +161,7 @@ const files = {
 
         { name: "Reading Comprehension Practice Test 1 - Academic Clinic", url: "0assets/0materials/5Academic-Clinic-Eng-Module-4.pdf" },
 
-        { name: "ACET 2015 Reading Comprehension Practice Test 2", url: "0assets/0materials/5ACET2015_SIMULATED-EXAM-SET-B_SECTION-5_READING-COMPREHENSION.pdf" },
+        { name: "ACET 2015 Reading Comprehension Practice Test 2", url: "0assets/0materials/5ACET2015_SIMULATED-EXAM-SET-B_SECTION-5_RE55ADING-COMPREHENSION.pdf" },
         
         { name: "DCAT 2014 Reading Comprehension Practice Test 3", url: "0assets/0materials/5DCAT2014_SIMULATED-SET-B_SECTION-3_READING-COMPREHENSION_final.pdf" },
 
