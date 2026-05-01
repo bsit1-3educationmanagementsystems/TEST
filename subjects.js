@@ -272,7 +272,6 @@ subjectSelect.addEventListener("change", updateFileList);
 updateFileList();
 
 // Quiz chuchu
-
 const quizBtn = document.getElementById("quizBtn");
 const deleteQuizBtn = document.getElementById("deleteQuizBtn");
 const quizModal = document.getElementById("quizModal");
@@ -281,6 +280,8 @@ const quizResult = document.getElementById("quizResult");
 
 // role detection
 const isTeacher = document.body.dataset.role === "teacher";
+
+let quizSubmitted = false;
 
 // quiz subject
 const quizzes = {
@@ -695,35 +696,42 @@ const quizzes = {
     }
 };
 
-// open quiz
+// open
+
 quizBtn.addEventListener("click", () => {
     quizModal.style.display = "block";
     quizSubmitted = isTeacher ? true : false;
     loadQuiz();
 });
 
-// delete quiz sa teachers
-deleteQuizBtn.addEventListener("click", () => {
-    const confirmDelete = confirm("Are you sure you want to delete this quiz? This action cannot be undone.");
+if (deleteQuizBtn) {
+    deleteQuizBtn.addEventListener("click", (e) => {
+        e.preventDefault();
 
-    if (!confirmDelete) return;
+        if (!isTeacher) return;
 
-    const subject = subjectSelect.value;
+        const confirmDelete = confirm(
+            "Are you sure you want to delete this quiz? This cannot be undone."
+        );
 
-    delete quizzes[subject];
+        if (!confirmDelete) return;
 
-    quizForm.innerHTML = "";
-    quizResult.innerHTML = "";
+        const subject = subjectSelect.value;
 
-    // deleted except close
-    quizForm.innerHTML = `
-        <button type="button" onclick="closeQuiz()">Close</button>
-    `;
+        if (quizzes[subject]) {
+            delete quizzes[subject];
+        }
 
-    alert("Quiz deleted successfully.");
-});
+        quizForm.innerHTML = `
+            <button type="button" onclick="closeQuiz()">Close</button>
+        `;
 
-// bawal close pag di tapos!
+        quizResult.innerHTML = "";
+        alert("Quiz deleted successfully.");
+    });
+}
+
+// close
 function closeQuiz() {
     if (!isTeacher && !quizSubmitted) {
         alert("You must complete and submit the quiz first.");
@@ -732,6 +740,10 @@ function closeQuiz() {
     quizModal.style.display = "none";
 }
 
+// 
+window.closeQuiz = closeQuiz;
+
+// laod
 
 function loadQuiz() {
     quizResult.innerHTML = "";
@@ -762,7 +774,7 @@ function loadQuiz() {
     });
 
     html += `
-        ${!isTeacher ? `<button id="submitQuizBtn" type="submit">Submit Quiz</button>` : ""}
+        ${!isTeacher ? `<button id="submitQuizBtn" type="button">Submit Quiz</button>` : ""}
         <button type="button" onclick="closeQuiz()">Close</button>
     `;
 
@@ -777,7 +789,10 @@ function loadQuiz() {
             let answered = 0;
 
             for (let i = 0; i < total; i++) {
-                if (quizForm[`q${i}`]?.value) answered++;
+                // 🔴 FIX #2
+                if (document.querySelector(`input[name="q${i}"]:checked`)) {
+                    answered++;
+                }
             }
 
             submitBtn.disabled = answered !== total;
@@ -785,34 +800,37 @@ function loadQuiz() {
     }
 }
 
-// submission
-quizForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+// submitt
 
-    const confirmSubmit = confirm("Are you sure you want to submit your answers?");
-    if (!confirmSubmit) return;
+quizForm.addEventListener("click", function(e) {
+    if (e.target.closest("#submitQuizBtn")) {
+        e.preventDefault();
 
-    const subject = subjectSelect.value;
-    const quiz = quizzes[subject];
+        const confirmSubmit = confirm("Are you sure you want to submit your answers?");
+        if (!confirmSubmit) return;
 
-    let score = 0;
-    let output = "";
+        const subject = subjectSelect.value;
+        const quiz = quizzes[subject];
 
-    quiz.questions.forEach((item, index) => {
-        const userAnswer = quizForm[`q${index}`]?.value;
+        let score = 0;
+        let output = "";
 
-        if (userAnswer === item.answer) {
-            score++;
-            output += `<p>Q${index + 1}: ✔ Correct</p>`;
-        } else {
-            output += `<p>Q${index + 1}: ❌ Wrong (Correct: ${item.answer})</p>`;
-        }
-    });
+        quiz.questions.forEach((item, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
 
-    quizResult.innerHTML = `
-        <h3>Score: ${score} / ${quiz.questions.length}</h3>
-        ${output}
-    `;
+            if (selected && selected.value === item.answer) {
+                score++;
+                output += `<p>Q${index + 1}: ✔ Correct</p>`;
+            } else {
+                output += `<p>Q${index + 1}: ❌ Wrong (Correct: ${item.answer})</p>`;
+            }
+        });
 
-    quizSubmitted = true;
+        quizResult.innerHTML = `
+            <h3>Score: ${score} / ${quiz.questions.length}</h3>
+            ${output}
+        `;
+
+        quizSubmitted = true;
+    }
 });
