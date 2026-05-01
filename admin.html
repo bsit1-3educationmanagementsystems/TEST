@@ -81,12 +81,10 @@ async function loadPendingTeachers() {
             return;
         }
 
-        // FIX APPLIED HERE: Changed 'document' parameter to 'docSnapshot'
-        querySnapshot.forEach((docSnapshot) => {
-            const data = docSnapshot.data();
+        querySnapshot.forEach((document) => {
+            const data = document.data();
             const dateStr = data.createdAt ? data.createdAt.toDate().toLocaleDateString() : 'N/A';
             
-            // The global 'document' object now correctly creates the HTML element
             const tr = document.createElement('tr');
             // Added the Decline button to the table row
             tr.innerHTML = `
@@ -95,9 +93,8 @@ async function loadPendingTeachers() {
                 <td>${data.school}</td>
                 <td>${dateStr}</td>
                 <td>
-                    <!-- Updated to use docSnapshot.id -->
-                    <button class="approve-btn" data-id="${docSnapshot.id}">Approve</button>
-                    <button class="decline-btn" data-id="${docSnapshot.id}">Decline</button>
+                    <button class="approve-btn" data-id="${document.id}">Approve</button>
+                    <button class="decline-btn" data-id="${document.id}">Decline</button>
                 </td>
             `;
             tableBody.appendChild(tr);
