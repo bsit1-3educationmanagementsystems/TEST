@@ -130,6 +130,18 @@ h2 {
     overflow-y: auto;
 }
 
+.quiz-question {
+    font-size: 18px;
+    text-align: justify;
+}
+
+.quiz-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
 /* website footer */
 footer {
     flex-shrink: 0;
