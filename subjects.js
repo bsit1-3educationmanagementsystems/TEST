@@ -290,55 +290,55 @@ const quizzes = {
         },
         { // 2
             q: "Which figure is the odd one out?",
-            image: "abstract_qstn2.png",
+            image: "0assets/0img/abstract_qstn2.png",
             options: ["A", "B", "C", "D"],
             answer: "C"
         },
         { // 3
             q: "Which figure belongs in neither group?",
-            image: "abstract_qstn3.png",
+            image: "0assets/0img/abstract_qstn3.png",
             options: ["A", "B", "C", "D"],
             answer: "C"
         },
         { // 4
             q: "Which figure is next in the series?",
-            image: "abstract_qstn4.png",
+            image: "0assets/0img/abstract_qstn4.png",
             options: ["A", "B", "C", "D"],
             answer: "B"
         },
         { // 5
             q: "Choose the image that completes the pattern (From left to right).",
-            image: "abstract_qstn5.png",
+            image: "0assets/0img/abstract_qstn5.png",
             options: ["A", "B", "C", "D"],
             answer: "D"
         },
         { // 6
             q: "Which figure is the odd one out?",
-            image: "abstract_qstn6.png",
+            image: "0assets/0img/abstract_qstn6.png",
             options: ["A", "B", "C", "D"],
             answer: "D"
         },
         { // 7
             q: "Which figure is the odd one out?",
-            image: "abstract_qstn7.png",
+            image: "0assets/0img/abstract_qstn7.png",
             options: ["A", "B", "C", "D"],
             answer: "D"
         },
         { // 8
             q: "Which figure belongs in neither group?",
-            image: "abstract_qstn8.png",
+            image: "0assets/0img/abstract_qstn8.png",
             options: ["A", "B", "C", "D"],
             answer: "A"
         },
         { // 9
             q: "Which figure is next in the series?",
-            image: "abstract_qstn9.png",
+            image: "0assets/0img/abstract_qstn9.png",
             options: ["A", "B", "C", "D"],
             answer: "D"
         },
         { // 10
             q: "Which figure is the odd one out?.",
-            image: "abstract_qstn10.png",
+            image: "0assets/0img/abstract_qstn10.png",
             options: ["A", "B", "C", "D"],
             answer: "C"
         },
@@ -399,7 +399,7 @@ const quizzes = {
         },
         { // 6
             q: "In the figure below, what is the area of the shaded region?",
-            image: "math_qstn6.png",
+            image: "0assets/0img/math_qstn6.png",
             options: ["A. (32 - 8π)cm²", "B. (32 - 16π)cm²", "C. (64 - 16π)cm²", "D. (16π - 64)cm²"],
             answer: "A. (32 - 8π)cm²"
         },
@@ -425,13 +425,13 @@ const quizzes = {
         },
         { // 11
             q: "Evaluate the limit.",
-            image: "math_qstn11.png",
+            image: "0assets/0img/math_qstn11.png",
             options: ["A. 4", "B. 5", "C. 6", "D. 7"],
             answer: "B. 5"
         },
         { // 12
             q: "In the given triangle, find h.",
-            image: "math_qstn12.png",
+            image: "0assets/0img/math_qstn12.png",
             options: ["A. 3", "B. 6", "C. 9", "D. 12"],
             answer: "B. 6"
         },
