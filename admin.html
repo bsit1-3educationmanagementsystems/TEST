@@ -12,13 +12,16 @@
         th { background-color: #004d40; color: white; }
         .approve-btn { background-color: #28a745; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px; }
         .approve-btn:hover { background-color: #218838; }
+        /* Added styling for the decline button */
+        .decline-btn { background-color: #dc3545; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px; margin-left: 8px; }
+        .decline-btn:hover { background-color: #c82333; }
         .empty-message { padding: 20px; color: #666; font-style: italic; }
     </style>
 </head>
 <body>
 
     <h1>Admin Dashboard - Pending Teacher Approvals</h1>
-    <p>Review and approve teacher accounts below.</p>
+    <p>Review and approve or decline teacher accounts below.</p>
 
     <table>
         <thead>
@@ -78,26 +81,33 @@ async function loadPendingTeachers() {
             return;
         }
 
-        querySnapshot.forEach((docSnapshot) => {
-            const data = docSnapshot.data();
+        querySnapshot.forEach((document) => {
+            const data = document.data();
             const dateStr = data.createdAt ? data.createdAt.toDate().toLocaleDateString() : 'N/A';
             
             const tr = document.createElement('tr');
+            // Added the Decline button to the table row
             tr.innerHTML = `
                 <td>${data.name}</td>
                 <td>${data.email}</td>
                 <td>${data.school}</td>
                 <td>${dateStr}</td>
                 <td>
-                    <button class="approve-btn" data-id="${docSnapshot.id}">Approve</button>
+                    <button class="approve-btn" data-id="${document.id}">Approve</button>
+                    <button class="decline-btn" data-id="${document.id}">Decline</button>
                 </td>
             `;
             tableBody.appendChild(tr);
         });
 
-        // Add event listeners to the new buttons
+        // Add event listeners to the approve buttons
         document.querySelectorAll('.approve-btn').forEach(btn => {
             btn.addEventListener('click', (e) => approveTeacher(e.target.getAttribute('data-id')));
+        });
+
+        // Add event listeners to the decline buttons
+        document.querySelectorAll('.decline-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => declineTeacher(e.target.getAttribute('data-id')));
         });
 
     } catch (error) {
@@ -122,6 +132,26 @@ async function approveTeacher(userId) {
     } catch (error) {
         console.error("Error approving teacher: ", error);
         alert("Failed to approve teacher. Check console for details.");
+    }
+}
+
+// Decline Teacher Function
+async function declineTeacher(userId) {
+    if(!confirm("Are you sure you want to decline this teacher?")) return;
+
+    try {
+        const userRef = doc(db, "users", userId);
+        // Updates the status to 'declined'. You can also delete the doc entirely if preferred.
+        await updateDoc(userRef, {
+            status: "declined" 
+        });
+        
+        alert("Teacher request declined.");
+        loadPendingTeachers(); // Refresh the list
+
+    } catch (error) {
+        console.error("Error declining teacher: ", error);
+        alert("Failed to decline teacher. Check console for details.");
     }
 }
 
