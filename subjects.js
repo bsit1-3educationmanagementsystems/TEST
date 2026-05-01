@@ -284,7 +284,7 @@ const quizzes = {
         questions: [
         { // 1
             q: "Select a suitable option that would complete the figure matrix.",
-            image: "abstract_qstn1.png",
+            image: "0assets/0img/abstract_qstn1.png",
             options: ["A", "B", "C", "D"],
             answer: "D"
         },
