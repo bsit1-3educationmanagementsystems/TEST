@@ -242,24 +242,6 @@ function removeFile(subject, index) {
     }
 }
 
-// Download PDF
-function downloadFile(url, fileName) {
-
-    const link = document.createElement('a');
-    link.style.display = 'none';
-    
-    link.href = url;
-    
-    link.download = fileName || 'download.pdf'; 
-
-    document.body.appendChild(link);
-    
-
-    link.click();
-   
-    document.body.removeChild(link);
-}
-
 // Upload PDF
 uploadBtn.addEventListener("click", () => {
     const file = uploadInput.files[0];
