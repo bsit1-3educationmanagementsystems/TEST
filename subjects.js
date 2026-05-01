@@ -274,9 +274,14 @@ updateFileList();
 // Quiz chuchu
 const quizBtn = document.getElementById("quizBtn");
 const deleteQuizBtn = document.getElementById("deleteQuizBtn");
+const viewRecordsBtn = document.getElementById("viewRecordsBtn");
 const quizModal = document.getElementById("quizModal");
 const quizForm = document.getElementById("quizForm");
 const quizResult = document.getElementById("quizResult");
+
+// records modal
+const recordsModal = document.getElementById("recordsModal");
+const recordsContent = document.getElementById("recordsContent");
 
 // role detection
 const isTeacher = document.body.dataset.role === "teacher";
@@ -697,13 +702,13 @@ const quizzes = {
 };
 
 // open
-
 quizBtn.addEventListener("click", () => {
     quizModal.style.display = "block";
     quizSubmitted = isTeacher ? true : false;
     loadQuiz();
 });
 
+// delete
 if (deleteQuizBtn) {
     deleteQuizBtn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -739,12 +744,9 @@ function closeQuiz() {
     }
     quizModal.style.display = "none";
 }
-
-// 
 window.closeQuiz = closeQuiz;
 
-// laod
-
+// load
 function loadQuiz() {
     quizResult.innerHTML = "";
 
@@ -789,7 +791,6 @@ function loadQuiz() {
             let answered = 0;
 
             for (let i = 0; i < total; i++) {
-                // 🔴 FIX #2
                 if (document.querySelector(`input[name="q${i}"]:checked`)) {
                     answered++;
                 }
@@ -800,8 +801,7 @@ function loadQuiz() {
     }
 }
 
-// submitt
-
+// submit
 quizForm.addEventListener("click", function(e) {
     if (e.target.closest("#submitQuizBtn")) {
         e.preventDefault();
@@ -822,7 +822,7 @@ quizForm.addEventListener("click", function(e) {
                 score++;
                 output += `<p>Q${index + 1}: ✔ Correct</p>`;
             } else {
-                output += `<p>Q${index + 1}: ❌ Wrong (Correct: ${item.answer})</p>`;
+                output += `<p>Q${index + 1}: ❌ Wrong</p>`;
             }
         });
 
@@ -834,3 +834,42 @@ quizForm.addEventListener("click", function(e) {
         quizSubmitted = true;
     }
 });
+
+// view records (PLACEHOLDER PA LANG)
+if (viewRecordsBtn) {
+    viewRecordsBtn.addEventListener("click", () => {
+
+        if (!isTeacher) return;
+
+        recordsModal.style.display = "block";
+
+        recordsContent.innerHTML = `
+            <h2 style="text-align:center; font-size:27px;">Student Assessment Records</h2>
+            <br><h2 style="text-align:center;">Quiz Records</h2>
+
+            <p style="text-align:center; margin-top:20px; color:#666;">
+                No records available yet.<br>
+            </p>
+
+            <hr style="margin:20px 0;">
+
+            <h3 style="text-align:center; font-size:23px;">Data Structure</h3>
+
+            <div style="font-size:18px; line-height:1.6;">
+                <p><b>Student Name:</b> —</p>
+                <p><b>Email:</b> —</p>
+                <p><b>Subject:</b> —</p>
+                <p><b>Attempt:</b> —</p>
+                <p><b>Score:</b> —</p>
+                <p><b>Answers:</b> Per-question breakdown</p>
+            </div>
+        `;
+    });
+}
+
+// close kay records
+function closeRecords() {
+    recordsModal.style.display = "none";
+}
+
+window.closeRecords = closeRecords;
