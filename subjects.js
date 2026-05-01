@@ -224,24 +224,6 @@ function updateFileList() {
     });
 }
 
-// Download PDF
-function downloadFile(url, fileName) {
-
-    const link = document.createElement('a');
-    link.style.display = 'none';
-    
-    link.href = url;
-    
-    link.download = fileName || 'download.pdf'; 
-
-    document.body.appendChild(link);
-    
-
-    link.click();
-   
-    document.body.removeChild(link);
-}
-
 // View PDF
 function viewPDF(url) {
     pdfViewer.src = url;
@@ -258,6 +240,24 @@ function removeFile(subject, index) {
         files[subject].splice(index, 1);
         updateFileList();
     }
+}
+
+// Download PDF
+function downloadFile(url, fileName) {
+
+    const link = document.createElement('a');
+    link.style.display = 'none';
+    
+    link.href = url;
+    
+    link.download = fileName || 'download.pdf'; 
+
+    document.body.appendChild(link);
+    
+
+    link.click();
+   
+    document.body.removeChild(link);
 }
 
 // Upload PDF
