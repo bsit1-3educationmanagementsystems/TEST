@@ -26,7 +26,7 @@
         <nav class="nav">
             <a href="teachersign-in.html">HOME</a>
             <a href="subjectsmain.html">SUBJECTS</a>
-            <a href="teacherAcount.html">ACCOUNT</a>
+            <a href="teacherAccount.html">ACCOUNT</a>
         </nav>
 
         <div class="search-wrapper">
@@ -91,11 +91,26 @@
 
         <hr style="margin: 15px 0;">
 
+        <div class="recent-section">
+            <p><strong>Recently Viewed Documents:</strong></p>
+            <div id="recentDocumentsList">
+                <p>No recently viewed documents yet.</p>
+            </div>
+        </div>
+
         <button class="signin-btn" id="logoutBtn" style="margin-top: 15px;">LOG OUT</button>
 
     </div>
 
 </section>
+
+<div id="recentPdfModal" class="recent-pdf-modal">
+    <div class="recent-pdf-box">
+        <button id="closeRecentPdf" class="recent-pdf-close">&times;</button>
+        <h3 id="recentPdfTitle">Document Preview</h3>
+        <iframe id="recentPdfViewer" src=""></iframe>
+    </div>
+</div>
 
 <footer>
     <p>
@@ -116,7 +131,12 @@ import {
   getFirestore,
   doc,
   getDoc,
-  updateDoc
+  updateDoc,
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -199,19 +219,16 @@ onAuthStateChanged(auth, async (user) => {
     if (docSnap.exists()) {
         const data = docSnap.data();
 
-        if (data.username) {
-            document.getElementById("userName").value = data.username;
-        } else {
-            document.getElementById("userName").value = data.name;
-        }
+        document.getElementById("userName").value =
+            data.username || data.name || user.email || "User";
 
         if (data.profilePic) {
             document.getElementById("profileImg").src = data.profilePic;
         }
 
-        document.getElementById("fullName").textContent = data.name;
-        document.getElementById("userEmail").textContent = data.email;
-        document.getElementById("userType").textContent = data.accountType;
+        document.getElementById("fullName").textContent = data.name || "Not provided";
+        document.getElementById("userEmail").textContent = data.email || "Not provided";
+        document.getElementById("userType").textContent = data.accountType || "Not provided";
 
         if (Array.isArray(data.school)) {
             currentSchools = data.school;
@@ -223,10 +240,100 @@ onAuthStateChanged(auth, async (user) => {
         
         renderSchools(currentSchools);
 
-        if (data.lastSubject) {
-            document.getElementById("lastSubject").textContent = data.lastSubject;
-        }
+        await loadRecentlyViewedDocuments(user.uid);
+
     }
+});
+
+async function loadRecentlyViewedDocuments(userId) {
+    const recentContainer = document.getElementById("recentDocumentsList");
+
+    if (!recentContainer) {
+        console.error("recentDocumentsList container not found.");
+        return;
+    }
+
+    recentContainer.innerHTML = "<p>Loading recently viewed documents...</p>";
+
+    try {
+        const recentQuery = query(
+            collection(db, "recentlyViewed", userId, "documents"),
+            orderBy("viewedAt", "desc"),
+            limit(5)
+        );
+
+        const querySnapshot = await getDocs(recentQuery);
+
+        if (querySnapshot.empty) {
+            recentContainer.innerHTML = "<p>No recently viewed documents yet.</p>";
+            return;
+        }
+
+        recentContainer.innerHTML = "";
+
+        querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+
+            const item = document.createElement("div");
+            item.className = "recent-document-item";
+
+            const info = document.createElement("div");
+
+            const title = document.createElement("strong");
+            title.textContent = data.title || "Untitled document";
+
+            const subject = document.createElement("p");
+            subject.textContent = data.subject
+                ? `Subject: ${formatSubjectName(data.subject)}`
+                : "Subject: Not listed";
+
+            info.appendChild(title);
+            info.appendChild(subject);
+
+            const openBtn = document.createElement("button");
+            openBtn.textContent = "Open";
+            openBtn.className = "open-recent-btn";
+            openBtn.addEventListener("click", () => {
+                openRecentPdf(data.fileUrl, data.title);
+            });
+
+            item.appendChild(info);
+            item.appendChild(openBtn);
+
+            recentContainer.appendChild(item);
+        });
+
+    } catch (error) {
+        console.error("Error loading recently viewed documents:", error);
+        recentContainer.innerHTML = "<p>Unable to load recently viewed documents.</p>";
+    }
+}
+
+function formatSubjectName(subject) {
+    const subjectNames = {
+        science: "Science",
+        mathematics: "Mathematics",
+        abstract: "Abstract Reasoning",
+        english: "English",
+        reading: "Reading Comprehension"
+    };
+
+    return subjectNames[subject] || subject;
+}
+
+function openRecentPdf(fileUrl, title) {
+    const modal = document.getElementById("recentPdfModal");
+    const viewer = document.getElementById("recentPdfViewer");
+    const modalTitle = document.getElementById("recentPdfTitle");
+
+    modalTitle.textContent = title || "Document Preview";
+    viewer.src = fileUrl;
+    modal.style.display = "flex";
+}
+
+document.getElementById("closeRecentPdf").addEventListener("click", () => {
+    document.getElementById("recentPdfViewer").src = "";
+    document.getElementById("recentPdfModal").style.display = "none";
 });
 
 // Logic to add a school with confirmation
@@ -335,6 +442,8 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
     }
 });
 </script>
+
+<script type="module" src="teacherGuard.js"></script>
 
 </body>
 </html>

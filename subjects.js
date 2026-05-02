@@ -1,3 +1,46 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp,
+    query,
+    where,
+    orderBy,
+    limit,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";  
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDeXxlaxk1nCVQ9k8tMiEs9o-EcLrkTSPE",
+    authDomain: "iskolar-website.firebaseapp.com",
+    projectId: "iskolar-website",
+    appId: "1:1034904541958:web:39eee81131f0a09a991c87"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let currentUser = null;
+let currentViewedDocument = {
+    title: "No document selected",
+    url: ""
+};
+
+onAuthStateChanged(auth, async (user) => {
+    currentUser = user;
+
+    if (user) {
+        await loadLatestQuizScore();
+    }
+});
+
 const searchbar = document.getElementById('searchbar');
 const easteregg = document.getElementById('EASTEREGG');
 const pics = document.getElementById('PICS');
@@ -197,36 +240,76 @@ function updateFileList() {
     subjectFiles.forEach((file, index) => {
         const li = document.createElement("li");
 
-        let buttons = `
-            <button onclick="viewPDF('${file.url}')">View</button>
-        `;
+        const fileNameSpan = document.createElement("span");
+        fileNameSpan.textContent = file.name;
 
-        // STUDENTS + TEACHERS can download
+        const buttonWrapper = document.createElement("div");
+
+        const viewBtn = document.createElement("button");
+        viewBtn.textContent = "View";
+        viewBtn.addEventListener("click", () => {
+            viewPDF(file.url, file.name, subject);
+        });
+
+        buttonWrapper.appendChild(viewBtn);
+
         if (role === "teacher" || role === "student") {
-            buttons += `
-                <button onclick="downloadFile('${file.url}', '${file.name}')">Download</button>
-            `;
+            const downloadBtn = document.createElement("button");
+            downloadBtn.textContent = "Download";
+            downloadBtn.addEventListener("click", () => {
+                downloadFile(file.url, file.name);
+            });
+
+            buttonWrapper.appendChild(downloadBtn);
         }
 
-        // ONLY teachers can remove files
         if (role === "teacher") {
-            buttons += `
-                <button onclick="removeFile('${subject}', ${index})">Remove</button>
-            `;
+            const removeBtn = document.createElement("button");
+            removeBtn.textContent = "Remove";
+            removeBtn.addEventListener("click", () => {
+                removeFile(subject, index);
+            });
+
+            buttonWrapper.appendChild(removeBtn);
         }
 
-        li.innerHTML = `
-            ${file.name}
-            <div>${buttons}</div>
-        `;
+        li.appendChild(fileNameSpan);
+        li.appendChild(buttonWrapper);
 
         fileList.appendChild(li);
     });
 }
 
 // View PDF
-function viewPDF(url) {
+async function viewPDF(url, fileName, subject) {
     pdfViewer.src = url;
+
+    currentViewedDocument = {
+        title: fileName || "Unknown document",
+        url: url || ""
+    };
+
+    await saveRecentlyViewedDocument(fileName, subject, url);
+}
+
+async function saveRecentlyViewedDocument(fileName, subject, fileUrl) {
+    if (!currentUser) {
+        console.log("No logged-in user. Recently viewed document was not saved.");
+        return;
+    }
+
+    try {
+        await addDoc(collection(db, "recentlyViewed", currentUser.uid, "documents"), {
+            title: fileName,
+            subject: subject,
+            fileUrl: fileUrl,
+            viewedAt: serverTimestamp()
+        });
+
+        console.log("Recently viewed document saved:", fileName);
+    } catch (error) {
+        console.error("Error saving recently viewed document:", error);
+    }
 }
 
 // Remove PDF
@@ -318,7 +401,10 @@ uploadBtn.addEventListener("click", () => {
 });
 
 // Update list when changing subjects
-subjectSelect.addEventListener("change", updateFileList);
+subjectSelect.addEventListener("change", async () => {
+    updateFileList();
+    await loadLatestQuizScore();
+});
 
 // Initial Load
 updateFileList();
@@ -330,6 +416,17 @@ const viewRecordsBtn = document.getElementById("viewRecordsBtn");
 const quizModal = document.getElementById("quizModal");
 const quizForm = document.getElementById("quizForm");
 const quizResult = document.getElementById("quizResult");
+
+const scoreDisplay = document.createElement("span");
+scoreDisplay.id = "latestScoreDisplay";
+scoreDisplay.style.marginLeft = "12px";
+scoreDisplay.style.fontWeight = "bold";
+scoreDisplay.style.color = "#4a2511";
+scoreDisplay.textContent = "Latest Score: No quiz taken yet";
+
+if (quizBtn) {
+    quizBtn.insertAdjacentElement("afterend", scoreDisplay);
+}
 
 // records modal
 const recordsModal = document.getElementById("recordsModal");
@@ -753,6 +850,60 @@ const quizzes = {
     }
 };
 
+async function loadLatestQuizScore() {
+    if (!scoreDisplay) return;
+
+    if (!currentUser) {
+        scoreDisplay.textContent = "Latest Score: Log in to view score";
+        return;
+    }
+
+    const subject = subjectSelect.value;
+
+    try {
+        const scoreQuery = query(
+            collection(db, "quizScores"),
+            where("userId", "==", currentUser.uid)
+        );
+
+        const querySnapshot = await getDocs(scoreQuery);
+
+        if (querySnapshot.empty) {
+            scoreDisplay.textContent = "Latest Score: No quiz taken yet";
+            return;
+        }
+
+        const matchingScores = [];
+
+        querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+
+            if (data.subject === subject) {
+                matchingScores.push(data);
+            }
+        });
+
+        if (matchingScores.length === 0) {
+            scoreDisplay.textContent = "Latest Score: No quiz taken yet";
+            return;
+        }
+
+        matchingScores.sort((a, b) => {
+            const dateA = a.takenAt && a.takenAt.toDate ? a.takenAt.toDate().getTime() : 0;
+            const dateB = b.takenAt && b.takenAt.toDate ? b.takenAt.toDate().getTime() : 0;
+            return dateB - dateA;
+        });
+
+        const latest = matchingScores[0];
+
+        scoreDisplay.textContent = `Latest Score: ${latest.score} / ${latest.total} — ${latest.percentage}%`;
+
+    } catch (error) {
+        console.error("Error loading latest quiz score:", error);
+        scoreDisplay.textContent = "Latest Score: Unable to load";
+    }
+}
+
 // open
 quizBtn.addEventListener("click", () => {
     quizModal.style.display = "block";
@@ -853,8 +1004,57 @@ function loadQuiz() {
     }
 }
 
+function formatSubjectName(subject) {
+    const subjectNames = {
+        science: "Science",
+        mathematics: "Mathematics",
+        abstract: "Abstract Reasoning",
+        english: "English",
+        reading: "Reading Comprehension"
+    };
+
+    return subjectNames[subject] || subject;
+}
+
+async function saveQuizScoreToFirebase(subject, quiz, score, answersOutput) {
+    if (!currentUser) {
+        alert("You must be logged in to save your quiz score.");
+        return;
+    }
+
+    const total = quiz.questions.length;
+    const percentage = Math.round((score / total) * 100);
+
+    try {
+        await addDoc(collection(db, "quizScores"), {
+            userId: currentUser.uid,
+            studentEmail: currentUser.email || "No email available",
+
+            subject: subject,
+            subjectName: formatSubjectName(subject),
+            quizTitle: `${formatSubjectName(subject)} Practice Quiz`,
+
+            relatedDocument: currentViewedDocument.title,
+            relatedDocumentUrl: currentViewedDocument.url,
+
+            score: score,
+            total: total,
+            percentage: percentage,
+
+            answers: answersOutput,
+
+            takenAt: serverTimestamp()
+        });
+
+        console.log("Quiz score saved to Firebase.");
+    } catch (error) {
+        console.error("Error saving quiz score:", error);
+        alert("Your score was shown, but it failed to save to Firebase.");
+    }
+}
+
 // submit
-quizForm.addEventListener("click", function(e) {
+quizForm.addEventListener("click", async function(e) {
     if (e.target.closest("#submitQuizBtn")) {
         e.preventDefault();
 
@@ -866,30 +1066,55 @@ quizForm.addEventListener("click", function(e) {
 
         let score = 0;
         let output = "";
+        let answersOutput = [];
 
         quiz.questions.forEach((item, index) => {
             const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            const selectedAnswer = selected ? selected.value : "No answer";
 
-            if (selected && selected.value === item.answer) {
+            const isCorrect = selectedAnswer === item.answer;
+
+            if (isCorrect) {
                 score++;
                 output += `<p>Q${index + 1}: ✔ Correct</p>`;
             } else {
                 output += `<p>Q${index + 1}: ❌ Wrong</p>`;
             }
+
+            answersOutput.push({
+                questionNumber: index + 1,
+                question: item.q,
+                selectedAnswer: selectedAnswer,
+                correctAnswer: item.answer,
+                isCorrect: isCorrect
+            });
         });
 
+        const total = quiz.questions.length;
+        const percentage = Math.round((score / total) * 100);
+
         quizResult.innerHTML = `
-            <h3>Score: ${score} / ${quiz.questions.length}</h3>
+            <h3>Score: ${score} / ${total}</h3>
+            <p><strong>Percentage:</strong> ${percentage}%</p>
+            <p style="color: green;"><strong>Your score has been submitted.</strong></p>
             ${output}
         `;
+
+        await saveQuizScoreToFirebase(subject, quiz, score, answersOutput);
+
+        scoreDisplay.textContent = `Latest Score: ${score} / ${total} — ${percentage}%`;
+
+        setTimeout(() => {
+            loadLatestQuizScore();
+        }, 1000);
 
         quizSubmitted = true;
     }
 });
 
-// view records (PLACEHOLDER PA LANG)
+// view records
 if (viewRecordsBtn) {
-    viewRecordsBtn.addEventListener("click", () => {
+    viewRecordsBtn.addEventListener("click", async () => {
 
         if (!isTeacher) return;
 
@@ -897,26 +1122,81 @@ if (viewRecordsBtn) {
 
         recordsContent.innerHTML = `
             <h2 style="text-align:center; font-size:27px;">Student Assessment Records</h2>
-            <br><h2 style="text-align:center;">Quiz Records</h2>
-
-            <p style="text-align:center; margin-top:20px; color:#666;">
-                No records available yet.<br>
-            </p>
-
-            <hr style="margin:20px 0;">
-
-            <h3 style="text-align:center; font-size:23px;">Data Structure</h3>
-
-            <div style="font-size:18px; line-height:1.6;">
-                <p><b>Student Name:</b> —</p>
-                <p><b>Email:</b> —</p>
-                <p><b>Subject:</b> —</p>
-                <p><b>Attempt:</b> —</p>
-                <p><b>Score:</b> —</p>
-                <p><b>Answers:</b> Per-question breakdown</p>
-            </div>
+            <p style="text-align:center; margin-top:20px;">Loading quiz records...</p>
         `;
+
+        await loadQuizRecords();
     });
+}
+
+async function loadQuizRecords() {
+    try {
+        const selectedSubject = subjectSelect.value;
+
+        const scoresQuery = query(
+            collection(db, "quizScores"),
+            orderBy("takenAt", "desc"),
+            limit(30)
+        );
+
+        const querySnapshot = await getDocs(scoresQuery);
+
+        let html = `
+            <h2 style="text-align:center; font-size:27px;">Student Assessment Records</h2>
+            <br>
+            <h2 style="text-align:center;">${formatSubjectName(selectedSubject)} Quiz Records</h2>
+        `;
+
+        let foundRecords = false;
+
+        querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+
+            if (data.subject !== selectedSubject) {
+                return;
+            }
+
+            foundRecords = true;
+
+            let takenDate = "Date unavailable";
+
+            if (data.takenAt && data.takenAt.toDate) {
+                takenDate = data.takenAt.toDate().toLocaleString();
+            }
+
+            html += `
+                <div style="border:1px solid #ccc; border-radius:10px; padding:15px; margin:15px 0; background:#f9f9f9;">
+                    <p><b>Student Email:</b> ${data.studentEmail || "No email"}</p>
+                    <p><b>Subject:</b> ${data.subjectName || formatSubjectName(data.subject)}</p>
+                    <p><b>Quiz:</b> ${data.quizTitle || "Quiz"}</p>
+                    <p><b>Related Document:</b> ${data.relatedDocument || "No document selected"}</p>
+                    <p><b>Score:</b> ${data.score} / ${data.total}</p>
+                    <p><b>Percentage:</b> ${data.percentage}%</p>
+                    <p><b>Date Taken:</b> ${takenDate}</p>
+                </div>
+            `;
+        });
+
+        if (!foundRecords) {
+            html += `
+                <p style="text-align:center; margin-top:20px; color:#666;">
+                    No quiz records available for this subject yet.
+                </p>
+            `;
+        }
+
+        recordsContent.innerHTML = html;
+
+    } catch (error) {
+        console.error("Error loading quiz records:", error);
+
+        recordsContent.innerHTML = `
+            <h2 style="text-align:center; font-size:27px;">Student Assessment Records</h2>
+            <p style="text-align:center; color:red; margin-top:20px;">
+                Failed to load quiz records.
+            </p>
+        `;
+    }
 }
 
 // close kay records

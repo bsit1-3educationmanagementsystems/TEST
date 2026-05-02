@@ -136,12 +136,47 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         if (docSnap.exists()) {
             const data = docSnap.data();
 
-            // NEW CHECK: Block declined teachers from logging in
+            const typedName = nameInput.trim().toLowerCase();
+            const registeredName = (data.name || "").trim().toLowerCase();
+            const registeredUsername = (data.username || "").trim().toLowerCase();
+
+            if (
+                typedName !== registeredName &&
+                typedName !== registeredUsername
+            ) {
+                formMessage.style.color = "red";
+                formMessage.textContent = "The name you entered does not match this account.";
+                await signOut(auth);
+                return;
+            }
+
+    // NEW CHECK: Block declined teachers from logging in
+
+            // Block pending teachers and send them to the pending approval page
+            if (data.accountType === "teacher" && data.status === "pending") {
+                formMessage.style.color = "orange";
+                formMessage.textContent = "Your teacher account is still under admin approval. Redirecting...";
+
+                setTimeout(() => {
+                    window.location.href = "pendingApproval.html";
+                }, 1500);
+
+                return;
+            }
+
+            // Block declined teachers from logging in
             if (data.accountType === "teacher" && data.status === "declined") {
                 formMessage.style.color = "red";
                 formMessage.textContent = "Access Denied: Your teacher application was declined.";
-                await auth.signOut(); // Log them out immediately
-                return; // Stop the script so it doesn't redirect
+                await auth.signOut();
+                return;
+            }
+
+            if (data.accountType === "teacher" && data.status === "declined") {
+                formMessage.style.color = "red";
+                formMessage.textContent = "Access denied. Your teacher application was declined.";
+                await signOut(auth);
+                return;
             }
 
             formMessage.style.color = "green";
@@ -166,12 +201,19 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     } catch (error) {
         formMessage.style.color = "red";
 
-        if (error.code === "auth/user-not-found") {
-            formMessage.textContent = "No account found.";
+        if (
+            error.code === "auth/user-not-found" ||
+            error.code === "auth/invalid-credential"
+        ) {
+            formMessage.textContent = "Incorrect email or password. Please try again.";
         } else if (error.code === "auth/wrong-password") {
-            formMessage.textContent = "Incorrect password.";
+            formMessage.textContent = "Incorrect email or password. Please try again.";
+        } else if (error.code === "auth/invalid-email") {
+            formMessage.textContent = "Please enter a valid email address.";
+        } else if (error.code === "auth/too-many-requests") {
+            formMessage.textContent = "Too many failed attempts. Please wait a while before trying again.";
         } else {
-            formMessage.textContent = error.message;
+            formMessage.textContent = "Login failed. Please check your information and try again.";
         }
     }
 });

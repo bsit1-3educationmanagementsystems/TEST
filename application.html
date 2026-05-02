@@ -63,6 +63,28 @@
 
             <input type="email" id="email" placeholder="EMAIL" required>
 
+            <div id="teacherExtraFields" style="display: none;">
+
+                <input 
+                    type="text" 
+                    id="department" 
+                    placeholder="DEPARTMENT / SUBJECT AREA"
+                >
+
+                <textarea 
+                    id="teacherReason" 
+                    placeholder="REASON FOR TEACHER ACCOUNT"
+                    rows="4"
+                ></textarea>
+
+                <input 
+                    type="url" 
+                    id="profileLink" 
+                    placeholder="OPTIONAL: PUBLIC PROFILE LINK"
+                >
+
+            </div>
+
             <div class="password-field">
                 <input type="password" id="password" placeholder="PASSWORD" required>
                 <button type="button" id="togglePassword">Show</button>
@@ -125,13 +147,37 @@ const db = getFirestore(app);
 const tabs = document.querySelectorAll(".tab");
 let accountType = "student";
 
+const teacherExtraFields = document.getElementById("teacherExtraFields");
+const departmentInput = document.getElementById("department");
+const teacherReasonInput = document.getElementById("teacherReason");
+const profileLinkInput = document.getElementById("profileLink");
+
+function updateTeacherFieldsVisibility() {
+  if (accountType === "teacher") {
+    teacherExtraFields.style.display = "block";
+    departmentInput.required = true;
+    teacherReasonInput.required = true;
+  } else {
+    teacherExtraFields.style.display = "none";
+    departmentInput.required = false;
+    teacherReasonInput.required = false;
+
+    departmentInput.value = "";
+    teacherReasonInput.value = "";
+    profileLinkInput.value = "";
+  }
+}
+
 tabs.forEach(tab => {
   tab.addEventListener("click", () => {
     tabs.forEach(t => t.classList.remove("active"));
     tab.classList.add("active");
     accountType = tab.getAttribute("data-type");
+    updateTeacherFieldsVisibility();
   });
 });
+
+updateTeacherFieldsVisibility();
 
 // Schools
 const schools = [
@@ -189,6 +235,9 @@ document.getElementById("signinForm").addEventListener("submit", async function 
   const name = document.getElementById("name").value.trim();
   const school = document.getElementById("school").value;
   const email = document.getElementById("email").value.trim();
+  const department = departmentInput.value.trim();
+  const teacherReason = teacherReasonInput.value.trim();
+  const profileLink = profileLinkInput.value.trim();
   const password = passwordInput.value.trim();
   const confirmPassword = confirmPasswordInput.value.trim();
   const formMessage = document.getElementById("formMessage");
@@ -199,6 +248,18 @@ document.getElementById("signinForm").addEventListener("submit", async function 
   if (!name || !school || !email || !password || !confirmPassword) {
     formMessage.textContent = "Please fill in all fields.";
     return;
+  }
+
+  if (accountType === "teacher") {
+    if (!department || !teacherReason) {
+      formMessage.textContent = "Please fill in the department and reason for teacher account.";
+      return;
+    }
+
+    if (teacherReason.length < 20) {
+      formMessage.textContent = "Please provide a clearer reason for requesting a teacher account.";
+      return;
+    }
   }
 
   if (password.length < 6) {
@@ -228,8 +289,11 @@ document.getElementById("signinForm").addEventListener("submit", async function 
     // Require admin approval for teachers
     if (accountType === "teacher") {
       userData.status = "pending";
+      userData.department = department;
+      userData.teacherReason = teacherReason;
+      userData.profileLink = profileLink || "";
     } else {
-      userData.status = "approved"; 
+      userData.status = "approved";
     }
 
     // Save to Firestore
@@ -246,12 +310,19 @@ document.getElementById("signinForm").addEventListener("submit", async function 
         formMessage.textContent = "Account created successfully. Please check your email for verification.";
     }
 
-    await signOut(auth);
+    // Do not sign out teachers immediately because pendingApproval.html needs the logged-in user
+    if (accountType !== "teacher") {
+      await signOut(auth);
+    }
 
     document.getElementById("signinForm").reset();
 
     setTimeout(() => {
-      window.location.href = "index.html";
+      if (accountType === "teacher") {
+        window.location.href = "pendingApproval.html";
+      } else {
+        window.location.href = "index.html";
+      }
     }, 3500);
 
   } catch (error) {

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Approval Pending - ISKOLAR</title>
+  <link rel="stylesheet" href="main.css">
+
+  <style>
+    body {
+      font-family: "Times New Roman", serif;
+      background: #f6f0e6;
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    .approval-wrapper {
+      min-height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .approval-card {
+      background: white;
+      max-width: 600px;
+      width: 100%;
+      padding: 35px;
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      text-align: center;
+      border-top: 8px solid #7c2b2b;
+    }
+
+    .approval-card h1 {
+      color: #7c2b2b;
+      margin-bottom: 15px;
+    }
+
+    .approval-card p {
+      font-size: 18px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .status-box {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #fff3cd;
+      color: #856404;
+      font-weight: bold;
+    }
+
+    .approved {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .declined {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .logout-btn {
+      margin-top: 25px;
+      padding: 12px 25px;
+      background: #7c2b2b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .logout-btn:hover {
+      background: #5f1f1f;
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="header">
+  <nav class="navbar">
+    <div class="name">
+      <div class="logo">
+        <img src="0assets/0img/!ISKOLAR.png" alt="ISKOLAR Logo">
+      </div>
+
+      <div class="namePos">
+        <p style="letter-spacing: 10px;">ISKOLAR</p>
+        <h3>Interactive System for Knowledge-Oriented <br> Learning, Assistance, and Review</h3>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<section class="approval-wrapper">
+  <div class="approval-card">
+    <h1>Teacher Account Under Review</h1>
+
+    <p>
+      Your teacher account has been created successfully, but it is still waiting for admin approval.
+    </p>
+
+    <p>
+      Please wait until an administrator verifies your account. Once approved, you will be able to access the teacher dashboard and teacher features.
+    </p>
+
+    <div id="statusBox" class="status-box">
+      Current Status: Checking approval status...
+    </div>
+
+    <button id="logoutBtn" class="logout-btn">Log Out</button>
+  </div>
+</section>
+
+<footer>
+  <p>
+    &copy; 2025 I.S.K.O.L.A.R. All rights reserved. <br>
+    Need help? Email us at bsiteducationmanagementsystem@gmail.com
+  </p>
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDeXxlaxk1nCVQ9k8tMiEs9o-EcLrkTSPE",
+  authDomain: "iskolar-website.firebaseapp.com",
+  projectId: "iskolar-website",
+  appId: "1:1034904541958:web:39eee81131f0a09a991c87"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const statusBox = document.getElementById("statusBox");
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "signin.html";
+    return;
+  }
+
+  const userRef = doc(db, "users", user.uid);
+
+  onSnapshot(userRef, (docSnap) => {
+    if (!docSnap.exists()) {
+      statusBox.textContent = "User data not found. Please contact the administrator.";
+      statusBox.className = "status-box declined";
+      return;
+    }
+
+    const data = docSnap.data();
+
+    if (data.accountType !== "teacher") {
+      window.location.href = "studentsign-in.html";
+      return;
+    }
+
+    if (data.status === "pending") {
+      statusBox.textContent = "Current Status: Pending admin approval.";
+      statusBox.className = "status-box";
+    }
+
+    else if (data.status === "approved") {
+      statusBox.textContent = "Current Status: Approved! Redirecting to teacher dashboard...";
+      statusBox.className = "status-box approved";
+
+      setTimeout(() => {
+        window.location.href = "teachersign-in.html";
+      }, 2000);
+    }
+
+    else if (data.status === "declined") {
+      statusBox.textContent = "Current Status: Declined. Please contact the administrator for more information.";
+      statusBox.className = "status-box declined";
+    }
+  });
+});
+
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  await signOut(auth);
+  window.location.href = "signin.html";
+});
+</script>
+
+</body>
+</html>

@@ -51,7 +51,7 @@
         <div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 20px;">
             
             <div class="profile-pic-wrapper" style="text-align: center; flex-shrink: 0; padding-top: 15px;">
-                <img id="profileImg" src=".assets/.img/nopfp.jpg" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #ccc;">
+                <img id="profileImg" src="0assets/0img/nopfp.jpg" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #ccc;">
                 <br>
                 <input type="file" id="fileInput" accept="image/*" style="display: none;">
                 <label for="fileInput" style="cursor: pointer; background-color: #dc3545; color: white; font-size: 14px; text-decoration: none; padding: 6px 18px; border-radius: 50px; display: inline-block; margin-top: 12px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background-color 0.3s;">
@@ -78,14 +78,26 @@
 
         <hr style="margin: 15px 0;">
 
-        <p><strong>Last Viewed Subject:</strong></p>
-        <p id="lastSubject">No subject viewed yet.</p>
+        <div class="recent-section">
+            <p><strong>Recently Viewed Documents:</strong></p>
+            <div id="recentDocumentsList">
+                <p>No recently viewed documents yet.</p>
+            </div>
+        </div>
 
         <button class="signin-btn" id="logoutBtn" style="margin-top: 15px;">LOG OUT</button>
 
     </div>
 
 </section>
+
+<div id="recentPdfModal" class="recent-pdf-modal">
+    <div class="recent-pdf-box">
+        <button id="closeRecentPdf" class="recent-pdf-close">&times;</button>
+        <h3 id="recentPdfTitle">Document Preview</h3>
+        <iframe id="recentPdfViewer" src=""></iframe>
+    </div>
+</div>
 
 <footer>
     <p>
@@ -106,7 +118,12 @@ import {
   getFirestore,
   doc,
   getDoc,
-  updateDoc
+  updateDoc,
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -134,25 +151,112 @@ onAuthStateChanged(auth, async (user) => {
     if (docSnap.exists()) {
         const data = docSnap.data();
 
-        if (data.username) {
-            document.getElementById("userName").value = data.username;
-        } else {
-            document.getElementById("userName").value = data.name;
-        }
+        document.getElementById("userName").value =
+            data.username || data.name || user.email || "User";
 
         if (data.profilePic) {
             document.getElementById("profileImg").src = data.profilePic;
         }
 
-        document.getElementById("fullName").textContent = data.name;
-        document.getElementById("userEmail").textContent = data.email;
-        document.getElementById("userSchool").textContent = data.school;
-        document.getElementById("userType").textContent = data.accountType;
+        document.getElementById("fullName").textContent = data.name || "Not provided";
+        document.getElementById("userEmail").textContent = data.email || "Not provided";
+        document.getElementById("userSchool").textContent = data.school || "Not provided";
+        document.getElementById("userType").textContent = data.accountType || "Not provided";
 
-        if (data.lastSubject) {
-            document.getElementById("lastSubject").textContent = data.lastSubject;
-        }
+        await loadRecentlyViewedDocuments(user.uid);
+
     }
+});
+
+async function loadRecentlyViewedDocuments(userId) {
+    const recentContainer = document.getElementById("recentDocumentsList");
+
+    if (!recentContainer) {
+        console.error("recentDocumentsList container not found.");
+        return;
+    }
+
+    recentContainer.innerHTML = "<p>Loading recently viewed documents...</p>";
+
+    try {
+        const recentQuery = query(
+            collection(db, "recentlyViewed", userId, "documents"),
+            orderBy("viewedAt", "desc"),
+            limit(5)
+        );
+
+        const querySnapshot = await getDocs(recentQuery);
+
+        if (querySnapshot.empty) {
+            recentContainer.innerHTML = "<p>No recently viewed documents yet.</p>";
+            return;
+        }
+
+        recentContainer.innerHTML = "";
+
+        querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+
+            const item = document.createElement("div");
+            item.className = "recent-document-item";
+
+            const info = document.createElement("div");
+
+            const title = document.createElement("strong");
+            title.textContent = data.title || "Untitled document";
+
+            const subject = document.createElement("p");
+            subject.textContent = data.subject
+                ? `Subject: ${formatSubjectName(data.subject)}`
+                : "Subject: Not listed";
+
+            info.appendChild(title);
+            info.appendChild(subject);
+
+            const openBtn = document.createElement("button");
+            openBtn.textContent = "Open";
+            openBtn.className = "open-recent-btn";
+            openBtn.addEventListener("click", () => {
+                openRecentPdf(data.fileUrl, data.title);
+            });
+
+            item.appendChild(info);
+            item.appendChild(openBtn);
+
+            recentContainer.appendChild(item);
+        });
+
+    } catch (error) {
+        console.error("Error loading recently viewed documents:", error);
+        recentContainer.innerHTML = "<p>Unable to load recently viewed documents.</p>";
+    }
+}
+
+function formatSubjectName(subject) {
+    const subjectNames = {
+        science: "Science",
+        mathematics: "Mathematics",
+        abstract: "Abstract Reasoning",
+        english: "English",
+        reading: "Reading Comprehension"
+    };
+
+    return subjectNames[subject] || subject;
+}
+
+function openRecentPdf(fileUrl, title) {
+    const modal = document.getElementById("recentPdfModal");
+    const viewer = document.getElementById("recentPdfViewer");
+    const modalTitle = document.getElementById("recentPdfTitle");
+
+    modalTitle.textContent = title || "Document Preview";
+    viewer.src = fileUrl;
+    modal.style.display = "flex";
+}
+
+document.getElementById("closeRecentPdf").addEventListener("click", () => {
+    document.getElementById("recentPdfViewer").src = "";
+    document.getElementById("recentPdfModal").style.display = "none";
 });
 
 // Save Username Logic with Confirmation
